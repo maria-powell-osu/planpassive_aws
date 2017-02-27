@@ -1,0 +1,64 @@
+	<br/>
+	<!-- BLOGLIST -->
+	<div class="row" ng-if="blog.view == 'blogList'">
+		<!-- MOST RECENT BLOGS -->
+		<div class="col-md-12">
+			<!-- BLOG CATEGORY TITLE BAR -->
+			<div class="text-center  mpDesignBackground27314F topPadding1 bottomPadding1">
+				<h4><b class="whiteText">MOST RECENT BLOGS</b></h4>
+			</div>
+			<!-- BLOGS: Most recent -->
+			<div class="row blogListPadding">
+				<div class="row mpClickable blogHover" ng-repeat="b in blog.blogs | orderBy:'date':true  track by $index" ng-click="blog.showBlog(b)"> 
+					<div class="col-md-6 col-md-push-4 blogListPadding">
+						<div class="row mpDesign27314F ">
+							<h2><b>{{b.title}}</b></h2>
+						</div>
+						<div class="row mpDesign39AEA9  ">
+							<p><b>-- {{b.comments.length}} Comments</b></p>
+						</div>
+					</div>
+					<div class="col-md-4 col-md-pull-6 blogListPadding">
+						<img ng-src="{{b.image}}" class="img-responsive">
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<hr class="thickHRBlack"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- MOST POPULAR BLOGS -->
+		<!-- <div class="col-md-6">
+		</div> -->
+	</div>
+	<!-- COMMENTING -->
+	<div ng-if="blog.view == 'viewBlog'">
+		<div class="row blogListPadding">
+			<div class="col-md-8">
+				<mp-blog blog="blog.currentBlogView"></mp-blog>
+			</div>
+		</div>
+		<div class="row blogListPadding">
+			<div class="col-md-12">
+				<!-- COMMENT USER FORM -->
+				<mp-comment-reply-form blog="blog" formid="'blogReply'" responds-to="" original-comment=""></mp-comment-reply-form>
+			</div>
+		</div>
+		<div class="row blogListPadding">
+			<div class="col-md-8">
+				<br/><br/>
+				<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#blogReply">Comment</button>
+				<br/>
+				<!-- COMMENT VIEW -->
+				<h2 ng-if="blog.currentBlogView.comments.length != 0"><b style="color: #696969;">Comments</b></h2>
+				<!-- Iterates through Comments -->
+				<div ng-repeat="comment in blog.currentBlogView.comments | orderBy:'date' track by $index">
+					<mp-comment comment="comment" level="1" blog="blog"></mp-comment>
+				</div>
+			</div>
+		</div>
+	</div>
+<br/>
+<br/>

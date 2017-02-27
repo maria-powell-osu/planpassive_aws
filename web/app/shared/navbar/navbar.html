@@ -1,0 +1,32 @@
+<!-- data-offset-top calculates the position of the scroll and data spy adds the affic for the sticky navbar -->
+<nav class="navbar navbar-default ppGradient" data-spy="affix" role="navigation" data-offset-top="500">
+	<div class="container">
+    <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+   </div>
+   <div class="collapse navbar-collapse" id="example-navbar-collapse"><!-- So that the original navbar disappears upon collapse -->
+    <ul class="nav nav-justified">
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="/"><div ng-class="{ active: isActive('/')}">About</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="investment-calculators"><div ng-class="{ active: isActive('/tools')}">Calculators</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="blogs"><div ng-class="{ active: isActive('/blog')}">Blog</div></a>
+      </li>
+<!--       <li class="nav-item">
+        <a class="nav-link whiteText" href="#videos"><div ng-class="{ active: isActive('/videos')}">Videos</div></a>
+      </li> -->
+<!--       <li class="nav-item">
+        <a class="nav-link whiteText" href="#contact"><div ng-class="{ active: isActive('/contact')}">Top Financial Products</div></a>
+      </li> -->
+    </ul>
+  </div>
+</div>
+</nav>

@@ -1,0 +1,61 @@
+<!-- Loader showing when calculations are running -->
+<mp-loader ng-show="rentalCalculator.calculating"></mp-loader>
+<div class="container page-content">
+	<div class="row">
+		<div class="col-md-10">
+			<div class="btn-toolbar" >
+				<!-- BUTTON TABS -->
+		        <div class="btn-group" style="width:100%;" > 
+		        	<!-- To strech the tabs to whole width
+		        		  Each of the labels got a assigned a width percentage value. ones with longer names I gave more space -->
+		        	<!-- Loan-->
+		        	<label class="btn btn-default" style="width:25%;"  ng-class="{active: rentalCalculator.view === 'loan'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="loan">Loan</label>
+		        	<!-- Income/Expenses -->
+		        	<label class="btn btn-default" style="width:42%;" ng-class="{active: rentalCalculator.view === 'incomeExpenses'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="incomeExpenses">Cash Flow</label>
+		        	<!-- CASHFLOW SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" ng-class="{active: rentalCalculator.view === 'cashFlowSummary'}" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="cashFlowSummary" >Result</label>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
+		<div>
+			<loan-information ng-show="rentalCalculator.view == 'loan'"></loan-information>
+			<money-flow ng-show="rentalCalculator.view == 'incomeExpenses'"></money-flow>
+			<!-- Only Shown when all fields have been entered -->
+			<cashflow-summary ng-show="rentalCalculator.view == 'cashFlowSummary'" ng-if="rentalCalculatorInputForm.$valid"></cashflow-summary>
+			<!-- If form is not valid but tab has been pushed display error message with missing fields -->
+			<!-- Error Messages -->
+			<div class="text-danger elemIndent" ng-show="rentalCalculator.view == 'cashFlowSummary' && !rentalCalculatorInputForm.$valid">
+	    		<b>Enter the following fields to view your cashflow summary:</b>
+	    		<div ng-repeat="field in rentalCalculator.missingFields">
+	    			<div>{{field}}</div>
+	    		</div>
+	  		</div>
+		</div>
+	</form>
+	<br/>
+	<br/>
+	<div class="row">
+		<div class="col-md-10">
+			<div class="btn-toolbar" >
+				<!-- BUTTON TABS -->
+		        <div class="btn-group" style="width:100%;" > 
+		        	<!-- To strech the tabs to whole width
+		        		  Each of the labels got a assigned a width percentage value. ones with longer names I gave more space -->
+		        	<!-- Loan-->
+		        	<label class="btn btn-default" style="width:25%;"  ng-class="{active: rentalCalculator.view === 'loan'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="loan">Loan</label>
+		        	<!-- Income/Expenses -->
+		        	<label class="btn btn-default" style="width:42%;" ng-class="{active: rentalCalculator.view === 'incomeExpenses'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="incomeExpenses">Cash Flow</label>
+		        	<!-- CASHFLOW SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" ng-class="{active: rentalCalculator.view === 'cashFlowSummary'}" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="cashFlowSummary" >Result</label>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
+<br/>
+<br/>
+<br/>

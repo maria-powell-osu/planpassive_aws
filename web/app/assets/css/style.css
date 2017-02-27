@@ -1,0 +1,574 @@
+/*.page-content
+{
+    margin-top: 5%;
+}*/
+/*.ppDarkBlue{
+    background-color: #27314F;
+}*/
+.table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.topPadding1 {
+    padding-top: 1px;
+}
+.bottomPadding1 {
+    padding-bottom: 1px;
+}
+
+/*To remove space below navbar before content starts*/
+.navbar {
+    margin-bottom: 0;
+}
+.cover
+{
+    background-image:url('/app/assets/img/Plan_Passive_Cover.png');
+    width: 100%;
+    height:500px;
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+} 
+.blogRow {
+    background-color: #e6e7e8;
+}
+/*Hover states for blog background to blue*/
+.blogHover:hover{
+    background-color: #27314F;
+    opacity: .9;
+}
+/*Hover states for blog thumb to blue opaque*/
+.blogHover:hover img{
+    opacity: .5;
+    background-color: #27314F;
+}
+/*Hover states for blog text to white*/
+.blogHover:hover div{
+    color:white;
+}
+.logoPadding {
+    padding-top: 15px;
+    padding-left: 20px;
+}
+.blogListPadding {
+    padding-left: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+}
+.taglineImgStyling
+ {
+    padding-top: 150px;
+}
+.thickHR {
+    background-color: white;
+    border: 0 none;
+    height: 2px;
+    margin: 0;
+    padding: 0;
+}
+.thickHRBlack {
+    background-color: #27314F;
+    border: 0 none;
+    height: 2px;
+    margin: 0;
+    padding: 0;
+}
+.calculatorBackground
+{
+    background-image:url('/app/assets/img/Icon_Background_Light.jpg');
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+}
+.calculatorBackground:hover
+{
+    background-image:url('/app/assets/img/Icon_Background_Hoverstate.jpg');
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+    color: white;
+}
+.calculatorBackground:hover a {
+    color: white;
+    text-decoration: none; /*remove underline*/
+}
+.calculatorBackground:hover #investmentReturnImg {
+    content: url('/app/assets/img/Icon_ROI_White.png');
+}
+.calculatorBackground:hover #rentalPropertyImg {
+    content: url('/app/assets/img/Icon_Property_White.png');
+}
+
+.whiteText {
+    color: white !important;
+}
+.footerLogoBlock {
+    padding-bottom: 20px;
+}
+.parallelogram {
+    margin: 0 0 0 30px;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
+}
+/*Apply left border to all but the first element with class parallelogram*/
+.footerLinks > .parallelogram ~ .parallelogram {
+    border-left: solid white;
+}
+/*Takes out default hover event for nav-justified*/
+.nav-justified > li > a:hover, .nav-justified > li > a:focus{
+    background-color:rgba(0,0,0,0);
+}
+ .affix {
+      top: 0;
+      width: 100%;
+      z-index: 998;
+      position: fixed;
+  }
+  .affix-top{
+    background-color: red;
+  }
+/*Takes out default hover event for nav-justified*/
+.nav-justified > li:hover, .nav-justified > li:focus {
+    background-color:rgba(0,0,0,0);
+}
+/*Adds white text box on hover event*/
+.nav-justified > li > a > div:hover, .nav-justified > li > a > div:focus, .nav-justified > li > a > div.active{
+    outline: 1px solid white;
+}
+/*Vertically aligns the links on navbar*/
+.nav-justified > li {
+    padding-top: 5px;
+}
+/* CSS Gradient Coloring*/
+.ppGradient
+{
+    background: rgba(39,49,79,1);
+    background: -moz-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(39,49,79,1)), color-stop(15%, rgba(50,83,102,1)), color-stop(31%, rgba(61,119,127,1)), color-stop(51%, rgba(59,143,145,1)), color-stop(77%, rgba(57,174,168,1)), color-stop(84%, rgba(66,176,147,1)), color-stop(100%, rgba(85,181,100,1)));
+    background: -webkit-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -o-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -ms-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: linear-gradient(to right, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27314f', endColorstr='#55b564', GradientType=1 );
+    /*White Borders*/
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important; /*Taking off rounded borders*/
+}
+.row  .row {
+    margin: 0px -15px;
+}
+label {
+    margin-top:15px !important;
+}
+.inpt
+{
+	border: solid 1pt #E0E0E0;
+}
+.dashedPlaceholder {
+    border: 2px dashed #999;
+    width: 100%;
+    height: 250px;
+    background: white;
+    display: table;
+    text-align: center;
+}
+
+.dashedHoverPlaceholder {
+    border: 2px dashed #26267f;
+    width: 100%;
+    height: 300px;
+    background: #e9e9f2;
+    margin: 10px 0px 50px 0px;
+    display: table;
+    text-align: center;
+
+}
+.innerDashedPlaceHolder
+{
+	display: table-cell;
+    vertical-align: middle;
+}
+.nonResizable
+{
+	resize: none;
+}
+input
+{
+    margin-bottom: 15px;
+}
+.glyphiconGreenColor
+{
+	color:#5cb85c;
+}
+.glyphiconBlueColor
+{
+    font-size: 1.0em;
+    color: black;
+}
+#propertyImage
+{
+	/* Make images fill their parent's space. Solves IE issues. */
+	width: inherit;  
+	max-width: 100%; 
+	height: auto;    
+	max-height: 300px;
+}
+input[type="radio"]{
+  margin: 0 0px 0 10px;
+}
+fieldset{
+    background: #FCFCFC;
+    padding: 16px;
+    border: 1px solid #D5D5D5;
+}
+.glyphiconDeleteForm{  
+    float:right;
+    color: #843534;
+    font-size: 1.2em;
+
+} 
+.mpClickable
+{
+    cursor: pointer;
+    cursor: hand; 
+}  
+.resultDiv
+{
+    height: 100px;
+    width: auto;
+    background-color: #f3f3f3; 
+    color:#444;
+    border:1px solid #CCC;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 100px;
+}
+.resultDiv:hover {
+    background-color: #dadada;
+}
+#tabs { border: none;}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em 1em 0 !important;
+}
+/*#loaderBody
+{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    top:0; 
+    overflow: visible;
+    opacity: 0.80;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+#loaderImg
+{
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+}*/
+.mpLoader{
+     position: fixed;
+      z-index: 999;
+      height: 15em;
+      width: 10em;
+      overflow: visible;
+      margin: auto;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+}
+.mpLoaderBox{
+    border-radius: 7px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: larger;
+}
+/* Transparent Overlay */
+.mpLoader:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.elemIndent{
+    padding-left: 1%;
+}
+
+/* 
+ * On extra small devices styline
+ */
+ @media screen and (max-width: 400px){
+    /*To make sure the navbar doesnt overlap the page content*/
+    .page-content {
+        margin-top: 25%;
+    }
+    /*To make the cover image smaller on phones*/
+    .cover {
+        height: 200px;
+    }
+    /*To make the spaces smaller for phones (image thumb and blogs titles etc.)*/
+    .blogListPadding {
+        padding-left: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    /*To make the tagline not disappear on phones due to small cover image height*/
+    .taglineImgStyling {
+        padding-top: 50px;
+    }
+    /*Makes the tag line image smaller on phones*/
+    .phoneSizeTagLine {
+        width: 55%;
+    }
+    /*Makes the logo img smaller on phones*/
+    .phoneSizeLogo {
+        width: 25%;
+    }
+    /*Adjust the space of the logo from the corner to be smaller on phones*/
+    .logoPadding {
+        padding-top: 7px;
+        padding-left: 7px;
+    }
+    .mobileCaptchaResize {
+        transform:scale(0.50);
+        -webkit-transform:scale(0.50);
+        transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+    }
+
+    .affix {
+        position: static;
+    }
+
+    /*Sets the line after bublle if the section is marked as completed*/
+    li.completed + li:after {
+        background-color: #5bc0de;
+        color: white;
+    }
+
+    /*Sets bubble after the active item if the section is marked as completed*/
+    li.completed + li:before {
+        cursor: pointer;
+    }
+
+    /*Sets the line color of selected section to be darker blue if also marked as selected*/
+    li.selected.completed + li:after {
+        background-color: #51acc7 !important;
+        color: white;
+    }
+
+    .fieldSetWidth {
+        display: inline-block;
+    }
+    .disabled {
+       visibility: hidden;
+       cursor: default;
+   }
+    .mpImageItem {
+        position: relative;     /*relative position so that child element do not escape (are not positioned relative to doc body)*/
+    }
+    .mpImageDesc:hover {
+        background: #555555;    
+    }
+    .mpImageDesc {
+        position: absolute;     /* elem absolutely positioned relative to parent*/
+        width: 100%;
+        bottom: 0;              /*moves the text to bottom of image*/
+        text-align: center;
+        background: #333333;
+        padding: 10px;
+        opacity: 0.8;
+        color: white;
+    }
+    .mpImageDesc > a {
+        color: inherit; /*Remove Blue Link Coloring*/
+    }
+}
+
+    .mpImageExpl {
+        padding: 10px;
+    }
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 0;             /*allow image to take up the whole space*/
+    }
+    .roundedCorners {
+        border-radius: 3px;
+    }
+
+.ui-datepicker{ 
+    z-index: 9999 !important;
+}
+.height-400 {
+    height: 400px;
+}
+.turqoiseBg {
+    background-color: #a3c6c4;
+}
+.turqioseText {
+    color: #a3c6c4;
+}
+.offWhiteBg {
+    background-color: #E0E7E9;
+}
+.row-center {
+    display: inline-block;
+    float: none;
+}
+.spacing{
+    margin-right: 4%;
+}
+@media screen and (max-width: 990px){
+    .spacing{
+        margin-right: 0 !important;
+    }
+}
+.headerHeight {
+    height: 70px;
+}
+.dollarValueLarge {
+    font-size: large;
+}
+.dollarValueMedium {
+    font-size: medium;
+}
+/*To make the radio circles disappear*/
+.mpButtonGroupRadio {
+    display: none;
+}
+.mpProfit {
+    color: green;
+}
+.mpGreen {
+    color: green;
+}
+.mpRed {
+    color:red;
+}
+.imageThumb {
+    width:100px;
+    margin:5px;
+    float:left;
+}
+.imageThumbLarge {
+    width:300px;
+    margin:5px;
+    float:left;
+}
+.mpDesignLightGray {
+    background-color: #e6e7e8;
+}
+/*Light Turquoise*/
+.mpDesign3D777F {
+    color: #3D777F;
+}
+/*Dark Blue*/
+.mpDesign27314F {
+    color: #27314F;
+}
+/*light blue*/
+.mpDesign39AEA9 {
+    color: #39AEA9;
+}
+/*Light Turquoise*/
+.mpDesignBackground3D777F {
+    background-color: #3D777F;
+}
+/*Dark Blue*/
+.mpDesignBackground27314F {
+    background-color: #27314F;
+}
+/* Medium Green*/
+.mpDesignBackGround55B563{
+     background-color: #55B563
+}
+
+.footerLink {
+  color: white;
+  text-decoration: none; /* no underline */
+}
+.footerLink:hover {
+  color: white;
+  text-decoration: underline; 
+}
+/*To make tinymce images responsive*/
+.elemResize img {
+    max-width: 100%;
+    height: auto;
+}
+.calculatorTabs .tab-content {
+  background-color: #39AEA9;
+  padding : 5px 15px;
+}
+/* remove border radius for the tab */
+.calculatorTabs .nav-pills > li > a {
+  border-radius: 0;
+}
+/* adds new coloring to bootstrap tab pills*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:black;
+    background-color:#39AEA9;
+}
+.inValidField {
+        border: 1px solid #843534;
+        background-color: #843534;
+    }
+
+.animation-show-hide {
+-moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    max-height: 1000px;
+    overflow: hidden;
+}
+.animation-show-hide.ng-hide {
+  overflow: hidden;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
