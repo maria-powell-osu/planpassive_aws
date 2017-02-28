@@ -1,10 +1,11 @@
 branch-defaults:
   default:
-    environment: planpassive_aws
+    environment: planpassive-aws
   master:
-    environment: my-first-application
+    environment: planpassive-aws
+    group_suffix: null
 environment-defaults:
-  my-first-application:
+  planpassive-aws:
     branch: null
     repository: null
 global:
