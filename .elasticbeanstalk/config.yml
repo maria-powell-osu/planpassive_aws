@@ -1,10 +1,14 @@
 branch-defaults:
+  default:
+    environment: planpassive_aws
   master:
-    environment: node-express-env
-    group_suffix: null
+    environment: my-first-application
+environment-defaults:
+  my-first-application:
+    branch: null
+    repository: null
 global:
-  application_name: planpassive_aws
-  branch: null
+  application_name: nodejs-v1
   default_ec2_keyname: null
   default_platform: node.js
   default_region: us-west-2
@@ -12,6 +16,5 @@ global:
   platform_name: null
   platform_version: null
   profile: eb-cli
-  repository: null
   sc: git
   workspace_type: Application
