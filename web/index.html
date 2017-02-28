@@ -1,93 +1,104 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Elastic Beanstalk</title>
-    <style>
-      body {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size:14px;
-        -moz-transition-property: text-shadow;
-        -moz-transition-duration: 4s;
-        -webkit-transition-property: text-shadow;
-        -webkit-transition-duration: 4s;
-        text-shadow: none;
-      }
-      body.blurry {
-        -moz-transition-property: text-shadow;
-        -moz-transition-duration: 4s;
-        -webkit-transition-property: text-shadow;
-        -webkit-transition-duration: 4s;
-        text-shadow: #fff 0px 0px 25px;
-      }
-      a {
-        color: #55aaff;
-      }
-      .textColumn, .linksColumn {
-        padding: 2em;
-      }
-      .textColumn {
-        position: absolute;
-        top: 0px;
-        right: 50%;
-        bottom: 0px;
-        left: 0px;
+ <!DOCTYPE html>
+<html ng-app="App" class="lightGreyBackground" >
+	<head>
+		<!-- Meta Tag provides machine parsable meta data about the webpage. The viewport is the visible area of a web page. Initial-scale controls zoom level when page is first loaded, initial scale = 1 means no zoom-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+		<!--Lib CSS-->
+		<link href="/app/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="/app/assets/css/jquery-1.11.4-ui.css" rel="stylesheet" type="text/css">
+		<!-- Custom CSS-->
+		<link href="/app/assets/css/style.css" rel="stylesheet" type="text/css">
 
-        text-align: right;
-        padding-top: 11em;
-        background-color: #73A53E;
+		<!-- Google Captcha for commenting service -->
+		<!-- onload callback is necessary to notify angular-recaptcha library that reCaptcha api is ready for usage -->
+		<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
 
-      }
-      .textColumn p {
-        width: 75%;
-        float:right;
-      }
-      .linksColumn {
-        position: absolute;
-        top:0px;
-        right: 0px;
-        bottom: 0px;
-        left: 50%;
+		<!-- For SEO -->
+    	<title id="titleTag"></title>
+    	<meta name="description"/>
+    	
+    	
+		<!-- To remove the # from the angularjs default routing (for SEO)-->
+    	<base href="/">
 
-        background-color: #33342D;
-      }
 
-      h1 {
-        color: #33342D;
-        font-size: 500%;
-        font-weight: normal;
-        margin-bottom: 0em;
-      }
-      h2 {
-        font-size: 200%;
-        font-weight: normal;
-        margin-bottom: 0em;
-      }
-      ul {
-        padding-left: 1em;
-        margin: 0px;
-      }
-      li {
-        margin: 1em 0em;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="textColumn">
-      <h1>Congratulations</h1>
-      <p>Your first AWS Elastic Beanstalk Node.js application is now running on your own dedicated environment in the AWS Cloud</p>
-    </div>
-    <div class="linksColumn">
-      <h2>What's Next?</h2>
-      <ul>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html">AWS Elastic Beanstalk overview</a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.html">AWS Elastic Beanstalk concepts</a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_express.html">Deploy an Express Application to AWS Elastic Beanstalk</a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_express_elasticache.html">Deploy an Express Application with Amazon ElastiCache to AWS Elastic Beanstalk</a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_geddy_elasticache.html">Deploy a Geddy Application with Amazon ElastiCache to AWS Elastic Beanstalk </a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_custom_container.html">Customizing and Configuring a Node.js Container </a></li>
-        <li><a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.loggingS3.title.html">Working with Logs</a></li>
-      </ul>
-    </div>
-  </body>
+
+	</head>
+
+	<body >
+		<!-- Right now the cover image is on every page
+		     Eventually I need to pull it into the aboutView.html
+		     So that every page can have its own view and style 
+		 -->
+     	<div class="cover">
+     		<div class="phoneSizeLogo">
+     			<img src="/app/assets/img/PP_Logo_White.png" class="img-responsive logoPadding">
+     		</div>
+ 			<div class="col-md-5 pull-right phoneSizeTagLine">
+ 				<img src="/app/assets/img/PP_Tagline_White.png" class="
+ 				img-responsive taglineImgStyling">
+ 			</div>
+     	</div>
+  		<mp-top-nav-bar></mp-top-nav-bar>	
+		<ng-view></ng-view>
+		<mp-footer></mp-footer>
+		<!-- Adding Site Scripts *****************************-->
+
+		<!-- Jquery -->
+		<script src="/app/assets/libs/scripts/jquery/jquery-1.12.2.js" type="text/javascript"></script>
+		<!-- Bootstrap JS-->
+		<script src="/app/assets/libs/scripts/bootstrap/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- Jquery UI -->
+		<script src="/app/assets/libs/scripts/jquery/jquery-1.11.4-ui.js" type="text/javascript"></script>
+		<!-- Angularjs -->
+		<script src="/app/assets/libs/scripts/angular/angular.js" type="text/javascript"></script>
+		<script src="/app/assets/libs/scripts/angular/angular-route.js" type="text/javascript"></script>
+		<script src="/app/assets/libs/scripts/angular/angular-sanitize.js" type="text/javascript"></script>
+		<script src="/app/assets/libs/scripts/angular/angular-animate.js" type="text/javascript"></script>
+
+		<!-- TinyMCE-->
+		 <script src="/app/assets/libs/scripts/tinymce/js/tinymce/tinymce.min.js"></script>
+		 <!-- Angular-UI-Tinymce -->
+		  <script src="/app/assets/libs/scripts/ui-tinymce-master/dist/tinymce.min.js"></script>
+
+		   <!-- Google Captcha -->
+		  <script src="/app/assets/libs/scripts/angular-recaptcha/angular-recaptcha.min.js"></script>
+
+		<!-- Google Charts -->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			// Load the Visualization API and the right packages 
+			//This was added here because as the user navigates between
+			//tabs we do not want to trigger the load multiple times
+          	google.charts.load('current', {'packages':['table', 'corechart', 'bar', 'gauge']});
+		</script>
+		<!-- APP -->
+		<script src="/app/app.js" type="text/javascript"></script>
+		<!-- Directives -->
+		<script src="/app/shared/navbar/navbar.js" type="text/javascript"></script>
+		<script src="/app/shared/footer/footer.js" type="text/javascript"></script>
+		<script src="/app/shared/loader/loader.js" type="text/javascript"></script>
+		<script src="/app/shared/inputFields/inputFields.js" type="text/javascript"></script>
+		<script src="/app/components/tools/rentalCalculator/rentalCalculatorDirective.js" type="text/javascript"></script>
+		<script src="/app/components/admin/adminDirective.js" type="text/javascript"></script>
+		<script src="/app/components/blog/blogDirective.js" type="text/javascript"></script>
+		<script src="/app/components/tools/futureValueCalculator/futureValueCalculatorDirective.js" type="text/javascript"></script>
+		<!-- Controllers -->
+		<script src="/app/components/tools/rentalCalculator/rentalCalculatorController.js" type="text/javascript"></script>
+		<script src="/app/components/tools/futureValueCalculator/futureValueCalculatorController.js" type="text/javascript"></script>
+		<script src="/app/components/blog/blogController.js" type="text/javascript"></script>
+		<script src="/app/components/admin/adminController.js" type="text/javascript"></script>
+		<script src="/app/components/about/aboutController.js" type="text/javascript"></script>
+		<script src="/app/components/tools/toolsController.js" type="text/javascript"></script>
+		<!-- Services  -->
+		<script src="/app/components/tools/rentalCalculator/rentalCalculatorService.js" type="text/javascript"></script>
+		<script src="/app/components/tools/futureValueCalculator/futureValueCalculatorService.js" type="text/javascript"></script>
+		<script src="/app/shared/services/comment.js" type="text/javascript"></script>
+		<script src="/app/shared/services/blog.js" type="text/javascript"></script>
+		<script src="/app/shared/services/admin.js" type="text/javascript"></script>
+		<script src="/app/shared/services/images.js" type="text/javascript"></script>
+		<script src="/app/shared/services/seo.js" type="text/javascript"></script>
+			<!-- Controller for the index page to load the seo tags -->
+
+	</body>
 </html>
