@@ -1,5 +1,5 @@
 {
-  "name": "Elastic-Beanstalk-Sample-App",
+  "name": "Plan Passive Rest API",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -10,7 +10,7 @@
 },
   "scripts": {
     "start": "node dist/app.js",
-    "build": "babel --presets es2015 src --out-dir dist --sourcemaps",
+    "build": "babel --presets es2015 rest --out-dir dist --sourcemaps",
     "debug": "node --inspect dist/app.js"
   }
 }
