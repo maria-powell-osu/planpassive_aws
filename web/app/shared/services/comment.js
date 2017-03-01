@@ -9,7 +9,7 @@ App.factory('Comments', function($http) {
 		postComment: function (data){
 			return $http({
 				method: 'POST',
-				url: "/comments",
+				url: "http://planpassive.com/comments",
 				data: data
 			})
 		}

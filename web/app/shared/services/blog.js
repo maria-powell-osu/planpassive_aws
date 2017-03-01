@@ -3,26 +3,26 @@ App.factory('Blog', function($http) {
 		getBlogs: function (){
 			return $http({
 				method: 'GET',
-				url: "/blogData"
+				url: "http://planpassive.com/blogData"
 			});
 		},
 		deleteBlog: function (blogKey){
 			return $http({
 				method: 'DELETE',
-				url: "/blogData/" + blogKey
+				url: "http://planpassive.com/blogData/" + blogKey
 			});
 		},
 		editBlog: function (data){
 			return $http({
 				method: 'PUT',
-				url: "/blogData",
+				url: "http://planpassive.com/blogData",
 				data: data
 			});
 		},
 		postBlog: function (data){
 			return $http({
 				method: 'POST',
-				url: "/blogData",
+				url: "http://planpassive.com/blogData",
 				data: data,
 			});
 		}
