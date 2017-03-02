@@ -1,4 +1,4 @@
-System.register(['angular2/core', './blogs/blogs.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './blogs.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,32 +10,34 @@ System.register(['angular2/core', './blogs/blogs.component'], function(exports_1
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, blogs_component_1;
-    var AppComponent;
+    var core_1, blogs_service_1;
+    var BlogsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (blogs_component_1_1) {
-                blogs_component_1 = blogs_component_1_1;
+            function (blogs_service_1_1) {
+                blogs_service_1 = blogs_service_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            BlogsComponent = (function () {
+                function BlogsComponent(blogsService) {
+                    this.blogs = "these are my blogs";
+                    this.bloggers = blogsService.getBlogs();
                 }
-                AppComponent = __decorate([
+                BlogsComponent = __decorate([
                     core_1.Component({
-                        selector: 'plan-passive',
-                        template: '<h1>Hello Angular</h1><blogs></blogs>',
-                        directives: [blogs_component_1.BlogsComponent]
+                        selector: "blogs",
+                        template: "<h2>blogs: {{blogs}}</h2>\n            <ul>\n                <li *ngFor=\"#blog of bloggers\">{{blog}}</li>\n            </ul>\n    ",
+                        providers: [blogs_service_1.BlogsService] //dependency injection
                     }), 
-                    __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                    __metadata('design:paramtypes', [blogs_service_1.BlogsService])
+                ], BlogsComponent);
+                return BlogsComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("BlogsComponent", BlogsComponent);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=blogs.component.js.map
