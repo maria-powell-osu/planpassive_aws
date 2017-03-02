@@ -1,10 +1,10 @@
-import {Component} from 'angular2/core';
-import {BlogsComponent} from './blogs/blogs.component';
-
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'plan-passive',
-    template: '<h1>Hello Angular</h1><blogs></blogs>',
-    directives: [BlogsComponent]
+    template: `
+        <h1>Angular2: Getting Started</h1>
+         <router-outlet></router-outlet>
+    `
 })
 export class AppComponent { }
