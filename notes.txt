@@ -1,17 +1,16 @@
-https://io2015codelabs.appspot.com/codelabs/cloud-nodejs#4
-- you need to restrict the key for the domains
-Where I left of:
-	- make mobile routes
+
+Where I left at:
+	- blogs html needs to be created now
+
+
+General TODOs
+- make mobile routes
 	- make site load faster
 		- minify files?
 		- images
 	- test commenting service
 	- dynamic sitmap genertaion
 	- bing webmaster submission
-
-	-https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
-
-General TODOs
  	- make the put and post and delete routes authenticated
  	- META TAGS
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
@@ -78,7 +77,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 326 hrs
+	Coding: 332 hrs
 
 Read Me:
 - install: pyton, PILL, GAE, github, text editor
