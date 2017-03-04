@@ -8,6 +8,9 @@ import { BlogsComponent} from "./blogs/blogs.component";
 import { HomeComponent } from "./home/home.component";
 import { AppComponent }  from './app.component';
 
+//Plan Passive Directives
+import {NavbarComponent} from "./shared/navbar/navbar.component";
+
 @NgModule({
   imports: [ 
     BrowserModule,
@@ -21,7 +24,8 @@ import { AppComponent }  from './app.component';
   declarations: [ 
     AppComponent,
     BlogsComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
      ],
   bootstrap: [
      AppComponent

@@ -7,16 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var NavbarComponent = (function () {
+    function NavbarComponent() {
     }
-    return AppComponent;
+    return NavbarComponent;
 }());
-AppComponent = __decorate([
+NavbarComponent = __decorate([
     core_1.Component({
-        selector: 'plan-passive',
-        template: "\n       <navbar></navbar>\n       \n        <router-outlet></router-outlet>\n    "
+        selector: 'navbar',
+        templateUrl: "app/shared/navbar/navbar.component.html"
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], NavbarComponent);
+exports.NavbarComponent = NavbarComponent;
+//# sourceMappingURL=navbar.component.js.map

@@ -14,6 +14,8 @@ var router_1 = require("@angular/router");
 var blogs_component_1 = require("./blogs/blogs.component");
 var home_component_1 = require("./home/home.component");
 var app_component_1 = require("./app.component");
+//Plan Passive Directives
+var navbar_component_1 = require("./shared/navbar/navbar.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +35,8 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             blogs_component_1.BlogsComponent,
-            home_component_1.HomeComponent
+            home_component_1.HomeComponent,
+            navbar_component_1.NavbarComponent
         ],
         bootstrap: [
             app_component_1.AppComponent
