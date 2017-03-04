@@ -10,12 +10,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
+var http_1 = require("@angular/http");
 //Plan Passive Components
 var blogs_component_1 = require("./blogs/blogs.component");
 var home_component_1 = require("./home/home.component");
 var app_component_1 = require("./app.component");
-//Plan Passive Directives
 var navbar_component_1 = require("./shared/navbar/navbar.component");
+//Plan Passive Services
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,6 +26,7 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
+            http_1.HttpModule,
             router_1.RouterModule.forRoot([
                 //Gets matched on first-match basis
                 { path: 'blogs', component: blogs_component_1.BlogsComponent },

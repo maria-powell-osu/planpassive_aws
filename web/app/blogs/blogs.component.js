@@ -12,10 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var blogs_service_1 = require("./blogs.service");
 var BlogsComponent = (function () {
-    function BlogsComponent(blogsService) {
-        this.blogs = "these are my blogs";
-        this.bloggers = blogsService.getBlogs();
+    function BlogsComponent(_blogsService) {
+        this._blogsService = _blogsService;
+        //this.blogs = _blogsService.getBlogs();
     }
+    BlogsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._blogsService.getBlogs()
+            .subscribe(function (blogs) { return _this.blogs = blogs; }, function (error) { return _this.errorMessage = error; });
+    };
     return BlogsComponent;
 }());
 BlogsComponent = __decorate([
