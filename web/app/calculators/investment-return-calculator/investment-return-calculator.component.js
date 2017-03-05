@@ -7,17 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var NavbarComponent = (function () {
-    function NavbarComponent() {
-        this.toggle = false;
+var InvestmentReturnCalculatorComponent = (function () {
+    function InvestmentReturnCalculatorComponent() {
+        this.pageTitle = 'Welcome';
     }
-    return NavbarComponent;
+    return InvestmentReturnCalculatorComponent;
 }());
-NavbarComponent = __decorate([
+InvestmentReturnCalculatorComponent = __decorate([
     core_1.Component({
-        selector: 'navbar',
-        templateUrl: "app/shared/navbar/navbar.component.html"
+        templateUrl: 'app/calculators/investment-return-calculator/investment-return-calculator.component.html'
     })
-], NavbarComponent);
-exports.NavbarComponent = NavbarComponent;
-//# sourceMappingURL=navbar.component.js.map
+], InvestmentReturnCalculatorComponent);
+exports.InvestmentReturnCalculatorComponent = InvestmentReturnCalculatorComponent;
+//# sourceMappingURL=investment-return-calculator.component.js.map

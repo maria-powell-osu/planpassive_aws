@@ -1,21 +1,19 @@
 
-Where I left at:
-	- 
+Angular 2 TO DOs:
+	- navbar collapse button needs animation for clicking
+	- are blogs ordered?
 
 
 General TODOs
-- start storign title urls
 - make mobile routes
 	- make site load faster
 		- minify files?
 		- images
-	- test commenting service
 	- dynamic sitmap genertaion
 	- bing webmaster submission
  	- make the put and post and delete routes authenticated
- 	- META TAGS
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
-	- remove imagge blob should disapprea too
+	- remove image blob should disapprea too
 	- make blog width bigger
 	- fix images list
 	- give jason ability ti give alt tag for title image 
@@ -25,27 +23,16 @@ General TODOs
 	- minify files
 
 SEO:
-	- we need out generate sitemaps xml
+	- we need auto generate sitemaps xml
 		- evertime jason adds a blog we should update the sitemap.xml
-
-Week Work List:	
-	- SEO for angularjs with work list for the two of us
-	- about page needs (set max display on there)
-	- Google Analytics
-	- contact page with email
 		
 Calculator:
-	5) loader bar needs to be the whole page
-	
 	- the numbers need commas for readability in the results page
 	- whole row click for adding data in calculator is annoying and should be shorter 
 	- cash on equity table when paid all cash creates really small increments for (cash on equity %), they should be large therefore creating a straight line   instead of confusing up and down
 	- pie charts on the same line
 	- dollar signs by pie charts
 	- when add a field (such as utility and enter desc but not the other) it will show missing field but not highligth in red like the others
-
-
-
 
 Backlog:
 	- 
@@ -62,11 +49,6 @@ Backlog:
 	- pie charts on the same line	
 	- do I still need jquery ui?
 
-Before Go-Live
-	- figure out how to optimized script loading (CDN, combining js files, etc.)
-	- how to make loading faster? a loader for website?
-	- minify all files before final deployment 
-
 
 Commit Changes:
 	- git add -A
@@ -78,8 +60,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 332 hrs
-
-Read Me:
-- install: pyton, PILL, GAE, github, text editor
+	Coding: 336 hrs
  

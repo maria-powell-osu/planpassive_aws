@@ -15,6 +15,9 @@ var http_1 = require("@angular/http");
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
 var blog_view_component_1 = require("./blogs/blog-view/blog-view.component");
 var home_component_1 = require("./home/home.component");
+var calculators_component_1 = require("./calculators/calculators.component");
+var rental_property_calculator_component_1 = require("./calculators/rental-property-calculator/rental-property-calculator.component");
+var investment_return_calculator_component_1 = require("./calculators/investment-return-calculator/investment-return-calculator.component");
 var app_component_1 = require("./app.component");
 var navbar_component_1 = require("./shared/navbar/navbar.component");
 //Plan Passive Services
@@ -33,6 +36,9 @@ AppModule = __decorate([
                 { path: 'home', component: home_component_1.HomeComponent },
                 { path: 'blogs', component: blog_list_component_1.BlogListComponent },
                 { path: 'blog/:name', component: blog_view_component_1.BlogViewComponent },
+                { path: 'investment-calculators', component: calculators_component_1.CalculatorsComponent },
+                { path: 'rental-property-calculator', component: rental_property_calculator_component_1.RentalPropertyCalculatorComponent },
+                { path: 'investment-return-calculator', component: investment_return_calculator_component_1.InvestmentReturnCalculatorComponent },
                 { path: '', redirectTo: "home", pathMatch: "full" }
             ])
         ],
@@ -41,7 +47,10 @@ AppModule = __decorate([
             blog_view_component_1.BlogViewComponent,
             blog_list_component_1.BlogListComponent,
             home_component_1.HomeComponent,
-            navbar_component_1.NavbarComponent
+            navbar_component_1.NavbarComponent,
+            calculators_component_1.CalculatorsComponent,
+            rental_property_calculator_component_1.RentalPropertyCalculatorComponent,
+            investment_return_calculator_component_1.InvestmentReturnCalculatorComponent
         ],
         bootstrap: [
             app_component_1.AppComponent

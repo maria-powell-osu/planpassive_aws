@@ -7,17 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var NavbarComponent = (function () {
-    function NavbarComponent() {
-        this.toggle = false;
+var CalculatorsComponent = (function () {
+    function CalculatorsComponent() {
+        this.pageTitle = 'Welcome';
     }
-    return NavbarComponent;
+    return CalculatorsComponent;
 }());
-NavbarComponent = __decorate([
+CalculatorsComponent = __decorate([
     core_1.Component({
-        selector: 'navbar',
-        templateUrl: "app/shared/navbar/navbar.component.html"
+        templateUrl: 'app/calculators/calculators.component.html',
+        selector: 'calculators',
     })
-], NavbarComponent);
-exports.NavbarComponent = NavbarComponent;
-//# sourceMappingURL=navbar.component.js.map
+], CalculatorsComponent);
+exports.CalculatorsComponent = CalculatorsComponent;
+//# sourceMappingURL=calculators.component.js.map

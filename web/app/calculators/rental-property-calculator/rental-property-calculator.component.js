@@ -7,17 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var NavbarComponent = (function () {
-    function NavbarComponent() {
-        this.toggle = false;
+var RentalPropertyCalculatorComponent = (function () {
+    function RentalPropertyCalculatorComponent() {
+        this.pageTitle = 'Welcome';
     }
-    return NavbarComponent;
+    return RentalPropertyCalculatorComponent;
 }());
-NavbarComponent = __decorate([
+RentalPropertyCalculatorComponent = __decorate([
     core_1.Component({
-        selector: 'navbar',
-        templateUrl: "app/shared/navbar/navbar.component.html"
+        templateUrl: 'app/calculators/rental-property-calculator/rental-property-calculator.component.html'
     })
-], NavbarComponent);
-exports.NavbarComponent = NavbarComponent;
-//# sourceMappingURL=navbar.component.js.map
+], RentalPropertyCalculatorComponent);
+exports.RentalPropertyCalculatorComponent = RentalPropertyCalculatorComponent;
+//# sourceMappingURL=rental-property-calculator.component.js.map

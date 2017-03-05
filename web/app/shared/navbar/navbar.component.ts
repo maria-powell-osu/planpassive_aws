@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
     selector: 'navbar',
     templateUrl: "app/shared/navbar/navbar.component.html"
  })
-export class NavbarComponent {}
+export class NavbarComponent {
+    toggle = false;
+}
