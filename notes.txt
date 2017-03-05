@@ -1,9 +1,10 @@
 
 Where I left at:
-	- blogs html needs to be created now
+	- 
 
 
 General TODOs
+- start storign title urls
 - make mobile routes
 	- make site load faster
 		- minify files?

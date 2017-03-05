@@ -15,7 +15,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     core_1.Component({
         selector: 'plan-passive',
-        template: "\n       <navbar></navbar>\n       \n        <router-outlet></router-outlet>\n    "
+        templateUrl: "app/app.component.html",
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

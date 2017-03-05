@@ -3,15 +3,22 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import { IBlog } from "./blogs";
+import { IBlog } from "../blog";
 import { Http, Response } from "@angular/http";
 
 @Injectable()
-export class BlogsService {
+export class BlogService {
     constructor (private _http: Http){}
 
+//TODO: this list needs to get ordered
     getBlogs() : Observable<IBlog[]> {
         return this._http.get("http://planpassive.com/blogData")
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+    getBlog(name : string) : Observable<IBlog> {
+        return this._http.get("http://planpassive.com/blogData/" + name)
+        //.map((response: Response) => <IBlog> response.json())
         .map(this.extractData)
         .catch(this.handleError);
     }

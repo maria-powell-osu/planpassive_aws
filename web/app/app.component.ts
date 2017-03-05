@@ -3,10 +3,6 @@ import { NavbarComponent } from "./shared/navbar/navbar.component";
 
 @Component({
     selector: 'plan-passive',
-    template: `
-       <navbar></navbar>
-       
-        <router-outlet></router-outlet>
-    `
+    templateUrl: "app/app.component.html",
 })
 export class AppComponent { }

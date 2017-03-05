@@ -15,37 +15,43 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 var http_1 = require("@angular/http");
-var BlogsService = (function () {
-    function BlogsService(_http) {
+var BlogService = (function () {
+    function BlogService(_http) {
         this._http = _http;
     }
-    BlogsService.prototype.getBlogs = function () {
+    //TODO: this list needs to get ordered
+    BlogService.prototype.getBlogs = function () {
         return this._http.get("http://planpassive.com/blogData")
             .map(this.extractData)
             .catch(this.handleError);
     };
-    BlogsService.prototype.deleteBlog = function () {
+    BlogService.prototype.getBlog = function (name) {
+        return this._http.get("http://planpassive.com/blogData/" + name)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    BlogService.prototype.deleteBlog = function () {
         return;
     };
-    BlogsService.prototype.editBlog = function () {
+    BlogService.prototype.editBlog = function () {
         return;
     };
-    BlogsService.prototype.postBlog = function () {
+    BlogService.prototype.postBlog = function () {
         return;
     };
-    BlogsService.prototype.extractData = function (response) {
+    BlogService.prototype.extractData = function (response) {
         var blogs = response.json();
         return blogs || [];
     };
-    BlogsService.prototype.handleError = function (error) {
+    BlogService.prototype.handleError = function (error) {
         console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Internal Server Error');
     };
-    return BlogsService;
+    return BlogService;
 }());
-BlogsService = __decorate([
+BlogService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], BlogsService);
-exports.BlogsService = BlogsService;
-//# sourceMappingURL=blogs.service.js.map
+], BlogService);
+exports.BlogService = BlogService;
+//# sourceMappingURL=blog.service.js.map

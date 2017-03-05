@@ -10,25 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var blogs_service_1 = require("./blogs.service");
-var BlogsComponent = (function () {
-    function BlogsComponent(_blogsService) {
-        this._blogsService = _blogsService;
+var blog_service_1 = require("../blog-service/blog.service");
+var BlogListComponent = (function () {
+    function BlogListComponent(_blogService) {
+        this._blogService = _blogService;
         //this.blogs = _blogsService.getBlogs();
     }
-    BlogsComponent.prototype.ngOnInit = function () {
+    BlogListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._blogsService.getBlogs()
+        //Retrieve all Blogs
+        this._blogService.getBlogs()
             .subscribe(function (blogs) { return _this.blogs = blogs; }, function (error) { return _this.errorMessage = error; });
     };
-    return BlogsComponent;
+    return BlogListComponent;
 }());
-BlogsComponent = __decorate([
+BlogListComponent = __decorate([
     core_1.Component({
-        templateUrl: "app/blogs/blogs.component.html",
-        providers: [blogs_service_1.BlogsService] //dependency injection
+        templateUrl: "app/blogs/blog-list/blog-list.component.html",
+        providers: [blog_service_1.BlogService] //dependency injection
     }),
-    __metadata("design:paramtypes", [blogs_service_1.BlogsService])
-], BlogsComponent);
-exports.BlogsComponent = BlogsComponent;
-//# sourceMappingURL=blogs.component.js.map
+    __metadata("design:paramtypes", [blog_service_1.BlogService])
+], BlogListComponent);
+exports.BlogListComponent = BlogListComponent;
+//# sourceMappingURL=blog-list.component.js.map
