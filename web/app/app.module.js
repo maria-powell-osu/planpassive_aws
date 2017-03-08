@@ -20,7 +20,7 @@ var rental_property_calculator_component_1 = require("./calculators/rental-prope
 var investment_return_calculator_component_1 = require("./calculators/investment-return-calculator/investment-return-calculator.component");
 var app_component_1 = require("./app.component");
 var navbar_component_1 = require("./shared/navbar/navbar.component");
-//Plan Passive Services
+var loader_component_1 = require("./shared/loader/loader.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -50,7 +50,8 @@ AppModule = __decorate([
             navbar_component_1.NavbarComponent,
             calculators_component_1.CalculatorsComponent,
             rental_property_calculator_component_1.RentalPropertyCalculatorComponent,
-            investment_return_calculator_component_1.InvestmentReturnCalculatorComponent
+            investment_return_calculator_component_1.InvestmentReturnCalculatorComponent,
+            loader_component_1.LoaderComponent
         ],
         bootstrap: [
             app_component_1.AppComponent

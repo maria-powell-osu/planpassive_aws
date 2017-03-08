@@ -13,8 +13,8 @@ import { RentalPropertyCalculatorComponent} from "./calculators/rental-property-
 import { InvestmentReturnCalculatorComponent } from "./calculators/investment-return-calculator/investment-return-calculator.component";  
 import { AppComponent }  from './app.component';
 import {NavbarComponent} from "./shared/navbar/navbar.component";
+import {LoaderComponent} from "./shared/loader/loader.component";
 
-//Plan Passive Services
 
 @NgModule({
   imports: [ 
@@ -39,7 +39,8 @@ import {NavbarComponent} from "./shared/navbar/navbar.component";
     NavbarComponent,
     CalculatorsComponent,
     RentalPropertyCalculatorComponent,
-    InvestmentReturnCalculatorComponent
+    InvestmentReturnCalculatorComponent,
+    LoaderComponent
      ],
   bootstrap: [
      AppComponent

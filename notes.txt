@@ -1,4 +1,5 @@
-
+Left at:
+	- create the calculators
 Angular 2 TO DOs:
 	- navbar collapse button needs animation for clicking
 	- are blogs ordered?

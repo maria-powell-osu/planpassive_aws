@@ -11,7 +11,6 @@ import { Subscription }from 'rxjs/Subscription';
 
 export class BlogViewComponent implements OnInit, OnDestroy  {
     blog : IBlog;
-    pageTitle: string;
     errorMessage : string;
     private sub: Subscription;
 
