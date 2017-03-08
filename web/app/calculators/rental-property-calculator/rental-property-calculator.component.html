@@ -32,15 +32,15 @@
 	<br/>
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
 		<div>
-			<loan-information ng-show="rentalCalculator.view == 'loan'"></loan-information>
-			<money-flow ng-show="rentalCalculator.view == 'incomeExpenses'"></money-flow>
+			<loaninformation [hidden]="rentalCalculator.view != 'loan'"></loaninformation>
+			<cashflow [hidden]="rentalCalculator.view != 'incomeExpenses'"></cashflow>
 			<!-- Only Shown when all fields have been entered -->
-			<cashflow-summary ng-show="rentalCalculator.view == 'cashFlowSummary'" ng-if="rentalCalculatorInputForm.$valid"></cashflow-summary>
+			<results [hidden]="rentalCalculator.view != 'cashFlowSummary'" *ngIf="rentalCalculatorInputForm.$valid"></results>
 			<!-- If form is not valid but tab has been pushed display error message with missing fields -->
 			<!-- Error Messages -->
-			<div class="text-danger elemIndent" ng-show="rentalCalculator.view == 'cashFlowSummary' && !rentalCalculatorInputForm.$valid">
+			<div class="text-danger elemIndent" [hidden]="rentalCalculator.view != 'cashFlowSummary' && !rentalCalculatorInputForm.$valid">
 	    		<b>Enter the following fields to view your cashflow summary:</b>
-	    		<div ng-repeat="field in rentalCalculator.missingFields">
+	    		<div *ngFor="let field of missingFields">
 	    			<div>{{field}}</div>
 	    		</div>
 	  		</div>
@@ -56,11 +56,20 @@
 		        	<!-- To strech the tabs to whole width
 		        		  Each of the labels got a assigned a width percentage value. ones with longer names I gave more space -->
 		        	<!-- Loan-->
-		        	<label class="btn btn-default" style="width:25%;"  [ngClass]="{active: rentalCalculator.view === 'loan'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="loan">Loan</label>
+		        	<label class="btn btn-default" style="width:25%;"  [ngClass]="{active:view === 'loan'}">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="loan">
+                        Loan
+                    </label>
 		        	<!-- Income/Expenses -->
-		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: rentalCalculator.view === 'incomeExpenses'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="incomeExpenses">Cash Flow</label>
+		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: view === 'incomeExpenses'}">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="incomeExpenses">
+                        Cash Flow
+                    </label>
 		        	<!-- CASHFLOW SUMMARY -->
-		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: rentalCalculator.view === 'cashFlowSummary'}" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="cashFlowSummary" >Result</label>
+		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'cashFlowSummary'}" (click)="calculate(rentalCalculatorInputForm)">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="cashFlowSummary" >
+                        Result
+                    </label>
 		        </div>
 		    </div>
 		</div>

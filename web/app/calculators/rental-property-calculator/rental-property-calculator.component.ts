@@ -1,7 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { RentalCalculatorService } from './rental-property-calculator.service';
-import { LoaderComponent} from '../../shared/loader/loader.component';
-import { LoanInformationComponent} from ''
+import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LoanInformationComponent } from './templates/loan-information.component';
+import { CashFlowComponent } from './templates/cashflow.component';
+import { ResultsComponent } from './templates/results.component';
+
 
 @Component({
     templateUrl: 'app/calculators/rental-property-calculator/rental-property-calculator.component.html',

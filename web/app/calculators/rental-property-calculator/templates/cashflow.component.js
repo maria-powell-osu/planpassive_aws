@@ -15,6 +15,7 @@ var CashFlowComponent = (function () {
 CashFlowComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/templates/cashflow.component.html",
+        selector: 'cashflow'
     })
 ], CashFlowComponent);
 exports.CashFlowComponent = CashFlowComponent;

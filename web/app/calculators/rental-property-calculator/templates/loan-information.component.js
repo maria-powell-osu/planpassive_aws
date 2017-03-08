@@ -15,6 +15,7 @@ var LoanInformationComponent = (function () {
 LoanInformationComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/templates/loan-information.component.html",
+        selector: 'loaninformation'
     })
 ], LoanInformationComponent);
 exports.LoanInformationComponent = LoanInformationComponent;

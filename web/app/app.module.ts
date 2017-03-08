@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
+import { FormsModule }   from '@angular/forms';
 import { HttpModule } from "@angular/http";
 
 //Plan Passive Components
@@ -12,13 +13,17 @@ import { CalculatorsComponent }  from "./calculators/calculators.component";
 import { RentalPropertyCalculatorComponent} from "./calculators/rental-property-calculator/rental-property-calculator.component";
 import { InvestmentReturnCalculatorComponent } from "./calculators/investment-return-calculator/investment-return-calculator.component";  
 import { AppComponent }  from './app.component';
-import {NavbarComponent} from "./shared/navbar/navbar.component";
-import {LoaderComponent} from "./shared/loader/loader.component";
+import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { LoaderComponent } from "./shared/loader/loader.component";
+import { CashFlowComponent } from "./calculators/rental-property-calculator/templates/cashflow.component";
+import { LoanInformationComponent } from './calculators/rental-property-calculator/templates/loan-information.component';
+import { ResultsComponent } from './calculators/rental-property-calculator/templates/results.component';
 
 
 @NgModule({
   imports: [ 
     BrowserModule,
+    FormsModule,
     HttpModule,
     RouterModule.forRoot([
       //Gets matched on first-match basis
@@ -40,7 +45,10 @@ import {LoaderComponent} from "./shared/loader/loader.component";
     CalculatorsComponent,
     RentalPropertyCalculatorComponent,
     InvestmentReturnCalculatorComponent,
-    LoaderComponent
+    LoaderComponent,
+    CashFlowComponent,
+    LoanInformationComponent,
+    ResultsComponent
      ],
   bootstrap: [
      AppComponent

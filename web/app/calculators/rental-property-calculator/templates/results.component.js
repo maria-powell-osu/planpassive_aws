@@ -15,6 +15,7 @@ var ResultsComponent = (function () {
 ResultsComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/templates/results.component.html",
+        selector: 'results'
     })
 ], ResultsComponent);
 exports.ResultsComponent = ResultsComponent;

@@ -10,6 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
+var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 //Plan Passive Components
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
@@ -21,6 +22,9 @@ var investment_return_calculator_component_1 = require("./calculators/investment
 var app_component_1 = require("./app.component");
 var navbar_component_1 = require("./shared/navbar/navbar.component");
 var loader_component_1 = require("./shared/loader/loader.component");
+var cashflow_component_1 = require("./calculators/rental-property-calculator/templates/cashflow.component");
+var loan_information_component_1 = require("./calculators/rental-property-calculator/templates/loan-information.component");
+var results_component_1 = require("./calculators/rental-property-calculator/templates/results.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,6 +34,7 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
+            forms_1.FormsModule,
             http_1.HttpModule,
             router_1.RouterModule.forRoot([
                 //Gets matched on first-match basis
@@ -51,7 +56,10 @@ AppModule = __decorate([
             calculators_component_1.CalculatorsComponent,
             rental_property_calculator_component_1.RentalPropertyCalculatorComponent,
             investment_return_calculator_component_1.InvestmentReturnCalculatorComponent,
-            loader_component_1.LoaderComponent
+            loader_component_1.LoaderComponent,
+            cashflow_component_1.CashFlowComponent,
+            loan_information_component_1.LoanInformationComponent,
+            results_component_1.ResultsComponent
         ],
         bootstrap: [
             app_component_1.AppComponent
