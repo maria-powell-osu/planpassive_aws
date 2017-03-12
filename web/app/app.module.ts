@@ -2,8 +2,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
-import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule } from "@angular/http";
+import { FormsModule } from '@angular/forms';
 
 //Plan Passive Components
 import { BlogListComponent} from "./blogs/blog-list/blog-list.component";
@@ -18,13 +19,14 @@ import { LoaderComponent } from "./shared/loader/loader.component";
 import { CashFlowComponent } from "./calculators/rental-property-calculator/templates/cashflow.component";
 import { LoanInformationComponent } from './calculators/rental-property-calculator/templates/loan-information.component';
 import { ResultsComponent } from './calculators/rental-property-calculator/templates/results.component';
-
+import {mpDatePicker} from './shared/datepicker/mpdatepicker';
 
 @NgModule({
   imports: [ 
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot([
       //Gets matched on first-match basis
       {path: 'home', component: HomeComponent},
@@ -48,7 +50,8 @@ import { ResultsComponent } from './calculators/rental-property-calculator/templ
     LoaderComponent,
     CashFlowComponent,
     LoanInformationComponent,
-    ResultsComponent
+    ResultsComponent,
+    mpDatePicker
      ],
   bootstrap: [
      AppComponent

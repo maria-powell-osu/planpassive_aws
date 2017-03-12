@@ -30,21 +30,10 @@
 	</div>
 	<br/>
 	<br/>
-	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
-		<div>
-			<loaninformation [hidden]="rentalCalculator.view != 'loan'"></loaninformation>
-			<cashflow [hidden]="rentalCalculator.view != 'incomeExpenses'"></cashflow>
-			<!-- Only Shown when all fields have been entered -->
-			<results [hidden]="rentalCalculator.view != 'cashFlowSummary'" *ngIf="rentalCalculatorInputForm.$valid"></results>
-			<!-- If form is not valid but tab has been pushed display error message with missing fields -->
-			<!-- Error Messages -->
-			<div class="text-danger elemIndent" [hidden]="rentalCalculator.view != 'cashFlowSummary' && !rentalCalculatorInputForm.$valid">
-	    		<b>Enter the following fields to view your cashflow summary:</b>
-	    		<div *ngFor="let field of missingFields">
-	    			<div>{{field}}</div>
-	    		</div>
-	  		</div>
-		</div>
+	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm" [formGroup]="calcForm">
+		<!--<form [formGroup]="loanFormGroup">-->
+			<loaninformation [hidden]="view != 'loan'" [parentFormGroup]="calcForm"></loaninformation>
+			<!--parentComponent: {{calcForm.get('loanInfoView').value}}-->
 	</form>
 	<br/>
 	<br/>

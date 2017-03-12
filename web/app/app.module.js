@@ -12,6 +12,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var forms_2 = require("@angular/forms");
 //Plan Passive Components
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
 var blog_view_component_1 = require("./blogs/blog-view/blog-view.component");
@@ -25,6 +26,7 @@ var loader_component_1 = require("./shared/loader/loader.component");
 var cashflow_component_1 = require("./calculators/rental-property-calculator/templates/cashflow.component");
 var loan_information_component_1 = require("./calculators/rental-property-calculator/templates/loan-information.component");
 var results_component_1 = require("./calculators/rental-property-calculator/templates/results.component");
+var mpdatepicker_1 = require("./shared/datepicker/mpdatepicker");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -34,8 +36,9 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
+            forms_1.ReactiveFormsModule,
             http_1.HttpModule,
+            forms_2.FormsModule,
             router_1.RouterModule.forRoot([
                 //Gets matched on first-match basis
                 { path: 'home', component: home_component_1.HomeComponent },
@@ -59,7 +62,8 @@ AppModule = __decorate([
             loader_component_1.LoaderComponent,
             cashflow_component_1.CashFlowComponent,
             loan_information_component_1.LoanInformationComponent,
-            results_component_1.ResultsComponent
+            results_component_1.ResultsComponent,
+            mpdatepicker_1.mpDatePicker
         ],
         bootstrap: [
             app_component_1.AppComponent

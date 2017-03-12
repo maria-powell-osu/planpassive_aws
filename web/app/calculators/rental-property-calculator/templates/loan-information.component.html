@@ -1,1 +1,37 @@
-loan infomation
+<!--LOAN TYPE SELECTION-->
+<div  [formGroup]="parentFormGroup">
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <input type="radio" formControlName="loanInfoView" value="cash" >
+            Cash
+            <input type="radio" value="bankLoan" formControlName="loanInfoView">
+            Loan - Bank
+            <input type="radio" value="specialTermsLoan" formControlName="loanInfoView">
+            Loan - Special Terms
+        </div>
+    </div> 
+
+<!--PRICE INFORMATION-->
+<div class="row">
+    <div class="col-md-10">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>
+              Purchase Price
+            </label>
+            <div class="input-group">
+              <input type="number" class="inpt form-control" formControlName="li_purchasePrice" placeholder="$" name="Purchase Price" required ng-change="rentalCalculator.calculateDownPayments('price')" ng-class="{inValidField: !rentalCalculator.input.li_purchasePrice && rentalCalculator.userWantedToViewResults}"> 
+              <span class="input-group-addon">$</span>
+            </div>
+          </div>
+          <div class="col-md-4 form-group">
+            <label >Purchase Date</label>
+           <input mp-datepicker (dateChange)="parentFormGroup.get('li_purchaseDate').setValue($event)" type="text" class="inpt form-control"  formControlName="li_purchaseDate" name="Purchase Price"> 
+          tester: {{parentFormGroup.get('li_purchaseDate').value}}
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>

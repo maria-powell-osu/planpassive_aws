@@ -10,39 +10,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var rental_property_calculator_service_1 = require("./rental-property-calculator.service");
 var RentalPropertyCalculatorComponent = (function () {
-    function RentalPropertyCalculatorComponent(_rentalCalculatorService) {
+    function RentalPropertyCalculatorComponent(_rentalCalculatorService, fb) {
         this._rentalCalculatorService = _rentalCalculatorService;
-        this.input = {};
+        this.fb = fb;
     }
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
-        if (form.$valid) {
-            //Get the data for the tables, graphs etc.
-            var results = this._rentalCalculatorService.calculateResults(this.input);
-            //Whenever we calculate new tables, I am resetting the tabs to show graph first
-            //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
-            this.cashFlowView = 'graph';
-            this.cashOnEquityView = 'graph';
-            this.totalReturnView = 'graph';
-            //A watch has been added in the mp-charts directive that triggers drawing of the graphs
-            this.chartData = results;
-        }
-        else {
-            //Generate list of missing fields
-            this.missingFields = [];
-            for (var i = 0; i < form.$error.required.length; i++) {
-                this.userWantedToViewResults = true;
-                this.missingFields.push(form.$error.required[i].$name);
-            }
-        }
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {
+        this.view = 'loan';
         this.loading = false;
-        this.view = "loan";
-        this.cashFlowView = 'graph';
-        this.cashOnEquityView = 'graph';
-        this.totalReturnView = 'graph';
+        this.calcForm = this.fb.group({
+            loanInfoView: 'bankLoan',
+            li_purchasePrice: '',
+            li_purchaseDate: this.getCurrentDate(),
+            bl_loanName: '',
+            bl_closingCost: '',
+            bl_interest: '',
+            bl_amortization: '',
+            bl_downPaymentDollar: '',
+            bl_downPaymentPercent: '',
+            bl_extraPrincipal: '',
+            bl_startDate: '',
+            bl_endDate: ''
+        });
+    };
+    RentalPropertyCalculatorComponent.prototype.getCurrentDate = function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var result = mm + '/' + dd + '/' + yyyy;
+        return result;
     };
     return RentalPropertyCalculatorComponent;
 }());
@@ -51,7 +58,8 @@ RentalPropertyCalculatorComponent = __decorate([
         templateUrl: 'app/calculators/rental-property-calculator/rental-property-calculator.component.html',
         providers: [rental_property_calculator_service_1.RentalCalculatorService]
     }),
-    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService])
+    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService,
+        forms_1.FormBuilder])
 ], RentalPropertyCalculatorComponent);
 exports.RentalPropertyCalculatorComponent = RentalPropertyCalculatorComponent;
 //# sourceMappingURL=rental-property-calculator.component.js.map

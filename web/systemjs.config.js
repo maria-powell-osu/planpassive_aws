@@ -6,7 +6,8 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/',
+      "ng2-bootstrap":   "node_modules/ng2-bootstrap"
     },
     // map tells the System loader where to look for things
     map: {
@@ -24,7 +25,8 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+       'ng2-bootstrap': 'npm:ng2-bootstrap'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -34,6 +36,11 @@
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      'ng2-bootstrap': { 
+        format: 'cjs', 
+        main: 'bundles/ng2-bootstrap.umd.js', 
+        defaultExtension: 'js' 
       }
     }
   });

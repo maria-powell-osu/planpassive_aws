@@ -1,9 +1,8 @@
 import { Component,OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { RentalCalculatorService } from './rental-property-calculator.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-import { LoanInformationComponent } from './templates/loan-information.component';
-import { CashFlowComponent } from './templates/cashflow.component';
-import { ResultsComponent } from './templates/results.component';
+import { NgModule }      from '@angular/core';
 
 
 @Component({
@@ -12,48 +11,50 @@ import { ResultsComponent } from './templates/results.component';
 })
 export class RentalPropertyCalculatorComponent implements OnInit {
      loading : Boolean;
-     view : string;
-     cashFlowView: string;
-     cashOnEquityView: string;
-     totalReturnView: string;
-     chartData : any;
-     missingFields: any[];
-     userWantedToViewResults : boolean;
-     input = {} as any;
+     calcForm : FormGroup;
+     view : String;
 
-     constructor (private _rentalCalculatorService : RentalCalculatorService){}
+
+     constructor (private _rentalCalculatorService : RentalCalculatorService,
+                  private fb: FormBuilder){}
 
      calculate (form :any): void {
-        if(form.$valid)  {
-            //Get the data for the tables, graphs etc.
-            var results =  this._rentalCalculatorService.calculateResults(this.input);
-
-            //Whenever we calculate new tables, I am resetting the tabs to show graph first
-            //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
-            this.cashFlowView = 'graph';
-            this.cashOnEquityView = 'graph';
-            this.totalReturnView = 'graph';
-
-            //A watch has been added in the mp-charts directive that triggers drawing of the graphs
-            this.chartData = results;
-
-            } else {
-                //Generate list of missing fields
-                this.missingFields = [];
-
-                for(var i = 0; i < form.$error.required.length; i++){
-                    this.userWantedToViewResults = true;
-                    this.missingFields.push(form.$error.required[i].$name);
-                }
-            }
+        
      }
 
      ngOnInit(): void {
+         this.view = 'loan';
          this.loading = false;
-         this.view = "loan";
-         this.cashFlowView = 'graph';
-         this.cashOnEquityView = 'graph';
-         this.totalReturnView = 'graph';
+         this.calcForm = this.fb.group({       
+            loanInfoView :  'bankLoan',
+            li_purchasePrice : '',
+            li_purchaseDate : this.getCurrentDate(),
+            bl_loanName : '',
+            bl_closingCost : '',
+            bl_interest : '',
+            bl_amortization : '',
+            bl_downPaymentDollar : '',
+            bl_downPaymentPercent : '',
+            bl_extraPrincipal : '',
+            bl_startDate : '',
+            bl_endDate : ''
+         });
      }
+
+    private getCurrentDate(){
+        var today = new Date();
+        var dd : any= today.getDate();
+        var mm : any= today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        var result = mm+'/'+ dd +'/'+ yyyy;
+        return result;
+    }
     
 }
