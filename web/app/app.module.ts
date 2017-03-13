@@ -21,6 +21,7 @@ import { LoanInformationComponent } from './calculators/rental-property-calculat
 import { ResultsComponent } from './calculators/rental-property-calculator/templates/results.component';
 import { mpDatePicker } from './shared/datepicker/mpdatepicker';
 import { mpToolTip } from './shared/tooltip/mptooltip';
+import { FooterComponent } from './shared/footer/footer.component'; 
 
 @NgModule({
   imports: [ 
@@ -53,7 +54,8 @@ import { mpToolTip } from './shared/tooltip/mptooltip';
     LoanInformationComponent,
     ResultsComponent,
     mpDatePicker,
-    mpToolTip
+    mpToolTip,
+    FooterComponent
      ],
   bootstrap: [
      AppComponent

@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: "app/shared/navbar/navbar.component.html"
  })
 export class NavbarComponent {
-    toggle = false;
 }
