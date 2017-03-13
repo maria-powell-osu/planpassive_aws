@@ -13,7 +13,7 @@
 
 <!--PRICE INFORMATION-->
 <div class="row">
-    <div class="col-md-10">
+  <div class="col-md-10">
       <fieldset>
         <div class="row">
           <div class="col-md-6 form-group">
@@ -21,17 +21,117 @@
               Purchase Price
             </label>
             <div class="input-group">
-              <input type="number" class="inpt form-control" formControlName="li_purchasePrice" placeholder="$" name="Purchase Price" required ng-change="rentalCalculator.calculateDownPayments('price')" ng-class="{inValidField: !rentalCalculator.input.li_purchasePrice && rentalCalculator.userWantedToViewResults}"> 
+              <input type="number" class="inpt form-control" formControlName="li_purchasePrice" placeholder="$" name="Purchase Price"> 
               <span class="input-group-addon">$</span>
             </div>
           </div>
           <div class="col-md-4 form-group">
             <label >Purchase Date</label>
            <input mp-datepicker (dateChange)="parentFormGroup.get('li_purchaseDate').setValue($event)" type="text" class="inpt form-control"  formControlName="li_purchaseDate" name="Purchase Price"> 
-          tester: {{parentFormGroup.get('li_purchaseDate').value}}
+          <!--tester: {{parentFormGroup.get('li_purchaseDate').value}}-->
           </div>
         </div>
       </fieldset>
     </div>
   </div>
+
+  <br/>
+  <!--BANK LOAN VIEW-->
+  <div [hidden]="parentFormGroup.get('loanInfoView').value != 'bankLoan'">
+     <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <!--new row-->
+            <div class="row">
+              <!--left-->
+              <div class="col-md-6 form-group">
+                 <label>Loan Name</label>
+                  <div class="input-group">
+                    <input type="text" class="inpt form-control" formControlName="bl_loanName" placeholder="Loan Name" name="Loan Name"> 
+                    <span class="input-group-addon">  </span>
+                  </div>
+                  <label>Closing Cost</label>
+                  <div class="input-group">
+                    <input type="number" class="inpt form-control" formControlName="bl_closingCost" placeholder="$"> 
+                    <span class="input-group-addon">$</span>
+                  </div>       
+              </div>
+              <!--right-->
+              <div class="col-md-6 form-group">
+                <label>Interest</label>
+                <div class="input-group">
+                  <input type="number" step="0.001" class="inpt form-control" formControlName="bl_interest" placeholder="%" name="Interest"> 
+                  <span class="input-group-addon">%</span>
+                </div>
+                <label>
+                  Amortization
+                  <a>
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_amortization" placeholder="yrs" name="Amortization">
+                  <span class="input-group-addon">years</span>
+                </div>               
+              </div>  
+            </div>
+            <!--new row-->
+            <div class="row noTopPad">
+              <!--left-->
+              <div class="col-md-3 form-group noTopPad">
+                <label>
+                  Down Payment ($)
+                  <!--<span class="text-danger" ng-show="rentalCalculator.input.showDownPaymentDollarHelpText">Enter purchase price first.</span>-->
+                </label> 
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_downPaymentDollar" placeholder="$" name="Down Payment ($)">
+                  <span class="input-group-addon" >$</span>
+                </div>
+              </div>
+              <!--right-->
+              <div class="col-md-3 form-group">
+                <label>
+                  Down Payment (%)
+                  <!--<span class="text-danger" ng-show="rentalCalculator.showDownPaymentPercentHelpText">Enter purchase price first.</span>-->
+                </label> 
+                <div class="input-group">    
+                  <input type="number" class="inpt form-control" formControlName="bl_downPaymentPercent" placeholder="%" name="Down Payment (%)">
+                  <span class="input-group-addon" >%</span>
+                </div>
+              </div>
+            </div>
+            <!--new row-->
+            <div class="row">
+              <!--left-->
+              <div class="col-md-6 form-group">
+                <label>
+                  Extra Principal Pmt
+                  <a>
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_extraPrincipal" placeholder="$" name="Extra Principal">                  
+                  <span class="input-group-addon">$/month</span>
+                </div>
+              </div>
+              <!--right-->
+              <div class="col-md-3 form-group">
+                <label>Start</label>      
+                <input type="text" mp-datepicker (dateChange)="parentFormGroup.get('bl_startDate').setValue($event)" class="inpt form-control" formControlName="bl_startDate" placeholder="Date" name="Principal Start Date"> 
+              </div>
+              <div class="col-md-3 form-group">
+                <label>End</label>      
+                <input type="text" class="inpt form-control" mp-datepicker (dateChange)="parentFormGroup.get('bl_endDate').setValue($event)" formControlName="bl_endDate" placeholder="Date" name="Principal End Date">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+     </div>
+  </div>
+
 </div>
+
+<!--tool tip-->
+<!--auto generate fields: down payment-->
+<!--validation-->

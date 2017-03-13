@@ -19,7 +19,8 @@ import { LoaderComponent } from "./shared/loader/loader.component";
 import { CashFlowComponent } from "./calculators/rental-property-calculator/templates/cashflow.component";
 import { LoanInformationComponent } from './calculators/rental-property-calculator/templates/loan-information.component';
 import { ResultsComponent } from './calculators/rental-property-calculator/templates/results.component';
-import {mpDatePicker} from './shared/datepicker/mpdatepicker';
+import { mpDatePicker } from './shared/datepicker/mpdatepicker';
+import { mpToolTip } from './shared/tooltip/mptooltip';
 
 @NgModule({
   imports: [ 
@@ -51,7 +52,8 @@ import {mpDatePicker} from './shared/datepicker/mpdatepicker';
     CashFlowComponent,
     LoanInformationComponent,
     ResultsComponent,
-    mpDatePicker
+    mpDatePicker,
+    mpToolTip
      ],
   bootstrap: [
      AppComponent

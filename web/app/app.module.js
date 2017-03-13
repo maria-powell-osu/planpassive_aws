@@ -27,6 +27,7 @@ var cashflow_component_1 = require("./calculators/rental-property-calculator/tem
 var loan_information_component_1 = require("./calculators/rental-property-calculator/templates/loan-information.component");
 var results_component_1 = require("./calculators/rental-property-calculator/templates/results.component");
 var mpdatepicker_1 = require("./shared/datepicker/mpdatepicker");
+var mptooltip_1 = require("./shared/tooltip/mptooltip");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -63,7 +64,8 @@ AppModule = __decorate([
             cashflow_component_1.CashFlowComponent,
             loan_information_component_1.LoanInformationComponent,
             results_component_1.ResultsComponent,
-            mpdatepicker_1.mpDatePicker
+            mpdatepicker_1.mpDatePicker,
+            mptooltip_1.mpToolTip
         ],
         bootstrap: [
             app_component_1.AppComponent

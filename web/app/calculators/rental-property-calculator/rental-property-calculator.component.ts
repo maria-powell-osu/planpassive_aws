@@ -38,6 +38,7 @@ export class RentalPropertyCalculatorComponent implements OnInit {
             bl_extraPrincipal : '',
             bl_startDate : '',
             bl_endDate : ''
+
          });
      }
 
