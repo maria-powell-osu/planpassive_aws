@@ -14,14 +14,14 @@
                         <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="loan">
                         Loan
                     </label>
-		        	<!-- Income/Expenses -->
-		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: view === 'incomeExpenses'}">
-                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="incomeExpenses">
+		        	<!-- Cashflow -->
+		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: view === 'cashflow'}">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="cashflow">
                         Cash Flow
                     </label>
-		        	<!-- CASHFLOW SUMMARY -->
-		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'cashFlowSummary'}" (click)="calculate(rentalCalculatorInputForm)">
-                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="cashFlowSummary" >
+		        	<!-- Result SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" (click)="calculate(rentalCalculatorInputForm)">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="result" >
                         Result
                     </label>
 		        </div>
@@ -31,9 +31,8 @@
 	<br/>
 	<br/>
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm" [formGroup]="calcForm">
-		<!--<form [formGroup]="loanFormGroup">-->
-			<loaninformation [hidden]="view != 'loan'" [parentFormGroup]="calcForm"></loaninformation>
-			<!--parentComponent: {{calcForm.get('loanInfoView').value}}-->
+		<loaninformation [hidden]="view != 'loan'" [calcForm]="calcForm"></loaninformation>
+		<cashflow [hidden]="view != 'cashflow'" [calcForm]="calcForm"></cashflow>
 	</form>
 	<br/>
 	<br/>
@@ -49,14 +48,14 @@
                         <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="loan">
                         Loan
                     </label>
-		        	<!-- Income/Expenses -->
-		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: view === 'incomeExpenses'}">
-                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="incomeExpenses">
+		        	<!-- Cashflow -->
+		        	<label class="btn btn-default" style="width:42%;" [ngClass]="{active: view === 'cashflow'}">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="cashflow">
                         Cash Flow
                     </label>
-		        	<!-- CASHFLOW SUMMARY -->
-		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'cashFlowSummary'}" (click)="calculate(rentalCalculatorInputForm)">
-                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="cashFlowSummary" >
+		        	<!-- Result SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" (click)="calculate(rentalCalculatorInputForm)">
+                        <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="result" >
                         Result
                     </label>
 		        </div>

@@ -10,11 +10,101 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var RentalCalculatorService = (function () {
     function RentalCalculatorService() {
     }
     RentalCalculatorService.prototype.calculateResults = function (form) {
         return this.rentalCalculations(form);
+    };
+    RentalCalculatorService.prototype.generateDownPaymentPercent = function (purchasePrice, downPaymentDollarAmount) {
+        return this.calculateDownPaymentPercentage(purchasePrice, downPaymentDollarAmount);
+    };
+    RentalCalculatorService.prototype.generateDownPaymentDollarAmount = function (purchasePrice, downPaymentPercentage) {
+        return this.calculateDownPaymentDollarAmount(purchasePrice, downPaymentPercentage);
+    };
+    RentalCalculatorService.prototype.buildLoan = function () {
+        return new forms_1.FormBuilder().group({
+            add_bl_loanName: '',
+            add_bl_loanAmount: '',
+            add_bl_interest: false,
+            add_bl_amortization: '',
+            add_bl_balloon: '',
+            add_bl_upFrontLenderPoints: '',
+            add_bl_interestOnly: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildSpecialTermsLoan = function () {
+        return new forms_1.FormBuilder().group({
+            stl_loanName: '',
+            stl_amount: '',
+            stl_interest: false,
+            stl_amortization: '',
+            stl_balloon: '',
+            stl_upFrontLenderPoints: '',
+            stl_interestOption: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildUnit = function () {
+        return new forms_1.FormBuilder().group({
+            ri_grossMonthlyIncome: '',
+            ri_unitName: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildSupplementalIncome = function () {
+        return new forms_1.FormBuilder().group({
+            si_description: '',
+            si_grossMonthlyIncome: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildUtility = function () {
+        return new forms_1.FormBuilder().group({
+            add_u_name: '',
+            add_u_amount: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildExpense = function () {
+        return new forms_1.FormBuilder().group({
+            add_e_name: '',
+            add_e_cost: ''
+        });
+    };
+    RentalCalculatorService.prototype.buildCapitalExpenditure = function () {
+        return new forms_1.FormBuilder().group({
+            ce_description: '',
+            ce_cost: '',
+            ce_date: this.getCurrentDate()
+        });
+    };
+    RentalCalculatorService.prototype.getCurrentDate = function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var result = mm + '/' + dd + '/' + yyyy;
+        return result;
+    };
+    RentalCalculatorService.prototype.calculateDownPaymentDollarAmount = function (purchasePrice, downPaymentPercentage) {
+        var downPaymentDollarAmount;
+        //if the user has not entered purchase price return nothing
+        if (purchasePrice && downPaymentPercentage) {
+            downPaymentDollarAmount = this.roundToNearestDecimal(2, (downPaymentPercentage / 100) * purchasePrice);
+        }
+        return downPaymentDollarAmount;
+    };
+    RentalCalculatorService.prototype.calculateDownPaymentPercentage = function (purchasePrice, downPaymentDollarAmount) {
+        var downPaymentPercentage;
+        //if the user has not entered purchase price return nothing
+        if (purchasePrice && downPaymentDollarAmount) {
+            downPaymentPercentage = this.roundToNearestDecimal(2, (downPaymentDollarAmount / purchasePrice) * 100);
+        }
+        return downPaymentPercentage;
     };
     RentalCalculatorService.prototype.rentalCalculations = function (form) {
         var result = {};

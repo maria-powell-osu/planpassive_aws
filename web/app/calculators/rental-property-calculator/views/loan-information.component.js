@@ -109,7 +109,7 @@ var LoanInformationComponent = (function () {
         configurable: true
     });
     LoanInformationComponent.prototype.addSpecialTermsLoan = function () {
-        this.specialTermsLoans.push(this._rentalCalculatorService.buildLoan());
+        this.specialTermsLoans.push(this._rentalCalculatorService.buildSpecialTermsLoan());
     };
     LoanInformationComponent.prototype.removeSpecialTermsLoan = function () {
         this.specialTermsLoans.removeAt(this.specialTermsLoans.length - 1);
@@ -122,7 +122,7 @@ __decorate([
 ], LoanInformationComponent.prototype, "calcForm", void 0);
 LoanInformationComponent = __decorate([
     core_1.Component({
-        templateUrl: "app/calculators/rental-property-calculator/templates/loan-information.component.html",
+        templateUrl: "app/calculators/rental-property-calculator/views/loan-information.component.html",
         selector: 'loaninformation',
         providers: [rental_property_calculator_service_1.RentalCalculatorService]
     }),

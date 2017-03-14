@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    templateUrl: "app/calculators/rental-property-calculator/templates/results.component.html",
+    templateUrl: "app/calculators/rental-property-calculator/views/results.component.html",
     selector: 'results'
 })
 

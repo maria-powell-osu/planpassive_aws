@@ -15,7 +15,7 @@ var mpToolTip = (function () {
         this.element = element;
     }
     mpToolTip.prototype.ngOnInit = function () {
-        jQuery(this.element).attr('title', this.text).tooltip();
+        jQuery(this.element.nativeElement).attr('title', this.text).tooltip();
     };
     return mpToolTip;
 }());

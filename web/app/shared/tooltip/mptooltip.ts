@@ -14,6 +14,6 @@ export class mpToolTip implements OnInit {
   }
   
   ngOnInit() {
-    jQuery(this.element).attr('title', this.text).tooltip();
+    jQuery(this.element.nativeElement).attr('title', this.text).tooltip();
   }
 }

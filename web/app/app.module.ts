@@ -16,9 +16,9 @@ import { InvestmentReturnCalculatorComponent } from "./calculators/investment-re
 import { AppComponent }  from './app.component';
 import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { LoaderComponent } from "./shared/loader/loader.component";
-import { CashFlowComponent } from "./calculators/rental-property-calculator/templates/cashflow.component";
-import { LoanInformationComponent } from './calculators/rental-property-calculator/templates/loan-information.component';
-import { ResultsComponent } from './calculators/rental-property-calculator/templates/results.component';
+import { CashFlowComponent } from "./calculators/rental-property-calculator/views/cashflow.component";
+import { LoanInformationComponent } from './calculators/rental-property-calculator/views/loan-information.component';
+import { ResultsComponent } from './calculators/rental-property-calculator/views/results.component';
 import { mpDatePicker } from './shared/datepicker/mpdatepicker';
 import { mpToolTip } from './shared/tooltip/mptooltip';
 import { FooterComponent } from './shared/footer/footer.component'; 

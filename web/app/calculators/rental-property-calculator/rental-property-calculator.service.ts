@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core"
+import { Injectable } from "@angular/core";
+import { FormGroup , FormBuilder} from '@angular/forms';
 
 @Injectable()
 export class RentalCalculatorService {
@@ -7,7 +8,108 @@ export class RentalCalculatorService {
     calculateResults(form : any) : Object{
         return this.rentalCalculations(form);
     }
-    
+
+    generateDownPaymentPercent (purchasePrice : number, downPaymentDollarAmount: number){
+        return this.calculateDownPaymentPercentage(purchasePrice, downPaymentDollarAmount);
+    }
+
+    generateDownPaymentDollarAmount(purchasePrice : number, downPaymentPercentage: number){
+        return this.calculateDownPaymentDollarAmount(purchasePrice, downPaymentPercentage);
+    }
+
+    buildLoan(){
+        return new FormBuilder().group({
+            add_bl_loanName : '',
+            add_bl_loanAmount : '',
+            add_bl_interest : false,
+            add_bl_amortization : '',
+            add_bl_balloon : '',
+            add_bl_upFrontLenderPoints : '',
+            add_bl_interestOnly : ''
+        })
+    }
+
+    buildSpecialTermsLoan(){
+        return new FormBuilder().group({
+            stl_loanName : '',
+            stl_amount : '',
+            stl_interest : false,
+            stl_amortization : '',
+            stl_balloon : '',
+            stl_upFrontLenderPoints : '',
+            stl_interestOption : ''
+        })
+    }
+
+    buildUnit(){
+        return new FormBuilder().group({
+            ri_grossMonthlyIncome : '',
+            ri_unitName : ''
+        })
+    }
+
+    buildSupplementalIncome(){
+        return new FormBuilder().group({
+            si_description : '',
+            si_grossMonthlyIncome : ''
+        })
+    }
+
+    buildUtility(){
+         return new FormBuilder().group({
+             add_u_name: '',
+             add_u_amount: ''
+         })
+    }
+
+    buildExpense(){
+         return new FormBuilder().group({
+             add_e_name: '',
+             add_e_cost: ''
+         })
+    }
+
+    buildCapitalExpenditure(){
+         return new FormBuilder().group({
+             ce_description: '',
+             ce_cost: '',
+             ce_date: this.getCurrentDate()
+         })
+    }
+
+    getCurrentDate(){
+        var today = new Date();
+        var dd : any= today.getDate();
+        var mm : any= today.getMonth()+1; //January is 0!
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        var result = mm+'/'+ dd +'/'+ yyyy;
+        return result;
+    }
+    private calculateDownPaymentDollarAmount(purchasePrice : number, downPaymentPercentage: number){
+        var downPaymentDollarAmount;
+
+        //if the user has not entered purchase price return nothing
+        if (purchasePrice && downPaymentPercentage){
+            downPaymentDollarAmount = this.roundToNearestDecimal(2, (downPaymentPercentage/100) * purchasePrice);
+        }
+        return downPaymentDollarAmount;
+    }
+
+    private calculateDownPaymentPercentage(purchasePrice : number, downPaymentDollarAmount: number){
+        var downPaymentPercentage;
+        //if the user has not entered purchase price return nothing
+        if (purchasePrice && downPaymentDollarAmount){
+            downPaymentPercentage = this.roundToNearestDecimal(2, (downPaymentDollarAmount/purchasePrice) *100);
+        } 
+        return downPaymentPercentage;
+    }
 
     private rentalCalculations(form : any) {
         var result = {} as any; 

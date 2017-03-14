@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import { RentalCalculatorService } from './rental-property-calculator.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { NgModule }      from '@angular/core';
@@ -7,13 +7,12 @@ import { NgModule }      from '@angular/core';
 
 @Component({
     templateUrl: 'app/calculators/rental-property-calculator/rental-property-calculator.component.html',
-     providers: [RentalCalculatorService]
+    providers: [RentalCalculatorService]
 })
 export class RentalPropertyCalculatorComponent implements OnInit {
      loading : Boolean;
      calcForm : FormGroup;
      view : String;
-
 
      constructor (private _rentalCalculatorService : RentalCalculatorService,
                   private fb: FormBuilder){}
@@ -28,7 +27,7 @@ export class RentalPropertyCalculatorComponent implements OnInit {
          this.calcForm = this.fb.group({       
             loanInfoView :  'bankLoan',
             li_purchasePrice : '',
-            li_purchaseDate : this.getCurrentDate(),
+            li_purchaseDate : this._rentalCalculatorService.getCurrentDate(),
             bl_loanName : '',
             bl_closingCost : '',
             bl_interest : '',
@@ -37,25 +36,69 @@ export class RentalPropertyCalculatorComponent implements OnInit {
             bl_downPaymentPercent : '',
             bl_extraPrincipal : '',
             bl_startDate : '',
-            bl_endDate : ''
-
+            bl_endDate : '',
+            loans : this.fb.array([ this._rentalCalculatorService.buildLoan() ]),
+            specialTermsLoans : this.fb.array([ this._rentalCalculatorService.buildSpecialTermsLoan() ]),
+            units : this.fb.array([this._rentalCalculatorService.buildUnit() ]),
+            supplementalIncomes : this.fb.array([this._rentalCalculatorService.buildSupplementalIncome()]),
+            u_garbage: '',
+            u_water: '',
+            o_yardMaintenance: '',
+            utilities : this.fb.array([this._rentalCalculatorService.buildUtility()]),
+            o_propertyTaxes: '',
+            m_costPercent: '',
+            o_insurance: '',
+            m_costAmount: '',
+            expenses : this.fb.array([ this._rentalCalculatorService.buildExpense() ]),
+            capitalExpenditures: this.fb.array([ this._rentalCalculatorService.buildCapitalExpenditure() ]),
+            e_arv: '',
+            pm_tenantPlacementFee: '',
+            pm_managementFeePercent: '',
+            pm_managementFeeAmount: '',
+            bp_assumedAppreciation: '',
+            o_vacancyRate: '',
+            ri_annualRentIncrease: '',
+            e_annualExpenseIncrease:''
          });
-     }
 
-    private getCurrentDate(){
-        var today = new Date();
-        var dd : any= today.getDate();
-        var mm : any= today.getMonth()+1; //January is 0!
+        //Populate Down Payment Percentage
+        this.calcForm.get('bl_downPaymentDollar').valueChanges
+            .subscribe(value=>{
+                var val = this._rentalCalculatorService.generateDownPaymentPercent(
+                        this.calcForm.get('li_purchasePrice').value,
+                        this.calcForm.get('bl_downPaymentDollar').value
+                );
+                if(val !=  this.calcForm.get('bl_downPaymentPercent').value){
+                    this.calcForm.patchValue({bl_downPaymentPercent : val});
+                }
+            }
+        )
 
-        var yyyy = today.getFullYear();
-        if(dd<10){
-            dd='0'+dd
-        } 
-        if(mm<10){
-            mm='0'+mm
-        } 
-        var result = mm+'/'+ dd +'/'+ yyyy;
-        return result;
-    }
-    
+        //Populate Down Payment Dollar Amount
+        this.calcForm.get('bl_downPaymentPercent').valueChanges
+            .subscribe(value=>{
+                var val =  this._rentalCalculatorService.generateDownPaymentDollarAmount(
+                        this.calcForm.get('li_purchasePrice').value,
+                        this.calcForm.get('bl_downPaymentPercent').value
+                );
+                //If the value changed
+                if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
+                     this.calcForm.patchValue({bl_downPaymentDollar : val});
+                }
+            }
+        )
+        //Populate Down Payment Dollar Amount & Percentage Amount
+        this.calcForm.get('li_purchasePrice').valueChanges
+            .subscribe(value=>{
+                var val =  this._rentalCalculatorService.generateDownPaymentDollarAmount(
+                        this.calcForm.get('li_purchasePrice').value,
+                        this.calcForm.get('bl_downPaymentPercent').value
+                );
+                //If the value changed
+                if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
+                     this.calcForm.patchValue({bl_downPaymentDollar : val});
+                }
+            }
+        )
+     } 
 }

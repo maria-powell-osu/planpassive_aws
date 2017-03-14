@@ -20,12 +20,13 @@ var RentalPropertyCalculatorComponent = (function () {
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.view = 'loan';
         this.loading = false;
         this.calcForm = this.fb.group({
             loanInfoView: 'bankLoan',
             li_purchasePrice: '',
-            li_purchaseDate: this.getCurrentDate(),
+            li_purchaseDate: this._rentalCalculatorService.getCurrentDate(),
             bl_loanName: '',
             bl_closingCost: '',
             bl_interest: '',
@@ -34,22 +35,56 @@ var RentalPropertyCalculatorComponent = (function () {
             bl_downPaymentPercent: '',
             bl_extraPrincipal: '',
             bl_startDate: '',
-            bl_endDate: ''
+            bl_endDate: '',
+            loans: this.fb.array([this._rentalCalculatorService.buildLoan()]),
+            specialTermsLoans: this.fb.array([this._rentalCalculatorService.buildSpecialTermsLoan()]),
+            units: this.fb.array([this._rentalCalculatorService.buildUnit()]),
+            supplementalIncomes: this.fb.array([this._rentalCalculatorService.buildSupplementalIncome()]),
+            u_garbage: '',
+            u_water: '',
+            o_yardMaintenance: '',
+            utilities: this.fb.array([this._rentalCalculatorService.buildUtility()]),
+            o_propertyTaxes: '',
+            m_costPercent: '',
+            o_insurance: '',
+            m_costAmount: '',
+            expenses: this.fb.array([this._rentalCalculatorService.buildExpense()]),
+            capitalExpenditures: this.fb.array([this._rentalCalculatorService.buildCapitalExpenditure()]),
+            e_arv: '',
+            pm_tenantPlacementFee: '',
+            pm_managementFeePercent: '',
+            pm_managementFeeAmount: '',
+            bp_assumedAppreciation: '',
+            o_vacancyRate: '',
+            ri_annualRentIncrease: '',
+            e_annualExpenseIncrease: ''
         });
-    };
-    RentalPropertyCalculatorComponent.prototype.getCurrentDate = function () {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var result = mm + '/' + dd + '/' + yyyy;
-        return result;
+        //Populate Down Payment Percentage
+        this.calcForm.get('bl_downPaymentDollar').valueChanges
+            .subscribe(function (value) {
+            var val = _this._rentalCalculatorService.generateDownPaymentPercent(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentDollar').value);
+            if (val != _this.calcForm.get('bl_downPaymentPercent').value) {
+                _this.calcForm.patchValue({ bl_downPaymentPercent: val });
+            }
+        });
+        //Populate Down Payment Dollar Amount
+        this.calcForm.get('bl_downPaymentPercent').valueChanges
+            .subscribe(function (value) {
+            var val = _this._rentalCalculatorService.generateDownPaymentDollarAmount(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentPercent').value);
+            //If the value changed
+            if (val != _this.calcForm.get('bl_downPaymentDollar').value) {
+                _this.calcForm.patchValue({ bl_downPaymentDollar: val });
+            }
+        });
+        //Populate Down Payment Dollar Amount & Percentage Amount
+        this.calcForm.get('li_purchasePrice').valueChanges
+            .subscribe(function (value) {
+            var val = _this._rentalCalculatorService.generateDownPaymentDollarAmount(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentPercent').value);
+            //If the value changed
+            if (val != _this.calcForm.get('bl_downPaymentDollar').value) {
+                _this.calcForm.patchValue({ bl_downPaymentDollar: val });
+            }
+        });
     };
     return RentalPropertyCalculatorComponent;
 }());

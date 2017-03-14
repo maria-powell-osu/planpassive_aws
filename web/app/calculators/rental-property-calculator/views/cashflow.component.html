@@ -1,0 +1,63 @@
+<div  [formGroup]="calcForm">
+  <!--INCOME-->
+  <div class="row">
+    <div class="col-md-10 text-center  ppGradient">
+      <h4><b class="whiteText">PROPERTY INCOME</b></h4>
+    </div>
+  </div>
+  <!--incomes-->
+  <h3>Rental Income</h3>
+  <div formArrayName="units" *ngFor="let unit of units.controls; let i=index; let isLast= last; let isFirst =first">
+    <div [formGroupName]="i">
+      <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-10 mpClickable" (click)="removeUnit()" [hidden]="!isLast || isFirst">
+                <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm"  aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>
+                    Gross Monthly Income
+                </label>
+                <div class="input-group">
+                  <!--TODO:ng-change="rentalCalculator.calculateFieldExpenses('income')"-->
+                  <input type="number" step="0.01"class="inpt form-control" formControlName="ri_grossMonthlyIncome" placeholder="$" name="Gross Monthly Income">
+                  <span class="input-group-addon" >$/month</span>
+                </div>    
+              </div>
+              <div class="col-md-6">
+                <label>
+                  Unit Name
+                </label> 
+                <input type="text" class="inpt form-control" formControlName="ri_unitName" placeholder="i.e. Unit 1, Unit A, etc." name="Unit Name">
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <br/>
+  </div>
+  <!--ADD LOAN-->
+  <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addUnit()">
+    Add Another Unit
+  </button>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-3">
+      <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" (click)="showIncomeOptions = !showIncomeOptions">
+        <span *ngIf="!showIncomeOptions">Show More Income Options</span>
+        <span *ngIf="showIncomeOptions"> Hide Income Options</span>
+      </button>
+    </div> 
+  </div>
+  <br/>
+  <br/>
+  <!--SHOW INCOME OPTIONS-->
+  <div [hidden]="!showIncomeOptions" class="animation-show-hide">
+    
+  </div>
+</div>
