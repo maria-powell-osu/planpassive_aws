@@ -14,6 +14,7 @@ import { RentalCalculatorService} from "../rental-property-calculator.service";
 export class CashFlowComponent {
      @Input() calcForm: FormGroup;
      showIncomeOptions: false;
+     expenseOptions : false;
 
     get units(): FormArray{
         return <FormArray>this.calcForm.get('units');
@@ -61,6 +62,18 @@ export class CashFlowComponent {
 
     removeExpense() : void {
         this.expenses.removeAt(this.expenses.length -1);
+    }
+
+    get capitalExpenditures(): FormArray{
+        return <FormArray>this.calcForm.get('capitalExpenditures');
+    }
+    
+    addCapitalExpenditure() : void {
+         this.capitalExpenditures.push(this._rentalCalculatorService.buildCapitalExpenditure());
+    }
+
+    removeCapitalExpenditure() : void {
+        this.capitalExpenditures.removeAt(this.capitalExpenditures.length -1);
     }
 
 

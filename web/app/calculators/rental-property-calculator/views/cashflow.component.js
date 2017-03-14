@@ -68,6 +68,19 @@ var CashFlowComponent = (function () {
     CashFlowComponent.prototype.removeExpense = function () {
         this.expenses.removeAt(this.expenses.length - 1);
     };
+    Object.defineProperty(CashFlowComponent.prototype, "capitalExpenditures", {
+        get: function () {
+            return this.calcForm.get('capitalExpenditures');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    CashFlowComponent.prototype.addCapitalExpenditure = function () {
+        this.capitalExpenditures.push(this._rentalCalculatorService.buildCapitalExpenditure());
+    };
+    CashFlowComponent.prototype.removeCapitalExpenditure = function () {
+        this.capitalExpenditures.removeAt(this.capitalExpenditures.length - 1);
+    };
     return CashFlowComponent;
 }());
 __decorate([

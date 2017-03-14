@@ -43,12 +43,12 @@ var RentalPropertyCalculatorComponent = (function () {
             u_garbage: '',
             u_water: '',
             o_yardMaintenance: '',
-            utilities: this.fb.array([this._rentalCalculatorService.buildUtility()]),
+            utilities: this.fb.array([]),
             o_propertyTaxes: '',
             m_costPercent: '',
             o_insurance: '',
             m_costAmount: '',
-            expenses: this.fb.array([this._rentalCalculatorService.buildExpense()]),
+            expenses: this.fb.array([]),
             capitalExpenditures: this.fb.array([this._rentalCalculatorService.buildCapitalExpenditure()]),
             e_arv: '',
             pm_tenantPlacementFee: '',
@@ -57,7 +57,7 @@ var RentalPropertyCalculatorComponent = (function () {
             bp_assumedAppreciation: '',
             o_vacancyRate: '',
             ri_annualRentIncrease: '',
-            e_annualExpenseIncrease: ''
+            e_annualExpenseIncrease: '',
         });
         //Populate Down Payment Percentage
         this.calcForm.get('bl_downPaymentDollar').valueChanges
@@ -84,6 +84,28 @@ var RentalPropertyCalculatorComponent = (function () {
             if (val != _this.calcForm.get('bl_downPaymentDollar').value) {
                 _this.calcForm.patchValue({ bl_downPaymentDollar: val });
             }
+        });
+        //Populate management fee dollar amount
+        // this.calcForm.get('units').get('ri_grossMonthlyIncome').valueChanges
+        //     .subscribe(value=>{
+        //         var val =  this._rentalCalculatorService.generateManagementFeeDollarAmount(
+        //                 "income",
+        //                 this.calcForm
+        //         );
+        //         //If the value changed
+        //         // if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
+        //         //      this.calcForm.patchValue({bl_downPaymentDollar : val});
+        //         // }
+        //     }
+        // )
+        //Populate management fee dollar amount
+        this.calcForm.get('m_costPercent').valueChanges
+            .subscribe(function (value) {
+            var val = _this._rentalCalculatorService.generateManagementFeeDollarAmount("managementPercent", _this.calcForm.controls);
+            //If the value changed
+            // if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
+            //      this.calcForm.patchValue({bl_downPaymentDollar : val});
+            // }
         });
     };
     return RentalPropertyCalculatorComponent;

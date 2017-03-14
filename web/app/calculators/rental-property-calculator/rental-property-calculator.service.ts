@@ -17,6 +17,38 @@ export class RentalCalculatorService {
         return this.calculateDownPaymentDollarAmount(purchasePrice, downPaymentPercentage);
     }
 
+    generateManagementFeeDollarAmount(triggerIndicator: string, form: any){
+        return this.calculateManagementFeeDollarAmount(triggerIndicator, form);
+    }
+
+    
+    private calculateManagementFeeDollarAmount(triggerIndicator:string, form:any){
+        var yearlyIncome = this.calculateFirstYearIncome(form);
+        var monthlyIncome = yearlyIncome / 12;
+        var maintenancePercent = form.m_costPercent;
+        var managementPercent = form.pm_managementFeePercent;
+
+        if(triggerIndicator === "maintenancePercent" && maintenancePercent){
+            form.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+            
+        } else if (triggerIndicator === "managementPercent" && managementPercent) {
+            form.pm_managementFeeAmount = (managementPercent / 100) * monthlyIncome;
+
+        } else if (triggerIndicator === "income") { 
+            if (maintenancePercent){
+                form.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+            }
+            if(managementPercent){
+                form.pm_managementFeeAmount = (managementPercent / 100) * monthlyIncome;
+            }
+        } else {
+            form.m_costAmount = undefined;
+            form.m_costPercent = undefined;
+            form.pm_managementFeePercent = undefined;
+            form.pm_managementFeeAmount = undefined;
+        }
+    }
+
     buildLoan(){
         return new FormBuilder().group({
             add_bl_loanName : '',

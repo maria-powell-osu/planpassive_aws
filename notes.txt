@@ -1,6 +1,9 @@
 Left at:
-	- create the calculators
+	- how to pass the form back into the calculator => write mapper function
 Angular 2 TO DOs:
+	- calculator:
+		- validation
+		- animation
 	- navbar collapse button needs animation for clicking
 	- are blogs ordered?
 
@@ -61,5 +64,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 336 hrs
+	Coding: 350 hrs
  
