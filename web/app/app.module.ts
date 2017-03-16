@@ -12,6 +12,7 @@ import { BlogViewComponent } from "./blogs/blog-view/blog-view.component";
 import { HomeComponent } from "./home/home.component";
 import { CalculatorsComponent }  from "./calculators/calculators.component";
 import { RentalPropertyCalculatorComponent} from "./calculators/rental-property-calculator/rental-property-calculator.component";
+import { CalculatorFormService} from './calculators/rental-property-calculator/calculator-form.service';
 import { InvestmentReturnCalculatorComponent } from "./calculators/investment-return-calculator/investment-return-calculator.component";  
 import { AppComponent }  from './app.component';
 import { NavbarComponent } from "./shared/navbar/navbar.component";

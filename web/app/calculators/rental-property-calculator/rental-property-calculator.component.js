@@ -12,111 +12,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var rental_property_calculator_service_1 = require("./rental-property-calculator.service");
+var calculator_form_service_1 = require("./calculator-form.service");
 var RentalPropertyCalculatorComponent = (function () {
-    function RentalPropertyCalculatorComponent(_rentalCalculatorService, fb) {
+    function RentalPropertyCalculatorComponent(_rentalCalculatorService, fb, _calculatorFormService) {
         this._rentalCalculatorService = _rentalCalculatorService;
         this.fb = fb;
+        this._calculatorFormService = _calculatorFormService;
     }
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.view = 'loan';
         this.loading = false;
-        this.calcForm = this.fb.group({
-            loanInfoView: 'bankLoan',
-            li_purchasePrice: '',
-            li_purchaseDate: this._rentalCalculatorService.getCurrentDate(),
-            bl_loanName: '',
-            bl_closingCost: '',
-            bl_interest: '',
-            bl_amortization: '',
-            bl_downPaymentDollar: '',
-            bl_downPaymentPercent: '',
-            bl_extraPrincipal: '',
-            bl_startDate: '',
-            bl_endDate: '',
-            loans: this.fb.array([this._rentalCalculatorService.buildLoan()]),
-            specialTermsLoans: this.fb.array([this._rentalCalculatorService.buildSpecialTermsLoan()]),
-            units: this.fb.array([this._rentalCalculatorService.buildUnit()]),
-            supplementalIncomes: this.fb.array([this._rentalCalculatorService.buildSupplementalIncome()]),
-            u_garbage: '',
-            u_water: '',
-            o_yardMaintenance: '',
-            utilities: this.fb.array([]),
-            o_propertyTaxes: '',
-            m_costPercent: '',
-            o_insurance: '',
-            m_costAmount: '',
-            expenses: this.fb.array([]),
-            capitalExpenditures: this.fb.array([this._rentalCalculatorService.buildCapitalExpenditure()]),
-            e_arv: '',
-            pm_tenantPlacementFee: '',
-            pm_managementFeePercent: '',
-            pm_managementFeeAmount: '',
-            bp_assumedAppreciation: '',
-            o_vacancyRate: '',
-            ri_annualRentIncrease: '',
-            e_annualExpenseIncrease: '',
-        });
-        //Populate Down Payment Percentage
-        this.calcForm.get('bl_downPaymentDollar').valueChanges
-            .subscribe(function (value) {
-            var val = _this._rentalCalculatorService.generateDownPaymentPercent(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentDollar').value);
-            if (val != _this.calcForm.get('bl_downPaymentPercent').value) {
-                _this.calcForm.patchValue({ bl_downPaymentPercent: val });
-            }
-        });
-        //Populate Down Payment Dollar Amount
-        this.calcForm.get('bl_downPaymentPercent').valueChanges
-            .subscribe(function (value) {
-            var val = _this._rentalCalculatorService.generateDownPaymentDollarAmount(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentPercent').value);
-            //If the value changed
-            if (val != _this.calcForm.get('bl_downPaymentDollar').value) {
-                _this.calcForm.patchValue({ bl_downPaymentDollar: val });
-            }
-        });
-        //Populate Down Payment Dollar Amount & Percentage Amount
-        this.calcForm.get('li_purchasePrice').valueChanges
-            .subscribe(function (value) {
-            var val = _this._rentalCalculatorService.generateDownPaymentDollarAmount(_this.calcForm.get('li_purchasePrice').value, _this.calcForm.get('bl_downPaymentPercent').value);
-            //If the value changed
-            if (val != _this.calcForm.get('bl_downPaymentDollar').value) {
-                _this.calcForm.patchValue({ bl_downPaymentDollar: val });
-            }
-        });
-        //Populate management fee dollar amount
-        // this.calcForm.get('units').get('ri_grossMonthlyIncome').valueChanges
-        //     .subscribe(value=>{
-        //         var val =  this._rentalCalculatorService.generateManagementFeeDollarAmount(
-        //                 "income",
-        //                 this.calcForm
-        //         );
-        //         //If the value changed
-        //         // if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
-        //         //      this.calcForm.patchValue({bl_downPaymentDollar : val});
-        //         // }
-        //     }
-        // )
-        //Populate management fee dollar amount
-        this.calcForm.get('m_costPercent').valueChanges
-            .subscribe(function (value) {
-            var val = _this._rentalCalculatorService.generateManagementFeeDollarAmount("managementPercent", _this.calcForm.controls);
-            //If the value changed
-            // if(val !=  this.calcForm.get('bl_downPaymentDollar').value){
-            //      this.calcForm.patchValue({bl_downPaymentDollar : val});
-            // }
-        });
+        this.calcForm = this._calculatorFormService.calcForm;
+        this._calculatorFormService.addEventListeners(this.calcForm);
     };
     return RentalPropertyCalculatorComponent;
 }());
 RentalPropertyCalculatorComponent = __decorate([
     core_1.Component({
         templateUrl: 'app/calculators/rental-property-calculator/rental-property-calculator.component.html',
-        providers: [rental_property_calculator_service_1.RentalCalculatorService]
+        providers: [rental_property_calculator_service_1.RentalCalculatorService, calculator_form_service_1.CalculatorFormService]
     }),
     __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService,
-        forms_1.FormBuilder])
+        forms_1.FormBuilder,
+        calculator_form_service_1.CalculatorFormService])
 ], RentalPropertyCalculatorComponent);
 exports.RentalPropertyCalculatorComponent = RentalPropertyCalculatorComponent;
 //# sourceMappingURL=rental-property-calculator.component.js.map

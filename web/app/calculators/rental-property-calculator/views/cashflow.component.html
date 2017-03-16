@@ -219,13 +219,13 @@
                 <input type="number" class="inpt form-control" formControlName="o_insurance" placeholder="$">
                 <span class="input-group-addon">$/month</span>
               </div>
-              <div [hidden]="!m_costAmount">
-                <br/>
-              <label>Maintenance Cost ($/mo)</label>
-              <div>
-                {{m_costAmount}} $/month
-              </div>
-              <input class="inpt form-control" formControlName="m_costAmount" placeholder="$" type="hidden">
+              <div [hidden]="!calcForm.get('m_costAmount').value">
+                  <br/>
+                <label>Maintenance Cost ($/mo)</label>
+                <div>
+                  {{calcForm.get('m_costAmount').value}} $/month
+                </div>
+                <input class="inpt form-control" formControlName="m_costAmount" placeholder="$" type="hidden">
             </div>
             </div>
           </div>

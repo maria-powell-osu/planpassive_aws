@@ -3,12 +3,13 @@ import { FormGroup , FormBuilder, FormArray} from '@angular/forms';
 import { mpDatePicker } from "../../../shared/datepicker/mpdatepicker";
 import { mpToolTip } from "../../../shared/tooltip/mptooltip";
 import { RentalCalculatorService} from "../rental-property-calculator.service";
+import { CalculatorFormService } from "../calculator-form.service"; 
 
 
 @Component({
     templateUrl: "app/calculators/rental-property-calculator/views/cashflow.component.html",
     selector: 'cashflow',
-    providers: [RentalCalculatorService]
+    providers: [RentalCalculatorService, CalculatorFormService]
 })
 
 export class CashFlowComponent {
@@ -16,12 +17,14 @@ export class CashFlowComponent {
      showIncomeOptions: false;
      expenseOptions : false;
 
+    constructor( private _rentalCalculatorService : RentalCalculatorService,
+                 private _calculatorFormService : CalculatorFormService) {}
     get units(): FormArray{
         return <FormArray>this.calcForm.get('units');
     }
 
     addUnit() : void {
-         this.units.push(this._rentalCalculatorService.buildUnit());
+         this.units.push(this._calculatorFormService.buildUnit());
     }
 
     removeUnit() : void {
@@ -33,7 +36,7 @@ export class CashFlowComponent {
     }
 
     addSupplementalIncome() : void {
-         this.supplementalIncomes.push(this._rentalCalculatorService.buildSupplementalIncome());
+         this.supplementalIncomes.push(this._calculatorFormService.buildSupplementalIncome());
     }
 
     removeSupplementalIncome() : void {
@@ -45,7 +48,7 @@ export class CashFlowComponent {
     }
 
     addUtility() : void {
-         this.utilities.push(this._rentalCalculatorService.buildUtility());
+         this.utilities.push(this._calculatorFormService.buildUtility());
     }
 
     removeUtility() : void {
@@ -57,7 +60,7 @@ export class CashFlowComponent {
     }
 
     addExpense() : void {
-         this.expenses.push(this._rentalCalculatorService.buildExpense());
+         this.expenses.push(this._calculatorFormService.buildExpense());
     }
 
     removeExpense() : void {
@@ -69,7 +72,7 @@ export class CashFlowComponent {
     }
     
     addCapitalExpenditure() : void {
-         this.capitalExpenditures.push(this._rentalCalculatorService.buildCapitalExpenditure());
+         this.capitalExpenditures.push(this._calculatorFormService.buildCapitalExpenditure());
     }
 
     removeCapitalExpenditure() : void {
@@ -77,5 +80,5 @@ export class CashFlowComponent {
     }
 
 
-    constructor( private _rentalCalculatorService : RentalCalculatorService) {}
+    
 }

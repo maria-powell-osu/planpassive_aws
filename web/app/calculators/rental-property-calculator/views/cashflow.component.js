@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var rental_property_calculator_service_1 = require("../rental-property-calculator.service");
+var calculator_form_service_1 = require("../calculator-form.service");
 var CashFlowComponent = (function () {
-    function CashFlowComponent(_rentalCalculatorService) {
+    function CashFlowComponent(_rentalCalculatorService, _calculatorFormService) {
         this._rentalCalculatorService = _rentalCalculatorService;
+        this._calculatorFormService = _calculatorFormService;
     }
     Object.defineProperty(CashFlowComponent.prototype, "units", {
         get: function () {
@@ -24,7 +26,7 @@ var CashFlowComponent = (function () {
         configurable: true
     });
     CashFlowComponent.prototype.addUnit = function () {
-        this.units.push(this._rentalCalculatorService.buildUnit());
+        this.units.push(this._calculatorFormService.buildUnit());
     };
     CashFlowComponent.prototype.removeUnit = function () {
         this.units.removeAt(this.units.length - 1);
@@ -37,7 +39,7 @@ var CashFlowComponent = (function () {
         configurable: true
     });
     CashFlowComponent.prototype.addSupplementalIncome = function () {
-        this.supplementalIncomes.push(this._rentalCalculatorService.buildSupplementalIncome());
+        this.supplementalIncomes.push(this._calculatorFormService.buildSupplementalIncome());
     };
     CashFlowComponent.prototype.removeSupplementalIncome = function () {
         this.supplementalIncomes.removeAt(this.supplementalIncomes.length - 1);
@@ -50,7 +52,7 @@ var CashFlowComponent = (function () {
         configurable: true
     });
     CashFlowComponent.prototype.addUtility = function () {
-        this.utilities.push(this._rentalCalculatorService.buildUtility());
+        this.utilities.push(this._calculatorFormService.buildUtility());
     };
     CashFlowComponent.prototype.removeUtility = function () {
         this.utilities.removeAt(this.utilities.length - 1);
@@ -63,7 +65,7 @@ var CashFlowComponent = (function () {
         configurable: true
     });
     CashFlowComponent.prototype.addExpense = function () {
-        this.expenses.push(this._rentalCalculatorService.buildExpense());
+        this.expenses.push(this._calculatorFormService.buildExpense());
     };
     CashFlowComponent.prototype.removeExpense = function () {
         this.expenses.removeAt(this.expenses.length - 1);
@@ -76,7 +78,7 @@ var CashFlowComponent = (function () {
         configurable: true
     });
     CashFlowComponent.prototype.addCapitalExpenditure = function () {
-        this.capitalExpenditures.push(this._rentalCalculatorService.buildCapitalExpenditure());
+        this.capitalExpenditures.push(this._calculatorFormService.buildCapitalExpenditure());
     };
     CashFlowComponent.prototype.removeCapitalExpenditure = function () {
         this.capitalExpenditures.removeAt(this.capitalExpenditures.length - 1);
@@ -91,9 +93,10 @@ CashFlowComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/views/cashflow.component.html",
         selector: 'cashflow',
-        providers: [rental_property_calculator_service_1.RentalCalculatorService]
+        providers: [rental_property_calculator_service_1.RentalCalculatorService, calculator_form_service_1.CalculatorFormService]
     }),
-    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService])
+    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService,
+        calculator_form_service_1.CalculatorFormService])
 ], CashFlowComponent);
 exports.CashFlowComponent = CashFlowComponent;
 //# sourceMappingURL=cashflow.component.js.map
