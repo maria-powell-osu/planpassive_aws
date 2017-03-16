@@ -3,12 +3,13 @@ import { FormGroup , FormBuilder, FormArray} from '@angular/forms';
 import { mpDatePicker } from "../../../shared/datepicker/mpdatepicker";
 import { mpToolTip } from "../../../shared/tooltip/mptooltip";
 import { RentalCalculatorService} from "../rental-property-calculator.service";
+import { CalculatorFormService} from "../calculator-form.service"; 
 
 
 @Component({
     templateUrl: "app/calculators/rental-property-calculator/views/loan-information.component.html",
     selector: 'loaninformation',
-    providers: [RentalCalculatorService]
+    providers: [RentalCalculatorService, CalculatorFormService]
 })
 
 
@@ -37,7 +38,7 @@ export class LoanInformationComponent {
     }
 
     addLoan() : void {
-         this.loans.push(this._rentalCalculatorService.buildLoan());
+         this.loans.push(this._calculatorFormService.buildLoan());
     }
 
     removeLoan() : void {
@@ -49,14 +50,15 @@ export class LoanInformationComponent {
     }
 
     addSpecialTermsLoan() : void {
-         this.specialTermsLoans.push(this._rentalCalculatorService.buildSpecialTermsLoan());
+         this.specialTermsLoans.push(this._calculatorFormService.buildSpecialTermsLoan());
     }
 
     removeSpecialTermsLoan() : void {
         this.specialTermsLoans.removeAt(this.specialTermsLoans.length -1);
     }
 
-    constructor( private _rentalCalculatorService : RentalCalculatorService) {
+    constructor( private _rentalCalculatorService : RentalCalculatorService,
+                 private _calculatorFormService : CalculatorFormService) {
         //Tooltips Text
         this.amortizationText = "How many years is your loan for?"
                             + "Residential loans are typically 30 or 15 years. "

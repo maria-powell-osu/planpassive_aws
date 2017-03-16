@@ -163,29 +163,21 @@ export class CalculatorFormService {
                         calcForm,
                 );
             });
-    
-        //Populate management fee dollar amount
-        // for(var i = 0; i < calcForm.get('units').length; i++){
-        //     this.addIncomeChangeEventListener(calcForm.get('units').at(i).get('ri_grossMonthlyIncome'), calcForm);
-        // }
-        
-        //Populate management fee dollar amount
-        // calcForm.get('m_costPercent').valueChanges
-        //     .subscribe((value:any) =>{
-        //         var val =  this._rentalCalculatorService.generateManagementFeeDollarAmount(
-        //                 "maintenancePercent",
-        //                 calcForm,
-        //         );
-        //     }
-        // )
+
+        calcForm.get('pm_managementFeePercent').valueChanges
+           .subscribe((value:any)=>{
+                this._rentalCalculatorService.generateManagementFeeDollarAmount(
+                        "managementPercent",
+                        calcForm,
+                );
+            });
+        calcForm.get('m_costPercent').valueChanges
+           .subscribe((value:any)=>{
+                this._rentalCalculatorService.generateManagementFeeDollarAmount(
+                        "maintenancePercent",
+                        calcForm,
+                );
+            });
     }
-    // addIncomeChangeEventListener(formControl: any, calcForm : any){
-    //     formControl.valueChanges
-    //         .subscribe((value:any) =>{
-    //             this._rentalCalculatorService.generateManagementFeeDollarAmount(
-    //                     "income",
-    //                     calcForm
-    //             );
-    //         });
-    // }
+
 }

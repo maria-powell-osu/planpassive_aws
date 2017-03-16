@@ -383,13 +383,13 @@
                 </div>
                 <div class="col-md-6" >
                   
-                  <div [hidden]="!pm_managementFeeAmount">
+                  <div [hidden]="!calcForm.get('pm_managementFeeAmount').value">
                     <br/>
                     <label>
                       Management Fee ($)
                     </label>
                     <div>
-                      {{pm_managementFeeAmount}} $/month
+                      {{calcForm.get('pm_managementFeeAmount').value}} $/month
                     </div>
                     <input type="hidden" class="inpt form-control" formControlName="pm_managementFeeAmount" placeholder="$">
                   </div>

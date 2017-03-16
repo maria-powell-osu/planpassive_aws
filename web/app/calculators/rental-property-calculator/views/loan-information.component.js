@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var rental_property_calculator_service_1 = require("../rental-property-calculator.service");
+var calculator_form_service_1 = require("../calculator-form.service");
 var LoanInformationComponent = (function () {
-    function LoanInformationComponent(_rentalCalculatorService) {
+    function LoanInformationComponent(_rentalCalculatorService, _calculatorFormService) {
         this._rentalCalculatorService = _rentalCalculatorService;
+        this._calculatorFormService = _calculatorFormService;
         //Tooltips Text
         this.amortizationText = "How many years is your loan for?"
             + "Residential loans are typically 30 or 15 years. "
@@ -96,7 +98,7 @@ var LoanInformationComponent = (function () {
         configurable: true
     });
     LoanInformationComponent.prototype.addLoan = function () {
-        this.loans.push(this._rentalCalculatorService.buildLoan());
+        this.loans.push(this._calculatorFormService.buildLoan());
     };
     LoanInformationComponent.prototype.removeLoan = function () {
         this.loans.removeAt(this.loans.length - 1);
@@ -109,7 +111,7 @@ var LoanInformationComponent = (function () {
         configurable: true
     });
     LoanInformationComponent.prototype.addSpecialTermsLoan = function () {
-        this.specialTermsLoans.push(this._rentalCalculatorService.buildSpecialTermsLoan());
+        this.specialTermsLoans.push(this._calculatorFormService.buildSpecialTermsLoan());
     };
     LoanInformationComponent.prototype.removeSpecialTermsLoan = function () {
         this.specialTermsLoans.removeAt(this.specialTermsLoans.length - 1);
@@ -124,9 +126,10 @@ LoanInformationComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/views/loan-information.component.html",
         selector: 'loaninformation',
-        providers: [rental_property_calculator_service_1.RentalCalculatorService]
+        providers: [rental_property_calculator_service_1.RentalCalculatorService, calculator_form_service_1.CalculatorFormService]
     }),
-    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService])
+    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService,
+        calculator_form_service_1.CalculatorFormService])
 ], LoanInformationComponent);
 exports.LoanInformationComponent = LoanInformationComponent;
 //# sourceMappingURL=loan-information.component.js.map
