@@ -1,5 +1,6 @@
 Left at:
-	- how to pass the form back into the calculator => write mapper function
+	- now need to create validation the way it was before
+	- results page need to show results
 Angular 2 TO DOs:
 	- calculator:
 		- validation
@@ -64,5 +65,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 350 hrs
+	Coding: 353 hrs
  

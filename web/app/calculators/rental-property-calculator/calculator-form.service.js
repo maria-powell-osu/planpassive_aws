@@ -29,7 +29,7 @@ var CalculatorFormService = (function () {
             bl_extraPrincipal: '',
             bl_startDate: '',
             bl_endDate: '',
-            loans: this.fb.array([this.buildLoan()]),
+            loans: this.fb.array([]),
             specialTermsLoans: this.fb.array([this.buildSpecialTermsLoan()]),
             units: this.fb.array([this.buildUnit()]),
             supplementalIncomes: this.fb.array([this.buildSupplementalIncome()]),

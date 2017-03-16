@@ -20,7 +20,7 @@ export class RentalPropertyCalculatorComponent implements OnInit {
                   private _calculatorFormService : CalculatorFormService){}
 
      calculate (form :any): void {
-        
+        this._rentalCalculatorService.calculateResults(this.calcForm);
      }
 
      ngOnInit(): void {

@@ -20,6 +20,7 @@ var RentalPropertyCalculatorComponent = (function () {
         this._calculatorFormService = _calculatorFormService;
     }
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
+        this._rentalCalculatorService.calculateResults(this.calcForm);
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {
         this.view = 'loan';

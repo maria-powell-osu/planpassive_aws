@@ -132,7 +132,7 @@ export class RentalCalculatorService {
 
         //cap rate
         //1st year income - 1st year expense / (purchase price + first year CAPEX)) ; rounded to nearest 10th decimal
-        resultData.capRate = this.roundToNearestDecimal(2, ((formInput.cashFlowTableData[firstYear][income] - formInput.cashFlowTableData[firstYear][expense]) / (formInput.li_purchasePrice + formInput.cashFlowTableData[firstYear][capex])  ) *100);
+        resultData.capRate = this.roundToNearestDecimal(2, ((formInput.cashFlowTableData[firstYear][income] - formInput.cashFlowTableData[firstYear][expense]) / (formInput.li_purchasePrice.value + formInput.cashFlowTableData[firstYear][capex])  ) *100);
 
         return resultData;
     }
@@ -252,7 +252,7 @@ export class RentalCalculatorService {
         var expenseColumn : number = 2;
         var balloonPmtsCashFlow : number = this.balloonPmtCashFlow(years, formInput);
         var lenderPointsSum : number = this.sumOfSpecialTermsLenderPoints(formInput);
-        var loanSum : number = this.sumOfSpecialTermsLoanAmounts(formInput.loanInfoView, formInput);
+        var loanSum : number = this.sumOfSpecialTermsLoanAmounts(formInput.loanInfoView.value, formInput);
 
 
         for (var i = 0; i < years; i++) {
@@ -297,14 +297,14 @@ export class RentalCalculatorService {
     */
     private getYears(formInput : any){
         var years : number = 0;
-        var view : any = formInput.loanInfoView;
+        var view : any = formInput.loanInfoView.value;
 
         if (view === "cash"){
             //aribitrarily set the years
             years = 30;
         } else if (view === "bankLoan"){
-            var maxValue : number = formInput.bl_amortization || 0;
-            var addedBankLoans : any = formInput.loans || [];
+            var maxValue : number = formInput.bl_amortization.value || 0;
+            var addedBankLoans : any = formInput.loans.value || [];
             var addedBankLoansLength : any = Object.keys(addedBankLoans).length;
 
             for (var i = 0; i < addedBankLoansLength; i++) {
@@ -316,7 +316,7 @@ export class RentalCalculatorService {
             years = maxValue + 1;
         } else if (view === "specialTermsLoan") {
             var maxValue : number = 0;
-            var specialTermsLoans : any = formInput.specialTermsLoans || [];
+            var specialTermsLoans : any = formInput.specialTermsLoans.value || [];
             var specialTermsLoansLength : number = Object.keys(specialTermsLoans).length;
 
             for (var i = 0; i < specialTermsLoansLength; i++) {
@@ -331,16 +331,16 @@ export class RentalCalculatorService {
     }
 
     private calculateCapitalExpenditures (years:number, formInput: any) {
-        var capitalExpenditures: any = formInput.capitalExpenditures || [];
+        var capitalExpenditures: any = formInput.capitalExpenditures.value || [];
         var capitalExpendituresLength :number = Object.keys(capitalExpenditures).length;
-        var purchasDateYear : any= new Date(formInput.li_purchaseDate).getFullYear();
+        var purchasDateYear : any= new Date(formInput.li_purchaseDate.value).getFullYear();
 
         //Initialize the result array to 0 and set length of array to how many years
         var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
         for (var i = 0; i < capitalExpendituresLength; i++) {
             //To ensure the user set a cost since desc and date are always given
-            if(formInput.capitalExpenditures[i].ce_cost){
+            if(capitalExpenditures[i].ce_cost){
                 var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
                 var capExpPosition = capExpYear - purchasDateYear;
                 if(capExpPosition <= capExpArray.length){
@@ -352,11 +352,11 @@ export class RentalCalculatorService {
     }
 
     private calculateLoanPmts (years : number, formInput : any) {
-        var view = formInput.loanInfoView;
-        var addedBankLoans = formInput.loans || [];
+        var view = formInput.loanInfoView.value;
+        var addedBankLoans = formInput.loans.value || [];
         var bankLoanPmt;
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
-        var specialTermsLoans = formInput.specialTermsLoans || [];
+        var specialTermsLoans = formInput.specialTermsLoans.value || [];
         var specialTermsLoansLength = Object.keys(specialTermsLoans).length;
         var r;
         var p;
@@ -371,13 +371,13 @@ export class RentalCalculatorService {
 
         if (view == "bankLoan"){
             //Calculate Bank Loan Payment
-            p = formInput.li_purchasePrice - formInput.bl_downPaymentDollar;
-            r = (formInput.bl_interest /100) / 12; 
-            n = formInput.bl_amortization * 12;
+            p = formInput.li_purchasePrice.value - formInput.bl_downPaymentDollar.value;
+            r = (formInput.bl_interest.value /100) / 12; 
+            n = formInput.bl_amortization.value * 12;
             bankLoanPmt = (this.amortizationCalculation(r, p, n) * 12);
 
             //Create array of bank loan payments
-            var bankLoanAmort = formInput.bl_amortization;
+            var bankLoanAmort = formInput.bl_amortization.value;
             var bankLoanPmts = Array.apply(null, Array(bankLoanAmort)).map(Number.prototype.valueOf, bankLoanPmt);
             
             //#For reuse purposes in different tables
@@ -585,10 +585,10 @@ export class RentalCalculatorService {
     }
 
     private balloonPmtCashFlow (years : number, formInput : any){
-        var view = formInput.loanInfoView;
-        var addedBankLoans = formInput.loans || [];
+        var view = formInput.loanInfoView.value;
+        var addedBankLoans = formInput.loans.value || [];
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
-        var specialTermsLoans = formInput.specialTermsLoans || [];
+        var specialTermsLoans = formInput.specialTermsLoans.value || [];
         var specialTermsLoansLength = Object.keys(specialTermsLoans).length;
         var balloonPmt = 0;
         
@@ -686,10 +686,10 @@ export class RentalCalculatorService {
 
     private sumOfSpecialTermsLenderPoints(formInput : any){
         var lenderPointsSumResult = 0,
-            view = formInput.loanInfoView,                  
-            addedBankLoans = formInput.loans || [],
+            view = formInput.loanInfoView.value,                  
+            addedBankLoans = formInput.loans.value || [],
             addedBankLoansLength = Object.keys(addedBankLoans).length,
-            specialTermsLoans = formInput.specialTermsLoans || [],
+            specialTermsLoans = formInput.specialTermsLoans.value || [],
             specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
         if(view === 'bankLoan'){
@@ -706,9 +706,9 @@ export class RentalCalculatorService {
 
     private sumOfSpecialTermsLoanAmounts(view: any, formInput : any){
         var specialTermsLoanAmountsResult = 0;
-        var addedBankLoans = formInput.loans || [];
+        var addedBankLoans = formInput.loans.value || [];
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
-        var specialTermsLoans = formInput.specialTermsLoans || [];
+        var specialTermsLoans = formInput.specialTermsLoans.value || [];
         var specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
         if (view == "bankLoan"){
@@ -724,7 +724,7 @@ export class RentalCalculatorService {
     }
     private calculateIncome (year : number, dataRows : any, incomeColumn : any, formInput: any) {
         var incomeResult;
-        var rentIncrease = formInput.ri_annualRentIncrease || 0;
+        var rentIncrease = formInput.ri_annualRentIncrease.value || 0;
 
         if (year == 0){
             incomeResult = this.calculateFirstYearIncome(formInput);
@@ -762,24 +762,24 @@ export class RentalCalculatorService {
 
     private calculateCashOnCash (cashFlowData : any, capExSumData : any, lenderPointsSum : any, loanSum : any, balloonPmt : any, formInput: any){
         var cashOnCashResult;
-        var view = formInput.loanInfoView;
-        var addedBankLoans = formInput.loans || [];
-        var closingCost = formInput.bl_closingCost || 0;
+        var view = formInput.loanInfoView.value;
+        var addedBankLoans = formInput.loans.value || [];
+        var closingCost = formInput.bl_closingCost.value || 0;
         var dividend = cashFlowData;
         var divisor;
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
 
         if (view === "cash"){
-            divisor = capExSumData + formInput.li_purchasePrice;
+            divisor = capExSumData + formInput.li_purchasePrice.value;
         } else if (view === "bankLoan"){
             //If there is only one bankloan
             if (addedBankLoansLength == 0){
-                divisor = capExSumData + formInput.bl_downPaymentDollar + closingCost + balloonPmt;
+                divisor = capExSumData + formInput.bl_downPaymentDollar.value + closingCost + balloonPmt;
             } else {
-                divisor = capExSumData + lenderPointsSum + formInput.bl_downPaymentDollar + closingCost + balloonPmt;
+                divisor = capExSumData + lenderPointsSum + formInput.bl_downPaymentDollar.value + closingCost + balloonPmt;
             }
         } else if (view === "specialTermsLoan"){
-            divisor = capExSumData + lenderPointsSum + (formInput.li_purchasePrice - loanSum) + balloonPmt;
+            divisor = capExSumData + lenderPointsSum + (formInput.li_purchasePrice.value - loanSum) + balloonPmt;
         }
 
         if (divisor <= 0){
@@ -793,7 +793,7 @@ export class RentalCalculatorService {
 
     private calculateExpenses (year: number, dataRows:any, expenseColumn:any, incomeData:any, formInput:any){
         var expenseResult;
-        var expenseIncrease = formInput.e_annualExpenseIncrease || 0;
+        var expenseIncrease = formInput.e_annualExpenseIncrease.value || 0;
 
         if (year == 0){
             expenseResult = this.calculateFirstYearExpense(incomeData, formInput);
@@ -809,23 +809,22 @@ export class RentalCalculatorService {
         var expenseResult = 0;
         var addedUtilities = formInput.addedUtilities || [];
             //DO TO HERE SHOULD BE ERROR HANDLING INSTEAD
-        var water = formInput.u_water || 0;
-        var sewer = formInput.u_sewer || 0;
-        var garbage = formInput.u_garbage || 0;
-        var electricity = formInput.u_electricity || 0;
-        var naturalGas = formInput.u_naturalGas || 0;
-        var maintenanceCost = formInput.m_costAmount || 0;
-        var yardMaitenance = formInput.o_yardMaintenance || 0;
-        var insurance = formInput.o_insurance || 0;
-        var managementFee = formInput.pm_managementFeeAmount || 0;
-        var tenantPlacementFee = formInput.pm_tenantPlacementFee || 0;
-        var propertyTaxes = formInput.o_propertyTaxes || 0;
+        var water = formInput.u_water.value || 0;
+        //var sewer = formInput.u_sewer.value || 0;
+        var garbage = formInput.u_garbage.value || 0;
+        //var electricity = formInput.u_electricity.value || 0;
+        //var naturalGas = formInput.u_naturalGas.value || 0;
+        var maintenanceCost = formInput.m_costAmount.value || 0;
+        var yardMaitenance = formInput.o_yardMaintenance.value || 0;
+        var insurance = formInput.o_insurance.value || 0;
+        var managementFee = formInput.pm_managementFeeAmount.value || 0;
+        var tenantPlacementFee = formInput.pm_tenantPlacementFee.value || 0;
+        var propertyTaxes = formInput.o_propertyTaxes.value || 0;
         var addedUtilitiesLength = Object.keys(addedUtilities).length;
-        var vacancyRate = (formInput.o_vacancyRate || 0) / 100;
+        var vacancyRate = (formInput.o_vacancyRate.value || 0) / 100;
 
             //add up all monthly default utility costs and 
-            monthlyExpenses = water + sewer + garbage
-                + electricity + naturalGas
+            monthlyExpenses = water  + garbage
                 + maintenanceCost
                 + yardMaitenance + insurance
                 + managementFee;
@@ -892,9 +891,9 @@ export class RentalCalculatorService {
     private createIncomePieChart(formInput:any){
         let	result = {} as any;
         var dataArray = [];
-        var units = formInput.units || [];
+        var units = formInput.units.value || [];
         var unitsLength = Object.keys(units).length;
-        var supplementalIncomes = formInput.supplementalIncomes || [];
+        var supplementalIncomes = formInput.supplementalIncomes.value || [];
         var supplementalIncomesLength = Object.keys(supplementalIncomes).length;
         var sumOfGrossMonthlyUnitIncome = 0;
         var colorArray = [
@@ -957,7 +956,7 @@ export class RentalCalculatorService {
         var monthlyExpenses = 0;
         var yearlyExpenses = 0;
         var expenseResult = 0;
-        var addedUtilities = formInput.utilities || [];
+        var addedUtilities = formInput.utilities.value || [];
         var addedUtilitiesLength = Object.keys(addedUtilities).length;
         var colorArray = [
                 '#008000',
@@ -977,44 +976,44 @@ export class RentalCalculatorService {
         //add columns to the data 
         dataArray.push(["Description", "ExpenseAmount"]);
 
-        if (formInput.u_water){
-            dataArray.push(["Water", formInput.u_water]);
+        if (formInput.u_water.value){
+            dataArray.push(["Water", formInput.u_water.value]);
         }
-        if (formInput.u_sewer){
-            dataArray.push(["Sewer", formInput.u_sewer]);
+        // if (formInput.u_sewer.value){
+        //     dataArray.push(["Sewer", formInput.u_sewer.value]);
+        // }
+        if (formInput.u_garbage.value){
+            dataArray.push(["Garbage", formInput.u_garbage.value]);
         }
-        if (formInput.u_garbage){
-            dataArray.push(["Garbage", formInput.u_garbage]);
+        // if (formInput.u_electricity.value){
+        //     dataArray.push(["Electricity", formInput.u_electricity.value]);
+        // }
+        // if (formInput.u_naturalGas.value){
+        //     dataArray.push(["Natural Gas", formInput.u_naturalGas.value]);
+        // }
+        if (formInput.m_costAmount.value){
+            dataArray.push(["Cost Amount", formInput.m_costAmount.value]);
         }
-        if (formInput.u_electricity){
-            dataArray.push(["Electricity", formInput.u_electricity]);
+        if (formInput.o_yardMaintenance.value){
+            dataArray.push(["Yard Maintenance", formInput.o_yardMaintenance.value]);
         }
-        if (formInput.u_naturalGas){
-            dataArray.push(["Natural Gas", formInput.u_naturalGas]);
+        if (formInput.o_insurance.value){
+            dataArray.push(["Insurance", formInput.o_insurance.value]);
         }
-        if (formInput.m_costAmount){
-            dataArray.push(["Cost Amount", formInput.m_costAmount]);
-        }
-        if (formInput.o_yardMaintenance){
-            dataArray.push(["Yard Maintenance", formInput.o_yardMaintenance]);
-        }
-        if (formInput.o_insurance){
-            dataArray.push(["Insurance", formInput.o_insurance]);
-        }
-        if (formInput.pm_managementFeeAmount || (formInput.pm_tenantPlacementFee && formInput.o_vacancyRate)){
-            var tenantFee = formInput.pm_tenantPlacementFee || 0;
-            var vacancyRate: any = formInput.o_vacancyRate || 0;
+        if (formInput.pm_managementFeeAmount.value || (formInput.pm_tenantPlacementFee.value && formInput.o_vacancyRate.value)){
+            var tenantFee = formInput.pm_tenantPlacementFee.value || 0;
+            var vacancyRate: any = formInput.o_vacancyRate.value || 0;
             var monthlyTenantFee = tenantFee * vacancyRate;
-            var managementFee = formInput.pm_managementFeeAmount + monthlyTenantFee;
+            var managementFee = formInput.pm_managementFeeAmount.value + monthlyTenantFee;
             
             dataArray.push(["Property Management", managementFee]);
         }
-        if (formInput.o_propertyTaxes){
-            var propTaxes = formInput.o_propertyTaxes / 12;
+        if (formInput.o_propertyTaxes.value){
+            var propTaxes = formInput.o_propertyTaxes.value / 12;
             dataArray.push(["Property Taxes", propTaxes]);
         }
-        if (formInput.o_vacancyRate){
-            var vacancyRate : any = formInput.o_vacancyRate / 100;
+        if (formInput.o_vacancyRate.value){
+            var vacancyRate : any = formInput.o_vacancyRate.value / 100;
                 //we are dividing by 12 because the function return income per year
             var income = Math.round(this.calculateFirstYearIncome(formInput) /12);
             var vacancyPerMonth = income * vacancyRate;
@@ -1078,10 +1077,10 @@ export class RentalCalculatorService {
     }
 
     private calculateRemainingLoan (years : number, formInput: any){
-        var view = formInput.loanInfoView;
-        var addedBankLoans = formInput.loans || [];
+        var view = formInput.loanInfoView.value;
+        var addedBankLoans = formInput.loans.value || [];
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
-        var specialTermsLoans = formInput.specialTermsLoans || [];
+        var specialTermsLoans = formInput.specialTermsLoans.value || [];
         var specialTermsLoansLength = Object.keys(specialTermsLoans).length;
         var loanPmtData = formInput.captureLoanData;
         var r;
@@ -1092,11 +1091,11 @@ export class RentalCalculatorService {
 
         for(var i = 0; i < years; i++){
             if (view == "bankLoan"){
-                if(i < (formInput.bl_amortization)){
+                if(i < (formInput.bl_amortization.value)){
 
                     //Calculate remaining loan for bank Loan
-                    p = formInput.li_purchasePrice - formInput.bl_downPaymentDollar;
-                    r = (formInput.bl_interest / 100) / 12;
+                    p = formInput.li_purchasePrice.value - formInput.bl_downPaymentDollar.value;
+                    r = (formInput.bl_interest.value / 100) / 12;
                     n = (i + 1) * 12; 
                     A = loanPmtData.bankLoanPmt / 12;
                     remLoan[i] += this.remainingLoanformInputula(p, r, n, A); 
@@ -1171,9 +1170,9 @@ export class RentalCalculatorService {
 
     private calculatePropertyValue (year: number, formInput: any){
         var propertyValueResult;
-        var arv = formInput.e_arv;
-        var assumedAppreciation = formInput.bp_assumedAppreciation || 0;
-        var purchasePrice = formInput.li_purchasePrice;
+        var arv = formInput.e_arv.value;
+        var assumedAppreciation = formInput.bp_assumedAppreciation.value || 0;
+        var purchasePrice = formInput.li_purchasePrice.value;
 
         var multiplier = Math.pow(1 + (assumedAppreciation / 100), year);
 
@@ -1350,14 +1349,14 @@ export class RentalCalculatorService {
     }
 
     private calculateLoanPayDown (years : number, formInput : any){
-        var view = formInput.loanInfoView;
+        var view = formInput.loanInfoView.value;
         var firstYearLoanAmount = 0;
         var remLoanIndex = 2;
-        var purchasePrice = formInput.li_purchasePrice;
-        var downPayment = formInput.bl_downPaymentDollar;
-        var addedBankLoans = formInput.loans || [];
+        var purchasePrice = formInput.li_purchasePrice.value;
+        var downPayment = formInput.bl_downPaymentDollar.value;
+        var addedBankLoans = formInput.loans.value || [];
         var addedBankLoansLength = Object.keys(addedBankLoans).length;
-        var specialTermsLoans = formInput.specialTermsLoans || [];
+        var specialTermsLoans = formInput.specialTermsLoans.value || [];
         var specialTermsLoansLength = Object.keys(specialTermsLoans).length;
         var capturedBankLoans = formInput.captureLoanData.addedBankLoans;
         var capturedSpecialTermsLoans = formInput.captureLoanData.specialTermsLoans;
@@ -1416,9 +1415,9 @@ export class RentalCalculatorService {
 
     private calculateAppreciation(year : number, formInput : any){
         var appreciationResult;
-        var arv = formInput.e_arv;
+        var arv = formInput.e_arv.value;
         var propertyValue = formInput.cashOnEquityTableData[year][1];
-        var purchasePrice = formInput.li_purchasePrice;
+        var purchasePrice = formInput.li_purchasePrice.value;
         var firstYear = 0;
         var capex = 3;
 
@@ -1483,7 +1482,7 @@ export class RentalCalculatorService {
         var cashFlowIndex = 4;
         var capturedBankLoans = formInput.captureLoanData.addedBankLoans;
         var capturedSpecialTermsLoans = formInput.captureLoanData.specialTermsLoans;
-        var view = formInput.loanInfoView;
+        var view = formInput.loanInfoView.value;
         var cashFlowDataResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
         //Copy the cash flow data from previous table
