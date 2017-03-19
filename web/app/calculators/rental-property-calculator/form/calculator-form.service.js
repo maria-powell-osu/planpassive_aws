@@ -20,6 +20,7 @@ var CalculatorFormService = (function () {
             loanInfoView: 'bankLoan',
             showIncomeOptions: false,
             expenseOptions: false,
+            advancedOptions: false,
             li_purchasePrice: ['', [forms_1.Validators.required]],
             li_purchaseDate: [this._rentalCalculatorService.getCurrentDate(), [forms_1.Validators.required]],
             bl_loanName: '',

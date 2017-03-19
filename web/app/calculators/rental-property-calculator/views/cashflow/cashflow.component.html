@@ -1,11 +1,13 @@
 <div  [formGroup]="calcForm">
   <!--INCOME-->
-  <div class="row">
+  <!--<div class="row">
     <div class="col-md-10 text-center  ppGradient">
       <h4><b class="whiteText">PROPERTY INCOME</b></h4>
     </div>
-  </div>
-  <!--incomes-->
+  </div>-->
+  
+   
+    <!--incomes-->
   <h3>Rental Income</h3>
   <div formArrayName="units" *ngFor="let unit of units.controls; let i=index; let isLast= last; let isFirst =first">
     <div [formGroupName]="i">
@@ -55,451 +57,466 @@
   </button>
  <br/>
  <br/>
-    <!-- More Income Options -->
-    <div class="row">
-      <div class="col-md-4 col-md-offset-3">
-        <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" (click)="calcForm.patchValue({showIncomeOptions: !calcForm.get('showIncomeOptions').value})">    
-          <span *ngIf="!calcForm.get('showIncomeOptions').value">Show More Income Options</span>
-            <span *ngIf="calcForm.get('showIncomeOptions').value"> Hide Income Options</span>
+ 
+      <!-- More Income Options -->
+      <!--<div class="row">
+        <div class="col-md-4 col-md-offset-3">
+          <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" (click)="calcForm.patchValue({showIncomeOptions: !calcForm.get('showIncomeOptions').value})">    
+            <span *ngIf="!calcForm.get('showIncomeOptions').value">Show More Income Options</span>
+              <span *ngIf="calcForm.get('showIncomeOptions').value"> Hide Income Options</span>
+          </button>
+        </div> 
+      </div>
+      <br/>
+      <br/>-->
+    <!--SHOW INCOME OPTIONS-->
+    <!--<div *ngIf="calcForm.get('showIncomeOptions').value" class="animation-show-hide">-->
+      <h3>Supplemental Income</h3>
+      <div formArrayName="supplementalIncomes" *ngFor="let supplementalIncome of supplementalIncomes.controls; let i=index; let isFirst = first; let isLast = last">
+          <div [formGroupName]="i">
+            <div class="row">
+              <div class="col-md-10">
+                <fieldset>
+                  <div class="row">
+                    <!--Remove supplemental income-->
+                    <div class="col-md-2 col-md-offset-10" (click)="removeSupplementalIncome()" [hidden]="!isLast">
+                      <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>
+                        <span *ngIf="supplementalIncome.get('si_description').errors" class="text-danger">* </span> 
+                        Description
+                      </label> 
+                      <input type="text" class="inpt form-control" formControlName="si_description" 
+                      placeholder="i.e. coin laundry, garages, etc." name="Description"
+                      [ngClass]="{inValidField: supplementalIncome.get('si_description').errors && calcForm.get('userClickedResults').value}">
+                    <!-- Field Error Message-->
+                    <div *ngIf="supplementalIncome.get('si_description').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="supplementalIncome.get('si_description').errors.required" class="text-danger">
+                        Enter Income
+                        </span>
+                    </div>  
+                    </div>
+                    <div class="col-md-6">
+                      <label>
+                        <span *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors" class="text-danger">* </span>
+                        Gross Monthly Income
+                      </label>
+                      <div class="input-group">
+                        <input type="number" step="0.01" class="inpt form-control" formControlName="si_grossMonthlyIncome"
+                        placeholder="$" name="Gross Monthly Income"
+                        [ngClass]="{inValidField: supplementalIncome.get('si_grossMonthlyIncome').errors && calcForm.get('userClickedResults').value}">
+                        <span class="input-group-addon">$/month</span>
+                      </div> 
+                      <!-- Field Error Message-->
+                      <div *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        <br/>
+      </div>
+        <!--ADD SUPPLEMENTAL INCOME-->
+        <br/>
+        <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addSupplementalIncome()">
+          Add Supplemental Income
         </button>
-      </div> 
+      <br/>
+      <br/>
+    <!--</div>-->
+    <!--EXPENSES-->
+    <!--<div class="row">
+      <div class="col-md-10 text-center  ppGradient">
+        <h4><b class="whiteText">EXPENSES</b></h4>
+      </div>
+    </div>-->
+    <h3>Utilities</h3>
+    <div class="row">
+      <div class="col-md-10">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-4">
+              
+              <label>Garbage</label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="u_garbage" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            
+            </div>
+            <div class="col-md-4">
+            
+
+              <label>Water</label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="u_water" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+            
+              <label>
+                Yard Care
+              </label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="o_yardMaintenance" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+        </fieldset>
+        <br/>
+      </div>
     </div>
-    <br/>
-    <br/>
-  <!--SHOW INCOME OPTIONS-->
-  <div *ngIf="calcForm.get('showIncomeOptions').value" class="animation-show-hide">
-    <h3>Supplemental Income</h3>
-    <div formArrayName="supplementalIncomes" *ngFor="let supplementalIncome of supplementalIncomes.controls; let i=index; let isFirst = first; let isLast = last">
+    <!--utilities-->
+    <div formArrayName="utilities" *ngFor="let utility of utilities.controls; let i=index; let isFirst = first; let isLast = last">
         <div [formGroupName]="i">
+          <br/>
           <div class="row">
             <div class="col-md-10">
               <fieldset>
                 <div class="row">
-                  <!--Remove supplemental income-->
-                  <div class="col-md-2 col-md-offset-10" (click)="removeSupplementalIncome()" [hidden]="!isLast">
-                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
+                  <div class="col-md-2 col-md-offset-10" (click)="removeUtility()" [hidden]="!isLast">
+                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <label>
-                      <span *ngIf="supplementalIncome.get('si_description').errors" class="text-danger">* </span> 
-                      Description
-                    </label> 
-                    <input type="text" class="inpt form-control" formControlName="si_description" 
-                    placeholder="i.e. coin laundry, garages, etc." name="Description"
-                     [ngClass]="{inValidField: supplementalIncome.get('si_description').errors && calcForm.get('userClickedResults').value}">
-                   <!-- Field Error Message-->
-                  <div *ngIf="supplementalIncome.get('si_description').errors && calcForm.get('userClickedResults').value">
-                      <span *ngIf="supplementalIncome.get('si_description').errors.required" class="text-danger">
-                      Enter Income
-                      </span>
-                  </div>  
+                      <span *ngIf="utility.get('add_u_name').errors" class="text-danger">* </span>
+                      Utility Name
+                    </label>
+                    <input type="text" class="inpt form-control" formControlName="add_u_name"  placeholder="Description"
+                    name="Utility Name"
+                    [ngClass]="{inValidField: utility.get('add_u_name').errors && calcForm.get('userClickedResults').value}">
+                      <!-- Field Error Message-->
+                      <div *ngIf="utility.get('add_u_name').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="utility.get('add_u_name').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
                   </div>
                   <div class="col-md-6">
                     <label>
-                      <span *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors" class="text-danger">* </span>
-                      Gross Monthly Income
-                    </label>
+                      <span *ngIf="utility.get('add_u_amount').errors" class="text-danger">* </span>
+                      Utility Amount
+                      </label>
                     <div class="input-group">
-                      <input type="number" step="0.01" class="inpt form-control" formControlName="si_grossMonthlyIncome"
-                       placeholder="$" name="Gross Monthly Income"
-                       [ngClass]="{inValidField: supplementalIncome.get('si_grossMonthlyIncome').errors && calcForm.get('userClickedResults').value}">
+                      <input type="number" class="inpt form-control" formControlName="add_u_amount" placeholder="$" 
+                      name="Utility Amount"
+                      [ngClass]="{inValidField: utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value}">
                       <span class="input-group-addon">$/month</span>
-                    </div> 
-                     <!-- Field Error Message-->
-                    <div *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors && calcForm.get('userClickedResults').value">
-                        <span *ngIf="supplementalIncome.get('si_grossMonthlyIncome').errors.required" class="text-danger">
-                        Enter Income
-                        </span>
-                    </div>  
+                    </div>
+                    <!-- Field Error Message-->
+                      <div *ngIf="utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="utility.get('add_u_amount').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
                   </div>
                 </div>
               </fieldset>
             </div>
           </div>
         </div>
-      <br/>
     </div>
-      <!--ADD SUPPLEMENTAL INCOME-->
-      <br/>
-      <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addSupplementalIncome()">
-        Add Supplemental Income
+    <br/>
+    <!--ADD Utilities-->
+      <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addUtility()">
+        Add Utility
       </button>
-    <br/>
-    <br/>
-  </div>
-  <!--EXPENSES-->
-  <div class="row">
-    <div class="col-md-10 text-center  ppGradient">
-      <h4><b class="whiteText">EXPENSES</b></h4>
-    </div>
-  </div>
-  <h3>Utilities</h3>
-  <div class="row">
-    <div class="col-md-10">
-      <fieldset>
-        <div class="row">
-          <div class="col-md-4">
-            
-            <label>Garbage</label>
-            <div class="input-group">
-              <input type="number" class="inpt form-control" formControlName="u_garbage" placeholder="$">
-              <span class="input-group-addon">$/month</span>
-            </div>
-          
-          </div>
-          <div class="col-md-4">
-           
-
-            <label>Water</label>
-            <div class="input-group">
-              <input type="number" class="inpt form-control" formControlName="u_water" placeholder="$">
-              <span class="input-group-addon">$/month</span>
-            </div>
-          </div>
-          <div class="col-md-4">
-           
-            <label>
-              Yard Care
-            </label>
-            <div class="input-group">
-              <input type="number" class="inpt form-control" formControlName="o_yardMaintenance" placeholder="$">
-              <span class="input-group-addon">$/month</span>
-            </div>
-          </div>
-        </div>
-        <br/>
-      </fieldset>
       <br/>
-    </div>
-  </div>
-  <!--utilities-->
-   <div formArrayName="utilities" *ngFor="let utility of utilities.controls; let i=index; let isFirst = first; let isLast = last">
-      <div [formGroupName]="i">
-        <br/>
-        <div class="row">
-          <div class="col-md-10">
-            <fieldset>
-              <div class="row">
-                <div class="col-md-2 col-md-offset-10" (click)="removeUtility()" [hidden]="!isLast">
-                  <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+      <h3>Property Expenses</h3>
+      <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <div class="row">
+              <div class="col-md-6">
+                <label>
+                  Property Taxes
+                  <a rel="mpTooltip" mptooltip text="{{propTaxText}}"> 
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="o_propertyTaxes" placeholder="$">
+                  <span class="input-group-addon">$/year</span>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>
-                    <span *ngIf="utility.get('add_u_name').errors" class="text-danger">* </span>
-                    Utility Name
-                  </label>
-                  <input type="text" class="inpt form-control" formControlName="add_u_name"  placeholder="Description"
-                   name="Utility Name"
-                   [ngClass]="{inValidField: utility.get('add_u_name').errors && calcForm.get('userClickedResults').value}">
-                    <!-- Field Error Message-->
-                    <div *ngIf="utility.get('add_u_name').errors && calcForm.get('userClickedResults').value">
-                        <span *ngIf="utility.get('add_u_name').errors.required" class="text-danger">
-                        Enter Income
-                        </span>
-                    </div>  
+                <label>
+                  Maintenance Cost (%)
+                  <a rel="mpTooltip" mptooltip text="{{maitenanceText}}"> 
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class = "input-group">
+                  <!--ng-change="rentalCalculator.calculateFieldExpenses('maintenancePercent')"-->
+                  <input type="text" class="inpt form-control" formControlName="m_costPercent" placeholder="%">
+                  <span class = "input-group-addon">%</span>
                 </div>
-                <div class="col-md-6">
-                  <label>
-                    <span *ngIf="utility.get('add_u_amount').errors" class="text-danger">* </span>
-                    Utility Amount
-                    </label>
-                  <div class="input-group">
-                    <input type="number" class="inpt form-control" formControlName="add_u_amount" placeholder="$" 
-                    name="Utility Amount"
-                    [ngClass]="{inValidField: utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value}">
-                    <span class="input-group-addon">$/month</span>
-                  </div>
-                   <!-- Field Error Message-->
-                    <div *ngIf="utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value">
-                        <span *ngIf="utility.get('add_u_amount').errors.required" class="text-danger">
-                        Enter Income
-                        </span>
-                    </div>  
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-      </div>
-   </div>
-   <br/>
-   <!--ADD Utilities-->
-    <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addUtility()">
-      Add Utility
-    </button>
-    <br/>
-    <h3>Property Expenses</h3>
-    <div class="row">
-      <div class="col-md-10">
-        <fieldset>
-          <div class="row">
-            <div class="col-md-6">
-              <label>
-                Property Taxes
-                <a rel="mpTooltip" mptooltip text="{{propTaxText}}"> 
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                </a>
-              </label>
-              <div class="input-group">
-                <input type="number" class="inpt form-control" formControlName="o_propertyTaxes" placeholder="$">
-                <span class="input-group-addon">$/year</span>
-              </div>
-              <label>
-                Maintenance Cost (%)
-                <a rel="mpTooltip" mptooltip text="{{maitenanceText}}"> 
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                </a>
-              </label>
-              <div class = "input-group">
-                <!--ng-change="rentalCalculator.calculateFieldExpenses('maintenancePercent')"-->
-                <input type="text" class="inpt form-control" formControlName="m_costPercent" placeholder="%">
-                <span class = "input-group-addon">%</span>
-              </div>
 
-            </div>
-            <div class="col-md-6" >
-              <label>
-                Insurance
-              </label>
-              <div class="input-group">
-                <input type="number" class="inpt form-control" formControlName="o_insurance" placeholder="$">
-                <span class="input-group-addon">$/month</span>
               </div>
-              <div [hidden]="!calcForm.get('m_costAmount').value">
-                  <br/>
-                <label>Maintenance Cost ($/mo)</label>
-                <div>
-                  {{calcForm.get('m_costAmount').value}} $/month
+              <div class="col-md-6" >
+                <label>
+                  Insurance
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="o_insurance" placeholder="$">
+                  <span class="input-group-addon">$/month</span>
                 </div>
-                <input class="inpt form-control" formControlName="m_costAmount" placeholder="$" type="hidden">
-            </div>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-    </div>
-    <!--expenses-->
-    <div formArrayName="expenses" *ngFor="let expense of expenses.controls; let i=index; let isFirst = first; let isLast = last">
-      <div [formGroupName]="i">
-        <br/>
-        <div class="row">
-          <div class="col-md-10">
-            <fieldset>
-              <div class="row">
-                <!--remove expense-->
-                <div class="col-md-2 col-md-offset-10" (click)="removeExpense()" [hidden]="!isLast">
-                  <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>
-                    <span *ngIf="expense.get('add_e_name').errors" class="text-danger">* </span>
-                    Expense Name</label>
-                  <input type="text" class="inpt form-control" formControlName="add_e_name" placeholder="Description" 
-                      name="Expense Name"
-                      [ngClass]="{inValidField: expense.get('add_e_name').errors && calcForm.get('userClickedResults').value}">
-                   <!-- Field Error Message-->
-                    <div *ngIf="expense.get('add_e_name').errors && calcForm.get('userClickedResults').value">
-                        <span *ngIf="expense.get('add_e_name').errors.required" class="text-danger">
-                        Enter Income
-                        </span>
-                    </div>  
-                </div>
-                <div class="col-md-6">
-                  <label>
-                    <span *ngIf="expense.get('add_e_cost').errors" class="text-danger">* </span>
-                    Cost
-                  </label>
-                  <div class="input-group">
-                    <input type="text" class="inpt form-control" formControlName="add_e_cost" placeholder="$" 
-                    name="Expense Cost"
-                    [ngClass]="{inValidField: expense.get('add_e_cost').errors && calcForm.get('userClickedResults').value}">
-                    <span class="input-group-addon">$/month</span>
+                <div [hidden]="!calcForm.get('m_costAmount').value">
+                    <br/>
+                  <label>Maintenance Cost ($/mo)</label>
+                  <div>
+                    {{calcForm.get('m_costAmount').value}} $/month
                   </div>
-                   <!-- Field Error Message-->
-                    <div *ngIf="expense.get('add_e_cost').errors && calcForm.get('userClickedResults').value">
-                        <span *ngIf="expense.get('add_e_cost').errors.required" class="text-danger">
-                        Enter Income
-                        </span>
-                    </div>  
-                </div>
+                  <input class="inpt form-control" formControlName="m_costAmount" placeholder="$" type="hidden">
               </div>
-            </fieldset>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <!--expenses-->
+      <div formArrayName="expenses" *ngFor="let expense of expenses.controls; let i=index; let isFirst = first; let isLast = last">
+        <div [formGroupName]="i">
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <fieldset>
+                <div class="row">
+                  <!--remove expense-->
+                  <div class="col-md-2 col-md-offset-10" (click)="removeExpense()" [hidden]="!isLast">
+                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>
+                      <span *ngIf="expense.get('add_e_name').errors" class="text-danger">* </span>
+                      Expense Name</label>
+                    <input type="text" class="inpt form-control" formControlName="add_e_name" placeholder="Description" 
+                        name="Expense Name"
+                        [ngClass]="{inValidField: expense.get('add_e_name').errors && calcForm.get('userClickedResults').value}">
+                    <!-- Field Error Message-->
+                      <div *ngIf="expense.get('add_e_name').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="expense.get('add_e_name').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
+                  </div>
+                  <div class="col-md-6">
+                    <label>
+                      <span *ngIf="expense.get('add_e_cost').errors" class="text-danger">* </span>
+                      Cost
+                    </label>
+                    <div class="input-group">
+                      <input type="text" class="inpt form-control" formControlName="add_e_cost" placeholder="$" 
+                      name="Expense Cost"
+                      [ngClass]="{inValidField: expense.get('add_e_cost').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon">$/month</span>
+                    </div>
+                    <!-- Field Error Message-->
+                      <div *ngIf="expense.get('add_e_cost').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="expense.get('add_e_cost').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
+                  </div>
+                </div>
+              </fieldset>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <br/>
-    <!--ADD Expenses-->
-    <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addExpense()">
-      Add Expense
-    </button>
-    <br/>
-    <br/>
-    <!-- More Expense Options -->
+      <br/>
+      <!--ADD Expenses-->
+      <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addExpense()">
+        Add Expense
+      </button>
+      <br/>
+      <br/>
+      <!-- More Expense Options -->
+      <!--<div class="row">
+        <div class="col-md-4 col-md-offset-3">
+          <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" (click)="calcForm.patchValue({expenseOptions: !calcForm.get('expenseOptions').value})">    
+            <span *ngIf="!calcForm.get('expenseOptions').value">Show More Expense Options</span>
+              <span *ngIf="calcForm.get('expenseOptions').value"> Hide Expense Options</span>
+          </button>
+        </div> 
+      </div>
+      <br/>
+      <br/>-->
+      <!--<div *ngIf="calcForm.get('expenseOptions').value" class="animation-show-hide">-->
+        <!-- More Income Options -->
     <div class="row">
       <div class="col-md-4 col-md-offset-3">
-        <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" (click)="calcForm.patchValue({expenseOptions: !calcForm.get('expenseOptions').value})">    
-          <span *ngIf="!calcForm.get('expenseOptions').value">Show More Expense Options</span>
-            <span *ngIf="calcForm.get('expenseOptions').value"> Hide Expense Options</span>
+        <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" 
+        (click)="calcForm.patchValue({advancedOptions: !calcForm.get('advancedOptions').value})">    
+          <span *ngIf="!calcForm.get('advancedOptions').value">Advanced Options</span>
+            <span *ngIf="calcForm.get('advancedOptions').value"> Hide Advanced Options</span>
         </button>
       </div> 
     </div>
     <br/>
     <br/>
-    <div *ngIf="calcForm.get('expenseOptions').value" class="animation-show-hide">
-      <h3>Repairs & Improvements</h3>
-      <div formArrayName="capitalExpenditures" *ngFor="let capitalExpenditure of capitalExpenditures.controls; let i=index; let isFirst = first; let isLast = last">
-        <div [formGroupName]="i">
-            <br/>
-            <div class="row">
-              <div class="col-md-10">
-                <fieldset>
-                  <!--remove capital expenditures-->
-                  <div class="row">
-                    <div class="col-md-2 col-md-offset-10" (click)="removeCapitalExpenditure()" [hidden]="!isLast">
-                      <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>
-                        <span *ngIf="capitalExpenditure.get('ce_description').errors" class="text-danger">* </span>
-                        Capital Expentiture (CAPEX)
-                        <a rel="mpTooltip" mptooltip text="{{capitalExpendituresText}}"> 
-                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                      </a>
-                      </label>
-                      <input type="text" class="inpt form-control" formControlName="ce_description" placeholder="Description"
-                        name="CAPEX"
-                        [ngClass]="{inValidField: capitalExpenditure.get('ce_description').errors && calcForm.get('userClickedResults').value}">
-                        <!-- Field Error Message-->
-                        <div *ngIf="capitalExpenditure.get('ce_description').errors && calcForm.get('userClickedResults').value">
-                            <span *ngIf="capitalExpenditure.get('ce_description').errors.required" class="text-danger">
-                            Enter Income
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label>
-                          <span *ngIf="capitalExpenditure.get('ce_cost').errors" class="text-danger">* </span>  
-                          Cost
-                        </label>
-                      <div class="input-group">
-                        <input type="number" class="inpt form-control" formControlName="ce_cost" placeholder="$" 
-                        name="CAPEX Cost"
-                         [ngClass]="{inValidField: capitalExpenditure.get('ce_cost').errors && calcForm.get('userClickedResults').value}">
-                        <span class="input-group-addon">$</span>
+   <div [hidden]="!calcForm.get('advancedOptions').value" class="animation-show-hide">
+        <h3>Repairs & Improvements</h3>
+        <div formArrayName="capitalExpenditures" *ngFor="let capitalExpenditure of capitalExpenditures.controls; let i=index; let isFirst = first; let isLast = last">
+          <div [formGroupName]="i">
+              <br/>
+              <div class="row">
+                <div class="col-md-10">
+                  <fieldset>
+                    <!--remove capital expenditures-->
+                    <div class="row">
+                      <div class="col-md-2 col-md-offset-10" (click)="removeCapitalExpenditure()" [hidden]="!isLast">
+                        <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
                       </div>
-                      <!-- Field Error Message-->
-                        <div *ngIf="capitalExpenditure.get('ce_cost').errors && calcForm.get('userClickedResults').value">
-                            <span *ngIf="capitalExpenditure.get('ce_cost').errors.required" class="text-danger">
-                            Enter Income
-                            </span>
-                        </div>
                     </div>
-                    
-                    <div class="col-md-4">
-                      <label>
-                          <span *ngIf="capitalExpenditure.get('ce_date').errors" class="text-danger">* </span>
-                          Date
-                      </label>
-                      <input type="text" class="inpt form-control" mp-datepicker (dateChange)="calcForm.get('ce_date').setValue($event)"  
-                      formControlName="ce_date" placeholder="Date" name="CAPEX Date"
-                      [ngClass]="{inValidField: capitalExpenditure.get('ce_date').errors && calcForm.get('userClickedResults').value}">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>
+                          <span *ngIf="capitalExpenditure.get('ce_description').errors" class="text-danger">* </span>
+                          Capital Expentiture (CAPEX)
+                          <a rel="mpTooltip" mptooltip text="{{capitalExpendituresText}}"> 
+                          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                        </a>
+                        </label>
+                        <input type="text" class="inpt form-control" formControlName="ce_description" placeholder="Description"
+                          name="CAPEX"
+                          [ngClass]="{inValidField: capitalExpenditure.get('ce_description').errors && calcForm.get('userClickedResults').value}">
+                          <!-- Field Error Message-->
+                          <div *ngIf="capitalExpenditure.get('ce_description').errors && calcForm.get('userClickedResults').value">
+                              <span *ngIf="capitalExpenditure.get('ce_description').errors.required" class="text-danger">
+                              Enter Income
+                              </span>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <label>
+                            <span *ngIf="capitalExpenditure.get('ce_cost').errors" class="text-danger">* </span>  
+                            Cost
+                          </label>
+                        <div class="input-group">
+                          <input type="number" class="inpt form-control" formControlName="ce_cost" placeholder="$" 
+                          name="CAPEX Cost"
+                          [ngClass]="{inValidField: capitalExpenditure.get('ce_cost').errors && calcForm.get('userClickedResults').value}">
+                          <span class="input-group-addon">$</span>
+                        </div>
                         <!-- Field Error Message-->
-                        <div *ngIf="capitalExpenditure.get('ce_date').errors && calcForm.get('userClickedResults').value">
-                            <span *ngIf="capitalExpenditure.get('ce_date').errors.required" class="text-danger">
-                            Enter Income
-                            </span>
-                        </div>
+                          <div *ngIf="capitalExpenditure.get('ce_cost').errors && calcForm.get('userClickedResults').value">
+                              <span *ngIf="capitalExpenditure.get('ce_cost').errors.required" class="text-danger">
+                              Enter Income
+                              </span>
+                          </div>
+                      </div>
+                      
+                      <div class="col-md-4">
+                        <label>
+                            <span *ngIf="capitalExpenditure.get('ce_date').errors" class="text-danger">* </span>
+                            Date
+                        </label>
+                        <input type="text" class="inpt form-control" mp-datepicker (dateChange)="calcForm.get('ce_date').setValue($event)"  
+                        formControlName="ce_date" placeholder="Date" name="CAPEX Date"
+                        [ngClass]="{inValidField: capitalExpenditure.get('ce_date').errors && calcForm.get('userClickedResults').value}">
+                          <!-- Field Error Message-->
+                          <div *ngIf="capitalExpenditure.get('ce_date').errors && calcForm.get('userClickedResults').value">
+                              <span *ngIf="capitalExpenditure.get('ce_date').errors.required" class="text-danger">
+                              Enter Income
+                              </span>
+                          </div>
+                      </div>
                     </div>
-                  </div>
-                </fieldset> 
+                  </fieldset> 
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <br/>
-         <!--ADD Capex-->
-        <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addCapitalExpenditure()">
-          Add Capital Expediture
-        </button>
-        <br/>
-        <br/>
-        <div class="row">
-          <div class="col-md-10 form-group">
-            <fieldset>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>
-                    After Repair Value
-                    <a rel="mpTooltip" mp-tooltip text="{{arvText}}"> 
-                      <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                    </a>
-                  </label>
-                  <div class="input-group">
-                    <input type="number" class="inpt form-control" formControlName="e_arv" placeholder="$">
-                    <span class="input-group-addon">$</span>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-
-        <h3>Property Management</h3>
-        <div class="row">
-          <div class="col-md-10">
-            <fieldset>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>
-                    Tenant Placement Fee
-                    <a rel="mpTooltip" mptooltip text="{{tenantPlacementText}}"> 
-                      <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                    </a>
-                  </label>
-                  <div class="input-group">
-                    <input type="number" class="inpt form-control" formControlName="pm_tenantPlacementFee" placeholder="$">
-                    <span class="input-group-addon">$</span>
-                  </div>
-                  <label>
-                    Management Fee (%)
-                      <a rel="mpTooltip" mptooltip text="{{managementFeeText}}"> 
-                      <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-                    </a>
-                  </label>
-                  <div class="input-group">
-                    <!--ng-change="rentalCalculator.calculateFieldExpenses('managementPercent')"-->
-                    <input type="text" class="inpt form-control" formControlName="pm_managementFeePercent" placeholder="%">
-                    <span class="input-group-addon">%</span>
-                  </div>
-                
-                  
-                </div>
-                <div class="col-md-6" >
-                  
-                  <div [hidden]="!calcForm.get('pm_managementFeeAmount').value">
-                    <br/>
+          <br/>
+          <!--ADD Capex-->
+          <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addCapitalExpenditure()">
+            Add Capital Expediture
+          </button>
+          <br/>
+          <br/>
+          <div class="row">
+            <div class="col-md-10 form-group">
+              <fieldset>
+                <div class="row">
+                  <div class="col-md-6">
                     <label>
-                      Management Fee ($)
+                      After Repair Value
+                      <a rel="mpTooltip" mp-tooltip text="{{arvText}}"> 
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
                     </label>
-                    <div>
-                      {{calcForm.get('pm_managementFeeAmount').value}} $/month
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="e_arv" placeholder="$">
+                      <span class="input-group-addon">$</span>
                     </div>
-                    <input type="hidden" class="inpt form-control" formControlName="pm_managementFeeAmount" placeholder="$">
                   </div>
                 </div>
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
           </div>
-        </div>
-        <br/>
-      </div>
+
+          <h3>Property Management</h3>
+          <div class="row">
+            <div class="col-md-10">
+              <fieldset>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>
+                      Tenant Placement Fee
+                      <a rel="mpTooltip" mptooltip text="{{tenantPlacementText}}"> 
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="pm_tenantPlacementFee" placeholder="$">
+                      <span class="input-group-addon">$</span>
+                    </div>
+                    <label>
+                      Management Fee (%)
+                        <a rel="mpTooltip" mptooltip text="{{managementFeeText}}"> 
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <!--ng-change="rentalCalculator.calculateFieldExpenses('managementPercent')"-->
+                      <input type="text" class="inpt form-control" formControlName="pm_managementFeePercent" placeholder="%">
+                      <span class="input-group-addon">%</span>
+                    </div>
+                  
+                    
+                  </div>
+                  <div class="col-md-6" >
+                    
+                    <div [hidden]="!calcForm.get('pm_managementFeeAmount').value">
+                      <br/>
+                      <label>
+                        Management Fee ($)
+                      </label>
+                      <div>
+                        {{calcForm.get('pm_managementFeeAmount').value}} $/month
+                      </div>
+                      <input type="hidden" class="inpt form-control" formControlName="pm_managementFeeAmount" placeholder="$">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <br/>
+        <!--</div>-->
+  </div>
 </div>
