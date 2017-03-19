@@ -131,110 +131,6 @@
         </button>
       <br/>
       <br/>
-    <!--</div>-->
-    <!--EXPENSES-->
-    <!--<div class="row">
-      <div class="col-md-10 text-center  ppGradient">
-        <h4><b class="whiteText">EXPENSES</b></h4>
-      </div>
-    </div>-->
-    <h3>Utilities</h3>
-    <div class="row">
-      <div class="col-md-10">
-        <fieldset>
-          <div class="row">
-            <div class="col-md-4">
-              
-              <label>Garbage</label>
-              <div class="input-group">
-                <input type="number" class="inpt form-control" formControlName="u_garbage" placeholder="$">
-                <span class="input-group-addon">$/month</span>
-              </div>
-            
-            </div>
-            <div class="col-md-4">
-            
-
-              <label>Water</label>
-              <div class="input-group">
-                <input type="number" class="inpt form-control" formControlName="u_water" placeholder="$">
-                <span class="input-group-addon">$/month</span>
-              </div>
-            </div>
-            <div class="col-md-4">
-            
-              <label>
-                Yard Care
-              </label>
-              <div class="input-group">
-                <input type="number" class="inpt form-control" formControlName="o_yardMaintenance" placeholder="$">
-                <span class="input-group-addon">$/month</span>
-              </div>
-            </div>
-          </div>
-          <br/>
-        </fieldset>
-        <br/>
-      </div>
-    </div>
-    <!--utilities-->
-    <div formArrayName="utilities" *ngFor="let utility of utilities.controls; let i=index; let isFirst = first; let isLast = last">
-        <div [formGroupName]="i">
-          <br/>
-          <div class="row">
-            <div class="col-md-10">
-              <fieldset>
-                <div class="row">
-                  <div class="col-md-2 col-md-offset-10" (click)="removeUtility()" [hidden]="!isLast">
-                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>
-                      <span *ngIf="utility.get('add_u_name').errors" class="text-danger">* </span>
-                      Utility Name
-                    </label>
-                    <input type="text" class="inpt form-control" formControlName="add_u_name"  placeholder="Description"
-                    name="Utility Name"
-                    [ngClass]="{inValidField: utility.get('add_u_name').errors && calcForm.get('userClickedResults').value}">
-                      <!-- Field Error Message-->
-                      <div *ngIf="utility.get('add_u_name').errors && calcForm.get('userClickedResults').value">
-                          <span *ngIf="utility.get('add_u_name').errors.required" class="text-danger">
-                          Enter Income
-                          </span>
-                      </div>  
-                  </div>
-                  <div class="col-md-6">
-                    <label>
-                      <span *ngIf="utility.get('add_u_amount').errors" class="text-danger">* </span>
-                      Utility Amount
-                      </label>
-                    <div class="input-group">
-                      <input type="number" class="inpt form-control" formControlName="add_u_amount" placeholder="$" 
-                      name="Utility Amount"
-                      [ngClass]="{inValidField: utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value}">
-                      <span class="input-group-addon">$/month</span>
-                    </div>
-                    <!-- Field Error Message-->
-                      <div *ngIf="utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value">
-                          <span *ngIf="utility.get('add_u_amount').errors.required" class="text-danger">
-                          Enter Income
-                          </span>
-                      </div>  
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-          </div>
-        </div>
-    </div>
-    <br/>
-    <!--ADD Utilities-->
-      <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addUtility()">
-        Add Utility
-      </button>
-      <br/>
       <h3>Property Expenses</h3>
       <div class="row">
         <div class="col-md-10">
@@ -341,6 +237,104 @@
       <!--ADD Expenses-->
       <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addExpense()">
         Add Expense
+      </button>
+      <br/>
+      <br/>
+    <h3>Utilities</h3>
+    <div class="row">
+      <div class="col-md-10">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-4">
+              
+              <label>Garbage</label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="u_garbage" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            
+            </div>
+            <div class="col-md-4">
+            
+
+              <label>Water</label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="u_water" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+            
+              <label>
+                Yard Care
+              </label>
+              <div class="input-group">
+                <input type="number" class="inpt form-control" formControlName="o_yardMaintenance" placeholder="$">
+                <span class="input-group-addon">$/month</span>
+              </div>
+            </div>
+          </div>
+          <br/>
+        </fieldset>
+        <br/>
+      </div>
+    </div>
+    <!--utilities-->
+    <div formArrayName="utilities" *ngFor="let utility of utilities.controls; let i=index; let isFirst = first; let isLast = last">
+        <div [formGroupName]="i">
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <fieldset>
+                <div class="row">
+                  <div class="col-md-2 col-md-offset-10" (click)="removeUtility()" [hidden]="!isLast">
+                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>
+                      <span *ngIf="utility.get('add_u_name').errors" class="text-danger">* </span>
+                      Utility Name
+                    </label>
+                    <input type="text" class="inpt form-control" formControlName="add_u_name"  placeholder="Description"
+                    name="Utility Name"
+                    [ngClass]="{inValidField: utility.get('add_u_name').errors && calcForm.get('userClickedResults').value}">
+                      <!-- Field Error Message-->
+                      <div *ngIf="utility.get('add_u_name').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="utility.get('add_u_name').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
+                  </div>
+                  <div class="col-md-6">
+                    <label>
+                      <span *ngIf="utility.get('add_u_amount').errors" class="text-danger">* </span>
+                      Utility Amount
+                      </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="add_u_amount" placeholder="$" 
+                      name="Utility Amount"
+                      [ngClass]="{inValidField: utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon">$/month</span>
+                    </div>
+                    <!-- Field Error Message-->
+                      <div *ngIf="utility.get('add_u_amount').errors && calcForm.get('userClickedResults').value">
+                          <span *ngIf="utility.get('add_u_amount').errors.required" class="text-danger">
+                          Enter Income
+                          </span>
+                      </div>  
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+    </div>
+    <br/>
+    <!--ADD Utilities-->
+      <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addUtility()">
+        Add Utility
       </button>
       <br/>
       <br/>

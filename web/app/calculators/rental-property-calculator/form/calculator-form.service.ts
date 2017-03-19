@@ -10,8 +10,8 @@ export class CalculatorFormService {
         
          this.calcForm = this.fb.group({     
             loanInfoView :  'bankLoan',
-            showIncomeOptions: false,
-            expenseOptions : false,
+            // showIncomeOptions: false,
+            // expenseOptions : false,
             advancedOptions: false,
             li_purchasePrice : ['', [Validators.required]],
             li_purchaseDate : [this._rentalCalculatorService.getCurrentDate(), [Validators.required]],  //date needs to get validated for format

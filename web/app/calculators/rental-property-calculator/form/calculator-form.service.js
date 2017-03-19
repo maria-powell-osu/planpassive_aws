@@ -18,8 +18,8 @@ var CalculatorFormService = (function () {
         this._rentalCalculatorService = _rentalCalculatorService;
         this.calcForm = this.fb.group({
             loanInfoView: 'bankLoan',
-            showIncomeOptions: false,
-            expenseOptions: false,
+            // showIncomeOptions: false,
+            // expenseOptions : false,
             advancedOptions: false,
             li_purchasePrice: ['', [forms_1.Validators.required]],
             li_purchaseDate: [this._rentalCalculatorService.getCurrentDate(), [forms_1.Validators.required]],
