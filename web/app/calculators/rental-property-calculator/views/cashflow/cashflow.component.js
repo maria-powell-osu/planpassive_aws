@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
-var rental_property_calculator_service_1 = require("../rental-property-calculator.service");
-var calculator_form_service_1 = require("../calculator-form.service");
+var rental_property_calculator_service_1 = require("../../rental-property-calculator.service");
+var calculator_form_service_1 = require("../../form/calculator-form.service");
 var CashFlowComponent = (function () {
     function CashFlowComponent(_rentalCalculatorService, _calculatorFormService) {
         this._rentalCalculatorService = _rentalCalculatorService;
@@ -91,7 +91,7 @@ __decorate([
 ], CashFlowComponent.prototype, "calcForm", void 0);
 CashFlowComponent = __decorate([
     core_1.Component({
-        templateUrl: "app/calculators/rental-property-calculator/views/cashflow.component.html",
+        templateUrl: "app/calculators/rental-property-calculator/views/cashflow/cashflow.component.html",
         selector: 'cashflow',
         providers: [rental_property_calculator_service_1.RentalCalculatorService, calculator_form_service_1.CalculatorFormService]
     }),

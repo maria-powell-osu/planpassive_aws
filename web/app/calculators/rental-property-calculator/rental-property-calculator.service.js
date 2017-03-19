@@ -22,6 +22,9 @@ var RentalCalculatorService = (function () {
     RentalCalculatorService.prototype.generateDownPaymentDollarAmount = function (purchasePrice, downPaymentPercentage) {
         return this.calculateDownPaymentDollarAmount(purchasePrice, downPaymentPercentage);
     };
+    // generateDownPayments (triggerIndicator: string, form: any){
+    //     return this.calculateDownPayments(triggerIndicator, form);
+    // }
     RentalCalculatorService.prototype.generateManagementFeeDollarAmount = function (triggerIndicator, form) {
         return this.calculateManagementFeeDollarAmount(triggerIndicator, form.controls, form);
     };
@@ -74,7 +77,7 @@ var RentalCalculatorService = (function () {
         }
     };
     RentalCalculatorService.prototype.calculateDownPaymentDollarAmount = function (purchasePrice, downPaymentPercentage) {
-        var downPaymentDollarAmount;
+        var downPaymentDollarAmount = null;
         //if the user has not entered purchase price return nothing
         if (purchasePrice && downPaymentPercentage) {
             downPaymentDollarAmount = this.roundToNearestDecimal(2, (downPaymentPercentage / 100) * purchasePrice);
@@ -82,7 +85,7 @@ var RentalCalculatorService = (function () {
         return downPaymentDollarAmount;
     };
     RentalCalculatorService.prototype.calculateDownPaymentPercentage = function (purchasePrice, downPaymentDollarAmount) {
-        var downPaymentPercentage;
+        var downPaymentPercentage = null;
         //if the user has not entered purchase price return nothing
         if (purchasePrice && downPaymentDollarAmount) {
             downPaymentPercentage = this.roundToNearestDecimal(2, (downPaymentDollarAmount / purchasePrice) * 100);

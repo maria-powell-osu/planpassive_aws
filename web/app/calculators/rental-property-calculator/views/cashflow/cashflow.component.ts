@@ -1,21 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup , FormBuilder, FormArray} from '@angular/forms';
-import { mpDatePicker } from "../../../shared/datepicker/mpdatepicker";
-import { mpToolTip } from "../../../shared/tooltip/mptooltip";
-import { RentalCalculatorService} from "../rental-property-calculator.service";
-import { CalculatorFormService } from "../calculator-form.service"; 
+import { mpDatePicker } from "../../../../shared/datepicker/mpdatepicker";
+import { mpToolTip } from "../../../../shared/tooltip/mptooltip";
+import { RentalCalculatorService} from "../../rental-property-calculator.service";
+import { CalculatorFormService } from "../../form/calculator-form.service"; 
 
 
 @Component({
-    templateUrl: "app/calculators/rental-property-calculator/views/cashflow.component.html",
+    templateUrl: "app/calculators/rental-property-calculator/views/cashflow/cashflow.component.html",
     selector: 'cashflow',
     providers: [RentalCalculatorService, CalculatorFormService]
 })
 
 export class CashFlowComponent {
      @Input() calcForm: FormGroup;
-     showIncomeOptions: false;
-     expenseOptions : false;
 
     constructor( private _rentalCalculatorService : RentalCalculatorService,
                  private _calculatorFormService : CalculatorFormService) {}

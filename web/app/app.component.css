@@ -541,7 +541,7 @@ fieldset{
 }
 .inValidField {
         border: 1px solid #843534;
-        background-color: #843534;
+        /*background-color: #843534;*/
     }
 
 .animation-show-hide {

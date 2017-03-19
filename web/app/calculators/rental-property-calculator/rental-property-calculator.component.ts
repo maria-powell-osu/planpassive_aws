@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import { RentalCalculatorService } from './rental-property-calculator.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { NgModule }      from '@angular/core';
-import { CalculatorFormService } from './calculator-form.service';
+import { CalculatorFormService } from './form/calculator-form.service';
 
 
 @Component({
@@ -20,7 +20,10 @@ export class RentalPropertyCalculatorComponent implements OnInit {
                   private _calculatorFormService : CalculatorFormService){}
 
      calculate (form :any): void {
-        this._rentalCalculatorService.calculateResults(this.calcForm);
+        this.calcForm.patchValue({'userClickedResults': true});
+        if(this.calcForm.valid){
+            this._rentalCalculatorService.calculateResults(this.calcForm);
+        }
      }
 
      ngOnInit(): void {

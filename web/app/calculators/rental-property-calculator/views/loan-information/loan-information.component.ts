@@ -1,13 +1,13 @@
 import { Component, Input, EventEmitter } from '@angular/core';
 import { FormGroup , FormBuilder, FormArray} from '@angular/forms';
-import { mpDatePicker } from "../../../shared/datepicker/mpdatepicker";
-import { mpToolTip } from "../../../shared/tooltip/mptooltip";
-import { RentalCalculatorService} from "../rental-property-calculator.service";
-import { CalculatorFormService} from "../calculator-form.service"; 
+import { mpDatePicker } from "../../../../shared/datepicker/mpdatepicker";
+import { mpToolTip } from "../../../../shared/tooltip/mptooltip";
+import { RentalCalculatorService} from "../../rental-property-calculator.service";
+import { CalculatorFormService} from "../../form/calculator-form.service"; 
 
 
 @Component({
-    templateUrl: "app/calculators/rental-property-calculator/views/loan-information.component.html",
+    templateUrl: "app/calculators/rental-property-calculator/views/loan-information/loan-information.component.html",
     selector: 'loaninformation',
     providers: [RentalCalculatorService, CalculatorFormService]
 })

@@ -1,0 +1,451 @@
+<!--LOAN TYPE SELECTION-->
+<div  [formGroup]="calcForm">
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <input type="radio" formControlName="loanInfoView" value="cash" >
+            Cash
+            <input type="radio" value="bankLoan" formControlName="loanInfoView">
+            Loan - Bank
+            <input type="radio" value="specialTermsLoan" formControlName="loanInfoView">
+            Loan - Special Terms
+        </div>
+    </div> 
+
+<!--PRICE INFORMATION-->
+<div class="row">
+  <div class="col-md-10">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>
+              <span *ngIf="calcForm.get('li_purchasePrice').errors" class="text-danger">* </span> 
+              Purchase Price
+            </label>
+            <div class="input-group">
+              <input type="number" class="inpt form-control" formControlName="li_purchasePrice" 
+                    placeholder="$" name="Purchase Price" 
+                    [ngClass]="{inValidField: calcForm.get('li_purchasePrice').errors 
+                    && calcForm.get('userClickedResults').value}"> 
+              <span class="input-group-addon">$</span>
+            </div>
+            <!-- Field Error Message-->
+            <span *ngIf="calcForm.get('li_purchasePrice').errors && calcForm.get('userClickedResults').value">
+              <span *ngIf="calcForm.get('li_purchasePrice').errors.required" class="text-danger">
+              Enter Purchase Price
+              </span>
+            </span>
+          </div>
+          <div class="col-md-4 form-group">
+            <label>
+              <span *ngIf="calcForm.get('li_purchaseDate').errors" class="text-danger">* </span> 
+              Purchase Date
+            </label>
+           <input mp-datepicker (dateChange)="calcForm.get('li_purchaseDate').setValue($event)" 
+                  type="text" class="inpt form-control"  formControlName="li_purchaseDate" name="Purchase Price"
+                  [ngClass]="{inValidField: calcForm.get('li_purchaseDate').errors && calcForm.get('userClickedResults').value}"> 
+            <!-- Field Error Message-->
+           <span *ngIf="calcForm.get('li_purchaseDate').errors && calcForm.get('userClickedResults').value">
+              <span *ngIf="calcForm.get('li_purchaseDate').errors.required" class="text-danger">
+              Enter Purchase Date
+              </span>
+          </span>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <br/>
+  <!--BANK LOAN VIEW-->
+  <div *ngIf="calcForm.get('loanInfoView').value == 'bankLoan'">
+     <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <!--new row-->
+            <div class="row">
+              <!--left-->
+              <div class="col-md-6 form-group">
+                 <label>Loan Name</label>
+                  <div class="input-group">
+                    <input type="text" class="inpt form-control" formControlName="bl_loanName" placeholder="Loan Name" name="Loan Name"> 
+                    <span class="input-group-addon">  </span>
+                  </div>
+                  <label>Closing Cost</label>
+                  <div class="input-group">
+                    <input type="number" class="inpt form-control" formControlName="bl_closingCost" placeholder="$"> 
+                    <span class="input-group-addon">$</span>
+                  </div>       
+              </div>
+              <!--right-->
+              <div class="col-md-6 form-group">
+                <label>
+                  <span *ngIf="calcForm.get('bl_interest').errors" class="text-danger">* </span> 
+                  Interest
+                  </label>
+                <div class="input-group">
+                  <input type="number" step="0.001" class="inpt form-control" formControlName="bl_interest" 
+                  placeholder="%" name="Interest"
+                  [ngClass]="{inValidField: calcForm.get('bl_interest').errors && calcForm.get('userClickedResults').value}"> 
+                  <span class="input-group-addon">%</span>
+                </div>
+                <!-- Field Error Message-->
+                <div *ngIf="calcForm.get('bl_interest').errors && calcForm.get('userClickedResults').value">
+                  <span *ngIf="calcForm.get('bl_interest').errors.required" class="text-danger">
+                  Enter Interest
+                  </span>
+               </div>
+                <label>
+                  <span *ngIf="calcForm.get('bl_amortization').errors" class="text-danger">* </span>
+                  Amortization
+                  <a mptooltip text="{{amortizationText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_amortization" placeholder="yrs" 
+                  name="Amortization"
+                  [ngClass]="{inValidField: calcForm.get('bl_amortization').errors && calcForm.get('userClickedResults').value}">
+                  <span class="input-group-addon">years</span>
+                </div>
+                <!-- Field Error Message-->
+                <div *ngIf="calcForm.get('bl_amortization').errors && calcForm.get('userClickedResults').value">
+                  <span *ngIf="calcForm.get('bl_amortization').errors.required" class="text-danger">
+                  Enter Amortization
+                  </span>
+               </div>               
+              </div>  
+            </div>
+            <!--new row-->
+            <div class="row noTopPad">
+              <!--left-->
+              <div class="col-md-3 form-group">
+                <label>
+                  <span *ngIf="calcForm.get('bl_downPaymentPercent').errors" class="text-danger">* </span>
+                  Down Payment (%)
+                  <!--<span class="text-danger" ng-show="rentalCalculator.showDownPaymentPercentHelpText">Enter purchase price first.</span>-->
+                </label> 
+                <div class="input-group">    
+                  <input type="number" class="inpt form-control" formControlName="bl_downPaymentPercent" placeholder="%" 
+                  name="Down Payment (%)"
+                  [ngClass]="{inValidField: calcForm.get('bl_downPaymentPercent').errors && calcForm.get('userClickedResults').value}">
+                  <span class="input-group-addon" >%</span>
+                </div>
+                <!-- Field Error Message-->
+                <div *ngIf="(calcForm.get('bl_downPaymentDollar').errors && calcForm.get('userClickedResults').value)||
+                            (!calcForm.get('li_purchasePrice').value && calcForm.get('purchasePriceError').value)">
+                  <span *ngIf="calcForm.get('bl_downPaymentPercent').errors &&
+                              calcForm.get('bl_downPaymentPercent').errors.required && 
+                              !calcForm.get('purchasePriceError').value" class="text-danger">
+                  Enter Down Payment in % or $
+                  </span>
+                  <span *ngIf="calcForm.get('purchasePriceError').value && !calcForm.get('li_purchasePrice').value" class="text-danger">
+                  Enter Purchase Price First
+                  </span>
+               </div>    
+              </div>
+              <!--right-->
+              <div class="col-md-3 form-group noTopPad">
+                <label>
+                  <span *ngIf="calcForm.get('bl_downPaymentDollar').errors" class="text-danger">* </span>
+                  Down Payment ($)
+                </label> 
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_downPaymentDollar" placeholder="$" 
+                  name="Down Payment ($)"
+                  [ngClass]="{inValidField: calcForm.get('bl_downPaymentDollar').errors && calcForm.get('userClickedResults').value}">
+                  <span class="input-group-addon" >$</span>
+                </div>
+                <!-- Field Error Message-->
+                <div *ngIf="(calcForm.get('bl_downPaymentDollar').errors && calcForm.get('userClickedResults').value) ||
+                            (!calcForm.get('li_purchasePrice').value && calcForm.get('purchasePriceError').value)">
+                  <span *ngIf="calcForm.get('bl_downPaymentDollar').errors &&
+                              calcForm.get('bl_downPaymentDollar').errors.required && 
+                              !calcForm.get('purchasePriceError').value" class="text-danger">
+                  Enter Down Payment in % or $
+                  </span>
+                  <span *ngIf="calcForm.get('purchasePriceError').value && !calcForm.get('li_purchasePrice').value" class="text-danger">
+                  Enter Purchase Price First
+                  </span>
+               </div>   
+              </div>
+            </div>
+            <!--new row-->
+            <div class="row">
+              <!--left-->
+              <div class="col-md-6 form-group">
+                <label>
+                  Extra Principal Pmt
+                  <a mptooltip text="{{extraPrincipalText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
+                </label>
+                <div class="input-group">
+                  <input type="number" class="inpt form-control" formControlName="bl_extraPrincipal" placeholder="$" name="Extra Principal">                  
+                  <span class="input-group-addon">$/month</span>
+                </div>
+              </div>
+              <!--right-->
+              <div class="col-md-3 form-group">
+                <label>
+                   <span *ngIf="calcForm.get('bl_startDate').errors" class="text-danger">* </span>
+                  Start
+                </label>  
+                <input type="text" mp-datepicker (dateChange)="calcForm.get('bl_startDate').setValue($event)" class="inpt form-control" 
+                    formControlName="bl_startDate" placeholder="Date" name="Principal Start Date"
+                    [ngClass]="{inValidField: calcForm.get('bl_startDate').errors && calcForm.get('userClickedResults').value}"> 
+                <!-- Field Error Message-->
+                <div *ngIf="calcForm.get('bl_startDate').errors && calcForm.get('userClickedResults').value">
+                  <span *ngIf="calcForm.get('bl_startDate').errors.required" class="text-danger">
+                  Enter Start Date
+                  </span>
+               </div>   
+              </div>
+              <div class="col-md-3 form-group">
+                <label>
+                  <span *ngIf="calcForm.get('bl_endDate').errors" class="text-danger">* </span>
+                  End
+                </label>      
+                <input type="text" class="inpt form-control" mp-datepicker (dateChange)="calcForm.get('bl_endDate').setValue($event)" 
+                    formControlName="bl_endDate" placeholder="Date" name="Principal End Date"
+                      [ngClass]="{inValidField: calcForm.get('bl_endDate').errors && calcForm.get('userClickedResults').value}">
+                
+                 <!-- Field Error Message-->
+                <div *ngIf="calcForm.get('bl_endDate').errors && calcForm.get('userClickedResults').value">
+                  <span *ngIf="calcForm.get('bl_endDate').errors.required" class="text-danger">
+                  Enter End Date
+                  </span>
+               </div>  
+              </div>
+            </div>
+          </fieldset>
+        </div>
+     </div>
+ 
+     <br/>
+
+    <!-- BANK LOANS-->
+    <div formArrayName="loans" *ngFor="let loan of loans.controls; let i=index; let isLast= last; let isFirst =first">
+      <div [formGroupName]="i">
+          <div class="row">
+            <div class="col-md-10">
+              <fieldset>
+                <!--REMOVE LOAN-->
+                <div class="row">
+                  <div class="col-md-2 col-md-offset-10 mpClickable" (click)="removeLoan()" [hidden]="!isLast || isFirst" >
+                    <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <!--new row-->
+                <div class="row">
+                  <!--left-->
+                  <div class="col-md-6 form-group">
+                    <label>Loan Name</label>
+                    <div class="input-group">
+                      <input type="text" class="inpt form-control" formControlName="add_bl_loanName" placeholder="Loan Name" name="Loan Name">
+                      <span class="input-group-addon">  </span>
+                    </div>
+                    <label>
+                      <span *ngIf="loan.get('add_bl_loanAmount').errors" class="text-danger">* </span>
+                      Amount
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="add_bl_loanAmount" 
+                      placeholder="Amount in $" name="Amount"
+                      [ngClass]="{inValidField: loan.get('add_bl_loanAmount').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon">$</span>
+                    </div>
+                    <!-- Field Error Message-->
+                    <div *ngIf="loan.get('add_bl_loanAmount').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="loan.get('add_bl_loanAmount').errors.required" class="text-danger">
+                        Enter Loan Amount
+                        </span>
+                    </div>  
+                    <label>
+                      <span *ngIf="loan.get('add_bl_interest').errors" class="text-danger">* </span>
+                      Interest (%)
+                    </label>
+                    <div class="input-group">
+                      <input type="number" step="0.001" class="inpt form-control" formControlName="add_bl_interest" 
+                      placeholder="%" name="Interest (%)"
+                      [ngClass]="{inValidField: loan.get('add_bl_interest').errors && calcForm.get('userClickedResults').value}">  
+                      <span class="input-group-addon">%</span>
+                    </div>
+                    <!-- Field Error Message-->
+                    <div *ngIf="loan.get('add_bl_interest').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="loan.get('add_bl_interest').errors.required" class="text-danger">
+                        Enter Interest
+                        </span>
+                    </div>  
+                  </div>
+                  <!--right-->
+                  <div class="col-md-6 form-group">
+                    <label>
+                      <span *ngIf="loan.get('add_bl_amortization').errors" class="text-danger">* </span>
+                      Amortization
+                      <a rel="mpTooltip" mptooltip text="amortizationText">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="add_bl_amortization" 
+                      placeholder="yrs" name="Amortization"
+                       [ngClass]="{inValidField: loan.get('add_bl_amortization').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon">years</span>
+                    </div>
+                    <!-- Field Error Message-->
+                    <div *ngIf="loan.get('add_bl_amortization').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="loan.get('add_bl_amortization').errors.required" class="text-danger">
+                        Enter Amortization
+                        </span>
+                    </div> 
+                    <label>
+                      Year Until Balloon Pmt
+                      <a rel="mpTooltip" mptooltip text="{{balloonDateText}}">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label> 
+                    <div class="input-group">    
+                      <input type="number" class="inpt form-control" formControlName="add_bl_balloon"  placeholder="Yrs"> 
+                      <span class="input-group-addon">years</span>
+                    </div>
+                  
+                    <label>
+                      Up Front Lender Points
+                      <a rel="mpTooltip" mptooltip text="{{lenderPointsText}}">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="add_bl_upFrontLenderPoints" placeholder="$">
+                      <span class="input-group-addon">$</span>
+                    </div>
+                  </div>
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor elemIndent" aria-hidden="true"></span>
+                  <label>Interest only?</label>
+                  <input type="checkbox" formControlName="add_bl_interestOnly">
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <br/>
+      </div>
+    </div>
+    <!--ADD LOAN-->
+    <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addLoan()">
+      Add Another Loan
+    </button>
+  </div>
+  <!--SPECIAL TERMS LOANS-->
+  <div *ngIf="calcForm.get('loanInfoView').value == 'specialTermsLoan'">
+    <div formArrayName="specialTermsLoans" *ngFor="let specialTermsLoan of specialTermsLoans.controls; let i=index; let isLast= last; let isFirst =first">
+      <div [formGroupName]="i">
+          <div class="row">
+            <div class="col-md-10">
+              <fieldset>
+                <!--Remove special terms loans-->
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-10" (click)="removeSpecialTermsLoan()"  [hidden]="!isLast || isFirst">
+                      <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <!--new row-->
+                <div class="row">
+                  <!--left-->
+                  <div class="col-md-6 form-group">
+                    <label>Loan Name</label>
+                    <div class="input-group">
+                      <input type="text" class="inpt form-control" formControlName="stl_loanName" placeholder="Loan Name" name="Loan Name">
+                      <span class="input-group-addon">$</span>
+                    </div>
+                    <label>                     
+                      <span *ngIf="specialTermsLoan.get('stl_loanName').errors" class="text-danger">* </span>
+                      Amount
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="stl_amount" placeholder="$" name="Loan Amount"
+                       [ngClass]="{inValidField: specialTermsLoan.get('stl_amount').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon" >$</span>
+                    </div>
+                    <!-- Field Error Message-->
+                    <div *ngIf="specialTermsLoan.get('stl_amount').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="specialTermsLoan.get('stl_amount').errors.required" class="text-danger">
+                        Enter Loan Amount
+                        </span>
+                    </div> 
+                    <label>
+                      <span *ngIf="specialTermsLoan.get('stl_interest').errors" class="text-danger">* </span>
+                      Interest
+                      <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" step="0.001" class="inpt form-control" formControlName="stl_interest" 
+                        placeholder="%" name="Interest"
+                         [ngClass]="{inValidField: specialTermsLoan.get('stl_interest').errors && calcForm.get('userClickedResults').value}"> 
+                      <span class="input-group-addon">%</span>
+                    </div> 
+                   <!-- Field Error Message-->
+                    <div *ngIf="specialTermsLoan.get('stl_interest').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="specialTermsLoan.get('stl_interest').errors.required" class="text-danger">
+                        Enter Interest
+                        </span>
+                    </div>
+                  </div>
+                  <!--right-->
+                  <div class="col-md-6 form-group">
+                    <label>
+                      <span *ngIf="specialTermsLoan.get('stl_amortization').errors" class="text-danger">* </span>
+                      Amortization
+                      <a rel="mpTooltip" mptooltip text="{{amortizationText}}">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="stl_amortization" 
+                      placeholder="yrs" name="Amortization"
+                       [ngClass]="{inValidField: specialTermsLoan.get('stl_amortization').errors && calcForm.get('userClickedResults').value}">
+                      <span class="input-group-addon">years</span>
+                    </div>
+                     <!-- Field Error Message-->
+                    <div *ngIf="specialTermsLoan.get('stl_amortization').errors && calcForm.get('userClickedResults').value">
+                        <span *ngIf="specialTermsLoan.get('stl_amortization').errors.required" class="text-danger">
+                        Enter Amortixzation
+                        </span>
+                    </div>
+                    <label>
+                      Years Until Balloon Pmt
+                      <a rel="mpTooltip" mptooltip text="{{balloonDateText}}">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="stl_balloon" placeholder="Yrs"> 
+                      <span class="input-group-addon">years</span>
+                    </div>
+
+                    <label>
+                      Up Front Lender Points
+                      <a rel="mpTooltip" mptooltip text="{{lenderPointsText}}">
+                        <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                      </a>
+                    </label>
+                    <div class="input-group">
+                      <input type="number" class="inpt form-control" formControlName="stl_upFrontLenderPoints" placeholder="$">
+                      <span class="input-group-addon">$</span>
+                    </div>
+                  </div>
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor elemIndent" aria-hidden="true"></span>
+                  <label>Interest only?</label>
+                  <input type="checkbox" formControlName="stl_interestOption">
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <br/>
+      </div>
+    </div>
+    <!--add special terms loan-->
+    <button class="btn mpDesignBackGround55B563 whiteText" type="button" (click)="addSpecialTermsLoan()">
+      Add AnotherSpecial Terms Loan
+    </button>
+  </div>
+</div>

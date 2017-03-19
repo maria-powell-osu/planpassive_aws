@@ -33,6 +33,7 @@
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm" [formGroup]="calcForm">
 		<loaninformation [hidden]="view != 'loan'" [calcForm]="calcForm"></loaninformation>
 		<cashflow [hidden]="view != 'cashflow'" [calcForm]="calcForm"></cashflow>
+		<result [hidden]="view != 'result'" [calcForm]="calcForm"></result>
 	</form>
 	<br/>
 	<br/>

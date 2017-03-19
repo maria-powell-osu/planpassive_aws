@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var rental_property_calculator_service_1 = require("./rental-property-calculator.service");
-var calculator_form_service_1 = require("./calculator-form.service");
+var calculator_form_service_1 = require("./form/calculator-form.service");
 var RentalPropertyCalculatorComponent = (function () {
     function RentalPropertyCalculatorComponent(_rentalCalculatorService, fb, _calculatorFormService) {
         this._rentalCalculatorService = _rentalCalculatorService;
@@ -20,7 +20,10 @@ var RentalPropertyCalculatorComponent = (function () {
         this._calculatorFormService = _calculatorFormService;
     }
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
-        this._rentalCalculatorService.calculateResults(this.calcForm);
+        this.calcForm.patchValue({ 'userClickedResults': true });
+        if (this.calcForm.valid) {
+            this._rentalCalculatorService.calculateResults(this.calcForm);
+        }
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {
         this.view = 'loan';

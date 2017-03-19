@@ -1,5 +1,5 @@
 Left at:
-	- now need to create validation the way it was before
+	- how to make start date require only if extra pcincipal required
 	- results page need to show results
 Angular 2 TO DOs:
 	- calculator:
@@ -26,6 +26,7 @@ General TODOs
 	- how can I make the page load faster? (I suspect the front image is what takes long so see how we can improve that)
 	- need loader bars for the images
 	- minify files
+	- dates are not getting validated
 
 SEO:
 	- we need auto generate sitemaps xml

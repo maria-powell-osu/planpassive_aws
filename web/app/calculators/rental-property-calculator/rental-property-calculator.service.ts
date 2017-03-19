@@ -17,6 +17,10 @@ export class RentalCalculatorService {
         return this.calculateDownPaymentDollarAmount(purchasePrice, downPaymentPercentage);
     }
 
+    // generateDownPayments (triggerIndicator: string, form: any){
+    //     return this.calculateDownPayments(triggerIndicator, form);
+    // }
+
     generateManagementFeeDollarAmount(triggerIndicator: string, form: any){
         return this.calculateManagementFeeDollarAmount(triggerIndicator, form.controls, form);
     }
@@ -36,7 +40,7 @@ export class RentalCalculatorService {
         var result = mm+'/'+ dd +'/'+ yyyy;
         return result;
     }
-
+    
     private calculateManagementFeeDollarAmount(triggerIndicator:string, formInput:any, form:any){
         var yearlyIncome = this.calculateFirstYearIncome(formInput);
         var monthlyIncome = yearlyIncome / 12;
@@ -71,7 +75,7 @@ export class RentalCalculatorService {
 }
 
     private calculateDownPaymentDollarAmount(purchasePrice : number, downPaymentPercentage: number){
-        var downPaymentDollarAmount;
+        var downPaymentDollarAmount = null;
 
         //if the user has not entered purchase price return nothing
         if (purchasePrice && downPaymentPercentage){
@@ -81,7 +85,7 @@ export class RentalCalculatorService {
     }
 
     private calculateDownPaymentPercentage(purchasePrice : number, downPaymentDollarAmount: number){
-        var downPaymentPercentage;
+        var downPaymentPercentage = null;
         //if the user has not entered purchase price return nothing
         if (purchasePrice && downPaymentDollarAmount){
             downPaymentPercentage = this.roundToNearestDecimal(2, (downPaymentDollarAmount/purchasePrice) *100);
