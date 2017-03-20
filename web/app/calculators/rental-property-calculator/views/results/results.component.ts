@@ -9,4 +9,5 @@ import { FormGroup } from '@angular/forms';
 
 export class ResultsComponent {
      @Input() calcForm: FormGroup;
+     @Input() resultData: any;
 }

@@ -20,9 +20,18 @@ var RentalPropertyCalculatorComponent = (function () {
         this._calculatorFormService = _calculatorFormService;
     }
     RentalPropertyCalculatorComponent.prototype.calculate = function (form) {
+        //setting this to true, highlights missing fields now in form
         this.calcForm.patchValue({ 'userClickedResults': true });
+        //Only run calculation if the required inputs are there and valid
         if (this.calcForm.valid) {
-            this._rentalCalculatorService.calculateResults(this.calcForm);
+            this.resultData = this._rentalCalculatorService.calculateResults(this.calcForm);
+            //Whenever we calculate new tables, I am resetting the tabs to show graph first
+            //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
+            //vm.cashFlowView = 'graph';
+            //vm.cashOnEquityView = 'graph';
+            //vm.totalReturnView = 'graph';
+            //A watch has been added in the mp-charts directive that triggers drawing of the graphs
+            //vm.chartData = results;
         }
     };
     RentalPropertyCalculatorComponent.prototype.ngOnInit = function () {

@@ -1,7 +1,7 @@
 Left at:
-	- how to make start date require only if extra pcincipal required
-	- results page need to show results
+	- google charts with google charts npm library
 Angular 2 TO DOs:
+	- commenting (google captcha import)
 	- calculator:
 		- validation
 		- animation
@@ -66,5 +66,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 353 hrs
+	Coding: 360 hrs
  

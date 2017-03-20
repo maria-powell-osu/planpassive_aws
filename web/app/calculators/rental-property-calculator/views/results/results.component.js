@@ -20,6 +20,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", forms_1.FormGroup)
 ], ResultsComponent.prototype, "calcForm", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], ResultsComponent.prototype, "resultData", void 0);
 ResultsComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/views/results/results.component.html",
