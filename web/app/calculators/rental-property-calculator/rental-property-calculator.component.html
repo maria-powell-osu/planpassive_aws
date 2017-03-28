@@ -21,7 +21,7 @@
                     </label>
 		        	<!-- Result SUMMARY -->
 		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" 
-					(click)="calculate(rentalCalculatorInputForm); $event.preventDefault();"> <!--to prevent button event firing twice-->
+					(click)="calculate(rentalCalculatorInputForm); view = 'result'; $event.preventDefault();"> <!--to prevent button event firing twice-->
                         <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="result" >
                         Result
                     </label>

@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { FormsModule } from '@angular/forms';
+// import { GoogleChart } from 'angular2-google-chart/directives/angular2-google-chart.directive';
 
 //Plan Passive Components
 import { BlogListComponent} from "./blogs/blog-list/blog-list.component";
@@ -23,6 +24,7 @@ import { ResultsComponent } from './calculators/rental-property-calculator/views
 import { mpDatePicker } from './shared/datepicker/mpdatepicker';
 import { mpToolTip } from './shared/tooltip/mptooltip';
 import { FooterComponent } from './shared/footer/footer.component'; 
+import { GoogleChartsComponent } from './calculators/charts/google-charts.component';
 
 @NgModule({
   imports: [ 
@@ -56,6 +58,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     ResultsComponent,
     mpDatePicker,
     mpToolTip,
+    GoogleChartsComponent,
+    //GoogleChart,
     FooterComponent
      ],
   bootstrap: [

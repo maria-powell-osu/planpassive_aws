@@ -13,6 +13,7 @@ var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var forms_2 = require("@angular/forms");
+// import { GoogleChart } from 'angular2-google-chart/directives/angular2-google-chart.directive';
 //Plan Passive Components
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
 var blog_view_component_1 = require("./blogs/blog-view/blog-view.component");
@@ -29,6 +30,7 @@ var results_component_1 = require("./calculators/rental-property-calculator/view
 var mpdatepicker_1 = require("./shared/datepicker/mpdatepicker");
 var mptooltip_1 = require("./shared/tooltip/mptooltip");
 var footer_component_1 = require("./shared/footer/footer.component");
+var google_charts_component_1 = require("./calculators/charts/google-charts.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -67,6 +69,8 @@ AppModule = __decorate([
             results_component_1.ResultsComponent,
             mpdatepicker_1.mpDatePicker,
             mptooltip_1.mpToolTip,
+            google_charts_component_1.GoogleChartsComponent,
+            //GoogleChart,
             footer_component_1.FooterComponent
         ],
         bootstrap: [

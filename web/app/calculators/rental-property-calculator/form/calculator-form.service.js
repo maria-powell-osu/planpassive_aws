@@ -18,8 +18,6 @@ var CalculatorFormService = (function () {
         this._rentalCalculatorService = _rentalCalculatorService;
         this.calcForm = this.fb.group({
             loanInfoView: 'bankLoan',
-            // showIncomeOptions: false,
-            // expenseOptions : false,
             advancedOptions: false,
             li_purchasePrice: ['', [forms_1.Validators.required]],
             li_purchaseDate: [this._rentalCalculatorService.getCurrentDate(), [forms_1.Validators.required]],
@@ -55,7 +53,13 @@ var CalculatorFormService = (function () {
             ri_annualRentIncrease: 3,
             e_annualExpenseIncrease: 3,
             userClickedResults: false,
-            purchasePriceError: false
+            purchasePriceError: false,
+            cashFlowView: 'graph',
+            cashOnEquityView: 'graph',
+            totalReturnView: 'graph',
+            cashFlowProjectionTableData: '',
+            cashFlowProjectionChart: ''
+            // loading : false
         });
     }
     CalculatorFormService.prototype.loanForm = function () {

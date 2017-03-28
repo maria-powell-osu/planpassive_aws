@@ -1,5 +1,6 @@
 Left at:
-	- google charts with google charts npm library
+	- need to create tabs for cashflow table and charts
+	- why when I enter all cash form not valid? (bl fails)
 Angular 2 TO DOs:
 	- commenting (google captcha import)
 	- calculator:

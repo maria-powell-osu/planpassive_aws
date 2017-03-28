@@ -3,3 +3,84 @@
     <h4>Not All Fields Have Been Entered</h4>
     <b>Enter all fields marked in red</b>
 </div>
+
+<!--loader bar that kicks in while calculations are running-->
+<loader [loading]="cashFlowTableLoading && cashFlowChartLoading"></loader>
+
+<!--<div class="row">
+    <div class="col-md-2 mpBoxSpacing" ng-class="{mpGreen: rentalCalculator.chartData.summaryData.cashFlow > 0, mpRed: rentalCalculator.chartData.summaryData.cashFlow < 0}">
+        CASH FLOW
+        <div class="dollarValueLarge">
+            $ {{rentalCalculator.chartData.summaryData.cashFlow}}
+        </div>
+        
+    </div>
+    <div class="col-md-2 mpBoxSpacing mpGreen">
+        INCOME
+        <div class="dollarValueLarge">
+            $ {{rentalCalculator.chartData.summaryData.income}}
+        </div>
+    </div>
+    <div class="col-md-2 mpBoxSpacing mpRed">
+        EXPENSES
+        <div class="dollarValueLarge">
+            $ {{rentalCalculator.chartData.summaryData.expense}}
+        </div>
+    </div>
+    <div class="col-md-2 mpBoxSpacing">
+        CASH ON CASH ROI
+        <div class="dollarValueLarge">
+            {{rentalCalculator.chartData.summaryData.cashOnCash}}%
+        </div>
+    </div>	
+    <div class="col-md-2 mpBoxSpacing">
+        CAP RATE
+        <div class="dollarValueLarge">
+            {{rentalCalculator.chartData.summaryData.capRate}}%
+        </div>
+    </div>
+    <div class="col-md-2" style="line-height=50px;">
+        FIRST MONTH VALUES
+    </div>
+</div>
+<hr/>-->
+
+<!--<div class="row">
+    <div class="col-md-6">
+        <h2>CASH FLOW <span class="glyphicon glyphicon-facetime-video"></span></h2>
+        <p>Am I making more money or loosing money?</p>
+    </div>
+        <div class="col-md-4 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>TOTAL NET INCOME IN:</h4>
+            </div>
+        </div>
+        <div class="row" ng-repeat="cashflowSum in rentalCalculator.chartData.cashFlowSummary">
+            <div class="col-md-12">
+                {{cashflowSum.years}} years: 
+                <span ng-class="{mpGreen: cashflowSum.totalCashflow > 0, mpRed: cashflowSum.totalCashflow < 0}">
+                    ${{cashflowSum.totalCashflow}}
+
+                </span>
+            </div>
+        </div>
+        
+        </div>
+</div>
+<hr>-->
+
+<!--CASHFLOW DATA-->
+
+<!--TABS-->
+
+
+
+
+<!--Cashflow Table-->
+<googlecharts [chartType]="'dataTable'" [(loading)]="cashFlowTableLoading"
+              [control]="calcForm.get('cashFlowProjectionTableData')"></googlecharts>
+
+<!--Cashflow Combo Chart-->
+<googlecharts [chartType]="'comboChart'" [(loading)]="cashFlowChartLoading"
+              [control]="calcForm.get('cashFlowProjectionChart')"></googlecharts>

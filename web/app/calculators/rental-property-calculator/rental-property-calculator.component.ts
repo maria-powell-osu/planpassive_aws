@@ -27,8 +27,13 @@ export class RentalPropertyCalculatorComponent implements OnInit {
 
         //Only run calculation if the required inputs are there and valid
         if(this.calcForm.valid){
+            this.calcForm
             this.resultData = this._rentalCalculatorService.calculateResults(this.calcForm);
 
+            if (this.resultData){
+                this.calcForm.patchValue({'cashFlowProjectionTableData': this.resultData.cashFlowProjectionTable});
+                this.calcForm.patchValue({'cashFlowProjectionChart': this.resultData.cashFlowProjectionChart});
+            }
 
             //Whenever we calculate new tables, I am resetting the tabs to show graph first
             //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn

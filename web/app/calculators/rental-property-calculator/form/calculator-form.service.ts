@@ -10,8 +10,6 @@ export class CalculatorFormService {
         
          this.calcForm = this.fb.group({     
             loanInfoView :  'bankLoan',
-            // showIncomeOptions: false,
-            // expenseOptions : false,
             advancedOptions: false,
             li_purchasePrice : ['', [Validators.required]],
             li_purchaseDate : [this._rentalCalculatorService.getCurrentDate(), [Validators.required]],  //date needs to get validated for format
@@ -47,7 +45,14 @@ export class CalculatorFormService {
             ri_annualRentIncrease: 3,
             e_annualExpenseIncrease:3,
             userClickedResults : false,  
-            purchasePriceError: false
+            purchasePriceError: false,
+
+            cashFlowView :'graph',
+            cashOnEquityView : 'graph',
+            totalReturnView : 'graph',
+            cashFlowProjectionTableData : '',
+            cashFlowProjectionChart : ''
+            // loading : false
          });
 
     }

@@ -13,6 +13,8 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var ResultsComponent = (function () {
     function ResultsComponent() {
+        this.cashFlowTableLoading = false;
+        this.cashFlowChartLoading = false;
     }
     return ResultsComponent;
 }());
@@ -28,7 +30,8 @@ ResultsComponent = __decorate([
     core_1.Component({
         templateUrl: "app/calculators/rental-property-calculator/views/results/results.component.html",
         selector: 'result'
-    })
+    }),
+    __metadata("design:paramtypes", [])
 ], ResultsComponent);
 exports.ResultsComponent = ResultsComponent;
 //# sourceMappingURL=results.component.js.map
