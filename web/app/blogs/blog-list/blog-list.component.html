@@ -1,35 +1,32 @@
-<br/>
-<!-- BLOGLIST -->
-
-<!-- MOST RECENT BLOGS -->
-<div class="col-md-12">
-    <!-- BLOG CATEGORY TITLE BAR -->
-    <div class="text-center  mpDesignBackground27314F topPadding1 bottomPadding1">
-        <h4><b class="whiteText">MOST RECENT BLOGS</b></h4>
-    </div>
-    <!-- BLOGS: Most recent -->
-    <div class="row blogListPadding">
-        <!--TODO: Need to make this clickable-->
-
-        <div class="row mpClickable blogHover" *ngFor="let blog of blogs">
-            <a [routerLink]="['/blog', blog.url]">
-                <div class="col-md-6 col-md-push-4 blogListPadding">
-                    <div class="row mpDesign27314F ">
-                        <h2><b>{{blog.title}}</b></h2>
+<div class="row">
+    <!-- MOST RECENT BLOGS -->
+    <div class="col-md-12">
+        <!-- BLOG CATEGORY TITLE BAR -->
+        <div class="text-center  mpDesignBackground27314F topPadding1 bottomPadding1">
+            <h4><b class="whiteText">MOST RECENT BLOGS</b></h4>
+        </div>
+        <!-- BLOGS: Most recent -->
+        <div class="row blogListPadding">
+            <div class="row mpClickable blogHover" *ngFor="let blog of blogs">
+                <a [routerLink]="['/blog', blog.url]">
+                    <div class="col-md-6 col-md-push-4 blogListPadding">
+                        <div class="row mpDesign27314F ">
+                            <h2><b>{{blog.title}}</b></h2>
+                        </div>
+                        <div class="row mpDesign39AEA9  ">
+                            <p><b>-- {{blog.comments.length}} Comments</b></p>
+                        </div>
                     </div>
-                    <div class="row mpDesign39AEA9  ">
-                        <p><b>-- {{blog.comments.length}} Comments</b></p>
+                    <div class="col-md-4 col-md-pull-6 blogListPadding">
+                        <img [src]="blog.image" class="img-responsive">
                     </div>
-                </div>
-                <div class="col-md-4 col-md-pull-6 blogListPadding">
-                    <img [src]="blog.image" class="img-responsive">
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <hr class="thickHRBlack" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr class="thickHRBlack" />
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </div>
