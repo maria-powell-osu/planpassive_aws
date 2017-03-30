@@ -737,8 +737,6 @@ var RentalCalculatorService = (function () {
             },
             hAxis: { title: 'Years' },
             vAxes: [{ title: 'Cash Flow ($)' }, { title: 'Cash on Cash (%)' }],
-            width: '100%',
-            height: '100%'
         };
         //Add columns to the data 
         chartData.push(["Year", "Cash Flow ($)", "Cash on Cash (%)"]);

@@ -46,13 +46,17 @@ export class CalculatorFormService {
             e_annualExpenseIncrease:3,
             userClickedResults : false,  
             purchasePriceError: false,
-
-            cashFlowView :'graph',
-            cashOnEquityView : 'graph',
-            totalReturnView : 'graph',
             cashFlowProjectionTableData : '',
-            cashFlowProjectionChart : ''
-            // loading : false
+            cashFlowProjectionChart : '',
+            cashFlowSummary : '',
+            incomePieChart : '',
+            expensePieChart : '',
+            cashOnEquityTable : '',
+            cashOnEquityChart : '',
+            totalReturnTable : '',
+            totalReturnStackedBarChart : '',
+            totalReturnSummary : '',
+            summaryData : 'yy'
          });
 
     }
@@ -287,7 +291,33 @@ export class CalculatorFormService {
                     calcForm.get('bl_startDate').updateValueAndValidity();
                     calcForm.get('bl_endDate').setValidators();
                     calcForm.get('bl_endDate').updateValueAndValidity();
+                }else if(value == 'cash'){
+                    //reset the form
+                    calcForm.controls['specialTermsLoans'] = this.fb.array([]);
+
+                      //reset the loan aray
+                    calcForm.controls['loans'] = this.fb.array([]);
+
+                     //make sure all bank loan validators are removed
+                    calcForm.get('bl_interest').setValidators();
+                    calcForm.get('bl_interest').updateValueAndValidity();
+
+                    calcForm.get('bl_amortization').setValidators();
+                    calcForm.get('bl_amortization').updateValueAndValidity();
+
+                    calcForm.get('bl_downPaymentDollar').setValidators();
+                    calcForm.get('bl_downPaymentDollar').updateValueAndValidity();
+
+                    calcForm.get('bl_downPaymentPercent').setValidators();
+                    calcForm.get('bl_downPaymentPercent').updateValueAndValidity();
+
+                    calcForm.get('bl_startDate').setValidators();
+                    calcForm.get('bl_startDate').updateValueAndValidity();
+                    calcForm.get('bl_endDate').setValidators();
+                    calcForm.get('bl_endDate').updateValueAndValidity()
+
                 }
+
             });
     }
 

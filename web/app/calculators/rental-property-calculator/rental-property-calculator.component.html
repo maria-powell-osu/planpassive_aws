@@ -1,5 +1,4 @@
-<!-- Loader showing when calculations are running -->
-<loader [hidden]="!loading"></loader>
+
 
 <div class="container page-content">
 	<div class="row">
@@ -20,8 +19,7 @@
                         Cash Flow
                     </label>
 		        	<!-- Result SUMMARY -->
-		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" 
-					(click)="calculate(rentalCalculatorInputForm); view = 'result'; $event.preventDefault();"> <!--to prevent button event firing twice-->
+		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" > 
                         <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="result" >
                         Result
                     </label>
@@ -34,7 +32,7 @@
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm" [formGroup]="calcForm">
 		<loaninformation [hidden]="view != 'loan'" [calcForm]="calcForm"></loaninformation>
 		<cashflow [hidden]="view != 'cashflow'" [calcForm]="calcForm"></cashflow>
-		<result [hidden]="view != 'result'" [calcForm]="calcForm" [resultData]="resultData"></result>
+		<result *ngIf="view == 'result'" [calcForm]="calcForm" [resultData]="resultData"></result>
 	</form>
 	<br/>
 	<br/>
@@ -56,8 +54,7 @@
                         Cash Flow
                     </label>
 		        	<!-- Result SUMMARY -->
-		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" 
-					(click)="calculate(rentalCalculatorInputForm);$event.preventDefault();"> <!--to prevent button event firing twice-->
+		        	<label class="btn btn-default" style="width:33%;" [ngClass]="{active: view === 'result'}" > 
                         <input type="radio" class="mpButtonGroupRadio" [(ngModel)]="view" value="result" >
                         Result
                     </label>

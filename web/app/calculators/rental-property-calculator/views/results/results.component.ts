@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit, ChangeDetectorRef  } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { RentalCalculatorService } from '../../rental-property-calculator.service';
 
 
 
@@ -8,14 +9,52 @@ import { FormGroup } from '@angular/forms';
     selector: 'result'
 })
 
-export class ResultsComponent {
+export class ResultsComponent implements AfterViewInit{
      @Input() calcForm: FormGroup;
      @Input() resultData: any;
      cashFlowTableLoading: boolean;
      cashFlowChartLoading: boolean;
+     cashFlowView : string;
 
-     constructor(){
+
+     constructor(private _rentalCalculatorService: RentalCalculatorService,
+                private _crd: ChangeDetectorRef ){
          this.cashFlowTableLoading = false;
          this.cashFlowChartLoading = false;
+         this.cashFlowView ='graph';
+     }
+
+     ngAfterViewInit() {
+     
+        //setting this to true, highlights missing fields now in form
+        this.calcForm.patchValue({'userClickedResults': true});
+
+        //Only run calculation if the required inputs are there and valid
+        if(this.calcForm.valid){
+            this.calcForm
+            this.resultData = this._rentalCalculatorService.calculateResults(this.calcForm);
+
+            if (this.resultData){
+
+                //watchers have been added for those used in charts to draw up the graphs
+                this.calcForm.patchValue({'summaryData': this.resultData.summaryData});
+                this.calcForm.patchValue({'cashFlowProjectionTableData': this.resultData.cashFlowProjectionTable});
+                this.calcForm.patchValue({'cashFlowProjectionChart': this.resultData.cashFlowProjectionChart});
+                this.calcForm.patchValue({'cashFlowSummary': this.resultData.cashFlowSummary});
+                this.calcForm.patchValue({'incomePieChart': this.resultData.incomePieChart});
+                this.calcForm.patchValue({'expensePieChart': this.resultData.expensePieChart});
+                this.calcForm.patchValue({'cashOnEquityTable': this.resultData.cashOnEquityTable});
+                this.calcForm.patchValue({'cashOnEquityChart': this.resultData.cashOnEquityChart});
+                this.calcForm.patchValue({'totalReturnTable': this.resultData.totalReturnTable});
+                this.calcForm.patchValue({'totalReturnStackedBarChart': this.resultData.totalReturnStackedBarChart});
+                this.calcForm.patchValue({'totalReturnSummary': this.resultData.totalReturnSummary});
+
+                //since we are in ngAfterViewInit which loads after view is loaded, we tell Angular to check the values again
+                //without this view will not load
+                this._crd.detectChanges();
+               
+            }
+        }
+     
      }
 }

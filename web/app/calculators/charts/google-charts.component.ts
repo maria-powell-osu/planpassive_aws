@@ -1,21 +1,22 @@
-import { Directive, Input,Output, ElementRef ,OnInit, EventEmitter} from '@angular/core';
+import { Component, Input,Output ,OnInit, EventEmitter} from '@angular/core';
 import { FormGroup , FormBuilder, FormControl } from '@angular/forms';
 declare var google: any;
-//declare var jQuery: any;
+declare var jQuery: any;
 
 // @Component({
 //     selector: 'googlecharts',
 // })
-@Directive({
-  selector: 'googlecharts'
+@Component({
+  selector: 'googlecharts',
+  template: '<div [attr.id]="chartId"></div>'
 })
 export class GoogleChartsComponent implements OnInit{
-    private element: ElementRef;
     @Input() chartType: string; 
     @Input() loading: boolean;
     @Input() control: FormControl;
+    @Input() chartId: string;
     @Output() loadingChange = new EventEmitter<boolean>();
-    
+
     ngOnInit() {
         var self = this;
          //Added to ensure that google loads library fully before drawing charts
@@ -46,21 +47,26 @@ export class GoogleChartsComponent implements OnInit{
                         case 'gauge':
                             break;
                     }
-
                     //Hide loader
                     self.loadingChange.emit(false);
                     
+                    // setTimeout(function(){ 
+                    //     self.loadingChange.emit(false);
+
+                    // }, 2000);
             });
         }
     }
-    constructor(element: ElementRef){
-        this.element = element;       
+    constructor(){
+        //this.element = element;      
+        //this.renderer = renderer; 
     }
 
     private drawDataTable(rawData:any){
         var table;
         var data = new google.visualization.DataTable();
-        var tableElement = this.element.nativeElement;
+        var tableElement = $("#" + this.chartId)[0];
+        
 
         //Add Table Columns
         (rawData.columns).forEach(function(column:any) {
@@ -77,8 +83,9 @@ export class GoogleChartsComponent implements OnInit{
     }
 
     private drawComboChart(rawData:any){
-        var chartElement = this.element.nativeElement;
-        
+        //var chartElement = this.element.nativeElement;
+        var chartElement = $("#" + this.chartId)[0];
+
         //Initialize chart
         var chart = new google.visualization.ComboChart(chartElement);
 

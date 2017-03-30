@@ -858,6 +858,7 @@ export class RentalCalculatorService {
 
         //Specify axis informInputation
         result.options = {
+           
             series: {
                 0: {axis: 'CashFlow', type: 'bars'}, 
                 1: {axis: 'CashOnCash', type: 'line', targetAxisIndex:1}
@@ -870,8 +871,7 @@ export class RentalCalculatorService {
             },
             hAxis: {title: 'Years'},
             vAxes: [{title:'Cash Flow ($)'}, {title:'Cash on Cash (%)'}],
-            width: '100%', 
-            height: '100%'
+           
         };
 
         //Add columns to the data 

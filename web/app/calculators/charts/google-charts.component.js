@@ -11,14 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
-//declare var jQuery: any;
 // @Component({
 //     selector: 'googlecharts',
 // })
 var GoogleChartsComponent = (function () {
-    function GoogleChartsComponent(element) {
+    function GoogleChartsComponent() {
         this.loadingChange = new core_1.EventEmitter();
-        this.element = element;
+        //this.element = element;      
+        //this.renderer = renderer; 
     }
     GoogleChartsComponent.prototype.ngOnInit = function () {
         var self = this;
@@ -48,13 +48,16 @@ var GoogleChartsComponent = (function () {
                 }
                 //Hide loader
                 self.loadingChange.emit(false);
+                // setTimeout(function(){ 
+                //     self.loadingChange.emit(false);
+                // }, 2000);
             });
         }
     };
     GoogleChartsComponent.prototype.drawDataTable = function (rawData) {
         var table;
         var data = new google.visualization.DataTable();
-        var tableElement = this.element.nativeElement;
+        var tableElement = $("#" + this.chartId)[0];
         //Add Table Columns
         (rawData.columns).forEach(function (column) {
             data.addColumn('number', column);
@@ -66,7 +69,8 @@ var GoogleChartsComponent = (function () {
         table.draw(data, rawData.options);
     };
     GoogleChartsComponent.prototype.drawComboChart = function (rawData) {
-        var chartElement = this.element.nativeElement;
+        //var chartElement = this.element.nativeElement;
+        var chartElement = $("#" + this.chartId)[0];
         //Initialize chart
         var chart = new google.visualization.ComboChart(chartElement);
         //Create data table for chart   
@@ -89,14 +93,19 @@ __decorate([
     __metadata("design:type", forms_1.FormControl)
 ], GoogleChartsComponent.prototype, "control", void 0);
 __decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], GoogleChartsComponent.prototype, "chartId", void 0);
+__decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], GoogleChartsComponent.prototype, "loadingChange", void 0);
 GoogleChartsComponent = __decorate([
-    core_1.Directive({
-        selector: 'googlecharts'
+    core_1.Component({
+        selector: 'googlecharts',
+        template: '<div [attr.id]="chartId"></div>'
     }),
-    __metadata("design:paramtypes", [core_1.ElementRef])
+    __metadata("design:paramtypes", [])
 ], GoogleChartsComponent);
 exports.GoogleChartsComponent = GoogleChartsComponent;
 //# sourceMappingURL=google-charts.component.js.map

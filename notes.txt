@@ -1,6 +1,7 @@
 Left at:
-	- need to create tabs for cashflow table and charts
-	- why when I enter all cash form not valid? (bl fails)
+	- combo chart fails because of the result view being in a hidden element
+	- <result [hidden]="view != 'result'"
+	- need to figure out how to draw after element is not hidden anymore or do something differen
 Angular 2 TO DOs:
 	- commenting (google captcha import)
 	- calculator:

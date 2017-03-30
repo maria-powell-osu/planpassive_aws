@@ -13,7 +13,7 @@ import { CalculatorFormService } from './form/calculator-form.service';
 export class RentalPropertyCalculatorComponent implements OnInit {
      loading : Boolean;
      calcForm : FormGroup;
-     view : String;
+     view : string;
      resultData : any;
 
 
@@ -21,35 +21,10 @@ export class RentalPropertyCalculatorComponent implements OnInit {
                   private fb: FormBuilder,
                   private _calculatorFormService : CalculatorFormService){}
 
-     calculate (form :any): void {
-        //setting this to true, highlights missing fields now in form
-        this.calcForm.patchValue({'userClickedResults': true});
-
-        //Only run calculation if the required inputs are there and valid
-        if(this.calcForm.valid){
-            this.calcForm
-            this.resultData = this._rentalCalculatorService.calculateResults(this.calcForm);
-
-            if (this.resultData){
-                this.calcForm.patchValue({'cashFlowProjectionTableData': this.resultData.cashFlowProjectionTable});
-                this.calcForm.patchValue({'cashFlowProjectionChart': this.resultData.cashFlowProjectionChart});
-            }
-
-            //Whenever we calculate new tables, I am resetting the tabs to show graph first
-            //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
-            //vm.cashFlowView = 'graph';
-            //vm.cashOnEquityView = 'graph';
-            //vm.totalReturnView = 'graph';
-
-            //A watch has been added in the mp-charts directive that triggers drawing of the graphs
-            //vm.chartData = results;
-        }
-     }
-
      ngOnInit(): void {
          this.view = 'loan';
-         this.loading = false;
          this.calcForm = this._calculatorFormService.calcForm;
          this._calculatorFormService.addEventListeners(this.calcForm);
      } 
+
 }
