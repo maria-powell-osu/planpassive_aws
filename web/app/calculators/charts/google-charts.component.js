@@ -17,8 +17,6 @@ var forms_1 = require("@angular/forms");
 var GoogleChartsComponent = (function () {
     function GoogleChartsComponent() {
         this.loadingChange = new core_1.EventEmitter();
-        //this.element = element;      
-        //this.renderer = renderer; 
     }
     GoogleChartsComponent.prototype.ngOnInit = function () {
         var self = this;
@@ -39,7 +37,8 @@ var GoogleChartsComponent = (function () {
                     case 'comboChart':
                         self.drawComboChart(data);
                         break;
-                    case 'piechart':
+                    case 'pieChart':
+                        self.drawPieChart(data);
                         break;
                     case 'table':
                         break;
@@ -53,6 +52,15 @@ var GoogleChartsComponent = (function () {
                 // }, 2000);
             });
         }
+    };
+    GoogleChartsComponent.prototype.drawPieChart = function (rawData) {
+        var chartElement = $("#" + this.chartId)[0];
+        //Intialize chart
+        var pieChart = new google.visualization.PieChart(chartElement);
+        //Create data table for chart
+        var data = google.visualization.arrayToDataTable(rawData.data);
+        /*To ensure that the table data gets updated*/
+        pieChart.draw(data, rawData.options);
     };
     GoogleChartsComponent.prototype.drawDataTable = function (rawData) {
         var table;

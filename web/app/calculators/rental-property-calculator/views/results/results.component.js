@@ -18,7 +18,14 @@ var ResultsComponent = (function () {
         this._crd = _crd;
         this.cashFlowTableLoading = false;
         this.cashFlowChartLoading = false;
+        this.totalReturnChartLoading = false;
+        this.totalReturnTableLoading = false;
+        this.cashOnEquityChartLoading = false;
+        this.cashOnEquityTableLoading = false;
+        this.pieChartLoading = false;
         this.cashFlowView = 'graph';
+        this.totalReturnView = 'graph';
+        this.cashOnEquityView = 'graph';
     }
     ResultsComponent.prototype.ngAfterViewInit = function () {
         //setting this to true, highlights missing fields now in form
@@ -61,8 +68,7 @@ ResultsComponent = __decorate([
         templateUrl: "app/calculators/rental-property-calculator/views/results/results.component.html",
         selector: 'result'
     }),
-    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService,
-        core_1.ChangeDetectorRef])
+    __metadata("design:paramtypes", [rental_property_calculator_service_1.RentalCalculatorService, core_1.ChangeDetectorRef])
 ], ResultsComponent);
 exports.ResultsComponent = ResultsComponent;
 //# sourceMappingURL=results.component.js.map

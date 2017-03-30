@@ -40,7 +40,8 @@ export class GoogleChartsComponent implements OnInit{
                         case 'comboChart':
                             self.drawComboChart(data);
                             break;
-                        case 'piechart':
+                        case 'pieChart':
+                            self.drawPieChart(data);
                             break;
                         case 'table':
                             break;
@@ -57,9 +58,19 @@ export class GoogleChartsComponent implements OnInit{
             });
         }
     }
-    constructor(){
-        //this.element = element;      
-        //this.renderer = renderer; 
+    constructor(){}
+
+    private drawPieChart(rawData:any){
+         var chartElement = $("#" + this.chartId)[0];
+
+        //Intialize chart
+        var pieChart = new google.visualization.PieChart(chartElement);
+
+        //Create data table for chart
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        /*To ensure that the table data gets updated*/
+        pieChart.draw(data, rawData.options);
     }
 
     private drawDataTable(rawData:any){
