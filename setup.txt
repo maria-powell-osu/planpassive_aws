@@ -1,1 +1,33 @@
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_express.html
+
+
+- if you updated the package.json then do the following for deployment:
+    1) remove nodemodie/ from gitignore and ebignore
+    2) make you have run npm install with the right packages
+    3) eb deploy
+    4) add them back in 
+
+    this way the node_modules only deploy when we have made changes to them
+
+something to look into how to add command to run npm install for the web
+- e.g. 
+    .ebextension/node_dependencies.config
+    Project/
+
+Library1/
+
+package.json
+Dependency2/
+
+package.json
+package.json 
+
+        commands:
+    01_lib1_npm_install:
+        command: npm install
+        cwd: Library1/
+    02_dep2_npm_install:
+        command: npm install
+        cwd: Dependency2/
+
+Current Issue: cannot find the cwd directory that I provide

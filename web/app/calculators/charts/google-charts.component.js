@@ -54,7 +54,7 @@ var GoogleChartsComponent = (function () {
         }
     };
     GoogleChartsComponent.prototype.drawPieChart = function (rawData) {
-        var chartElement = $("#" + this.chartId)[0];
+        var chartElement = jQuery("#" + this.chartId)[0];
         //Intialize chart
         var pieChart = new google.visualization.PieChart(chartElement);
         //Create data table for chart
@@ -65,7 +65,7 @@ var GoogleChartsComponent = (function () {
     GoogleChartsComponent.prototype.drawDataTable = function (rawData) {
         var table;
         var data = new google.visualization.DataTable();
-        var tableElement = $("#" + this.chartId)[0];
+        var tableElement = jQuery("#" + this.chartId)[0];
         //Add Table Columns
         (rawData.columns).forEach(function (column) {
             data.addColumn('number', column);
@@ -78,7 +78,7 @@ var GoogleChartsComponent = (function () {
     };
     GoogleChartsComponent.prototype.drawComboChart = function (rawData) {
         //var chartElement = this.element.nativeElement;
-        var chartElement = $("#" + this.chartId)[0];
+        var chartElement = jQuery("#" + this.chartId)[0];
         //Initialize chart
         var chart = new google.visualization.ComboChart(chartElement);
         //Create data table for chart   

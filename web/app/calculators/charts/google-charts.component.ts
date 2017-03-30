@@ -61,7 +61,7 @@ export class GoogleChartsComponent implements OnInit{
     constructor(){}
 
     private drawPieChart(rawData:any){
-         var chartElement = $("#" + this.chartId)[0];
+         var chartElement = jQuery("#" + this.chartId)[0];
 
         //Intialize chart
         var pieChart = new google.visualization.PieChart(chartElement);
@@ -76,7 +76,7 @@ export class GoogleChartsComponent implements OnInit{
     private drawDataTable(rawData:any){
         var table;
         var data = new google.visualization.DataTable();
-        var tableElement = $("#" + this.chartId)[0];
+        var tableElement = jQuery("#" + this.chartId)[0];
         
 
         //Add Table Columns
@@ -95,7 +95,7 @@ export class GoogleChartsComponent implements OnInit{
 
     private drawComboChart(rawData:any){
         //var chartElement = this.element.nativeElement;
-        var chartElement = $("#" + this.chartId)[0];
+        var chartElement = jQuery("#" + this.chartId)[0];
 
         //Initialize chart
         var chart = new google.visualization.ComboChart(chartElement);
