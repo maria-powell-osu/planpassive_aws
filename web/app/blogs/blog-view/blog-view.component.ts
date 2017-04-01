@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { IBlog } from "../blog";
 import { Router, ActivatedRoute } from "@angular/router";
 import { BlogService } from "../blog-service/blog.service";
+import { CommentViewComponent } from "../../comments/comment-view/comment-view.component"; 
 import { Subscription }from 'rxjs/Subscription';
 
 @Component({
@@ -13,6 +14,7 @@ export class BlogViewComponent implements OnInit, OnDestroy  {
     blog : IBlog;
     errorMessage : string;
     private sub: Subscription;
+    test : string;
 
     constructor(private _route : ActivatedRoute,
                 private _blogService: BlogService,
@@ -20,6 +22,7 @@ export class BlogViewComponent implements OnInit, OnDestroy  {
     }
 
     ngOnInit(): void {
+        this.test = "test";
         this.sub = this._route.params.subscribe(
             params => {
                 let name = this._route.snapshot.params['name'];

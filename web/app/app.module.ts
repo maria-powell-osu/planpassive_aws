@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { FormsModule } from '@angular/forms';
-// import { GoogleChart } from 'angular2-google-chart/directives/angular2-google-chart.directive';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 //Plan Passive Components
 import { BlogListComponent} from "./blogs/blog-list/blog-list.component";
@@ -25,6 +25,8 @@ import { mpDatePicker } from './shared/datepicker/mpdatepicker';
 import { mpToolTip } from './shared/tooltip/mptooltip';
 import { FooterComponent } from './shared/footer/footer.component'; 
 import { GoogleChartsComponent } from './calculators/charts/google-charts.component';
+import { CommentViewComponent } from './comments/comment-view/comment-view.component';
+import { CommentReplyComponent } from './comments/comment-reply/comment-reply.component';
 
 @NgModule({
   imports: [ 
@@ -32,6 +34,7 @@ import { GoogleChartsComponent } from './calculators/charts/google-charts.compon
     ReactiveFormsModule,
     HttpModule,
     FormsModule,
+    ReCaptchaModule,
     RouterModule.forRoot([
       //Gets matched on first-match basis
       {path: 'home', component: HomeComponent},
@@ -59,7 +62,8 @@ import { GoogleChartsComponent } from './calculators/charts/google-charts.compon
     mpDatePicker,
     mpToolTip,
     GoogleChartsComponent,
-    //GoogleChart,
+    CommentViewComponent,
+    CommentReplyComponent,
     FooterComponent
      ],
   bootstrap: [

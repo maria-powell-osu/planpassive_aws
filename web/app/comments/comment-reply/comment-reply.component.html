@@ -1,0 +1,77 @@
+<form [attr.id]="formid" name="blogCommentForm" [formGroup]="commentReplyForm">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-12">
+				<label>
+                    <span *ngIf="commentReplyForm.get('content').errors" class="text-danger">* </span> 
+                    Comment
+                </label>
+				<textarea rows="4" class="form-control" placeholder="Type your comment here:" 
+                        formControlName="content" name="comment">
+               </textarea>
+                <!-- Field Error Message-->
+                <div *ngIf="commentReplyForm.get('content').errors && userHitReply">
+                  <span *ngIf="commentReplyForm.get('content').errors.required" class="text-danger">
+                  Enter Comment Content
+                  </span>
+               </div>  
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-5">
+				<label>
+                    <span *ngIf="commentReplyForm.get('name').errors" class="text-danger">* </span> 
+                    Name
+                </label>
+				<input type="text" class="form-control inpt" formControlName="name" name="name">
+                <!-- Field Error Message-->
+                <div *ngIf="commentReplyForm.get('name').errors && userHitReply">
+                  <span *ngIf="commentReplyForm.get('name').errors.required" class="text-danger">
+                  Enter Your Name
+                  </span>
+               </div>  
+
+				<label>
+                    <span *ngIf="commentReplyForm.get('email').errors" class="text-danger">* </span>
+                    Email
+                </label>
+				<input type="email"  class="form-control inpt" formControlName="email" name="email">
+
+                 <!-- Field Error Message-->
+                <div *ngIf="commentReplyForm.get('email').errors && userHitReply">
+                  <span *ngIf="commentReplyForm.get('email').errors.required" class="text-danger">
+                  Enter a Valid Email
+                  </span>
+               </div>  
+
+				<!--Recaptcha Widget-->
+                <br/>
+                <re-captcha (captchaResponse)="captchaResponse($event)" class="mobileCaptchaResize"
+                    site_key="<6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH>"></re-captcha>
+
+                 <!-- Field Error Message-->
+                <div *ngIf="commentReplyForm.get('captchaResponse').errors && userHitReply">
+                  <span *ngIf="commentReplyForm.get('captchaResponse').errors.required" class="text-danger">
+                  Please confirm you are not a robot taking over the world
+                  </span>
+               </div>  
+
+				<br/>
+
+		  		<!-- data-toggle only collapses if there are no erorrs in the request -->
+				<button type="button" class="btn btn-info" 
+                    (click)="submitNewComment()">
+                    Post Comment
+                </button>
+				<!-- Data Toggle added so that when user hits cancel, the section get -->
+				<button type="button" class="btn btn-info" 
+                    (click)="cancelComment()">Cancel</button>
+			</div>
+			<div class="col-md-5">
+				<label>Website</label>
+				<input type="text" class="form-control inpt" ng-model="blog.newComment.website">
+			</div>
+		</div>
+	</fieldset>
+</form>

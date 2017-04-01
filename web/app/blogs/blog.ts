@@ -7,4 +7,5 @@ export interface IBlog {
     titleTag: string;
     content: string;
     id: number;
+    comments: any;
 }

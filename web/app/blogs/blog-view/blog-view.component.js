@@ -20,6 +20,7 @@ var BlogViewComponent = (function () {
     }
     BlogViewComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.test = "test";
         this.sub = this._route.params.subscribe(function (params) {
             var name = _this._route.snapshot.params['name'];
             _this.getBlog(name);

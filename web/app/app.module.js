@@ -13,7 +13,7 @@ var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var forms_2 = require("@angular/forms");
-// import { GoogleChart } from 'angular2-google-chart/directives/angular2-google-chart.directive';
+var angular2_recaptcha_1 = require("angular2-recaptcha");
 //Plan Passive Components
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
 var blog_view_component_1 = require("./blogs/blog-view/blog-view.component");
@@ -31,6 +31,8 @@ var mpdatepicker_1 = require("./shared/datepicker/mpdatepicker");
 var mptooltip_1 = require("./shared/tooltip/mptooltip");
 var footer_component_1 = require("./shared/footer/footer.component");
 var google_charts_component_1 = require("./calculators/charts/google-charts.component");
+var comment_view_component_1 = require("./comments/comment-view/comment-view.component");
+var comment_reply_component_1 = require("./comments/comment-reply/comment-reply.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -43,6 +45,7 @@ AppModule = __decorate([
             forms_1.ReactiveFormsModule,
             http_1.HttpModule,
             forms_2.FormsModule,
+            angular2_recaptcha_1.ReCaptchaModule,
             router_1.RouterModule.forRoot([
                 //Gets matched on first-match basis
                 { path: 'home', component: home_component_1.HomeComponent },
@@ -70,7 +73,8 @@ AppModule = __decorate([
             mpdatepicker_1.mpDatePicker,
             mptooltip_1.mpToolTip,
             google_charts_component_1.GoogleChartsComponent,
-            //GoogleChart,
+            comment_view_component_1.CommentViewComponent,
+            comment_reply_component_1.CommentReplyComponent,
             footer_component_1.FooterComponent
         ],
         bootstrap: [
