@@ -1,4 +1,4 @@
-<!--to make sure this only loads when the blog has been gotten-->
+<!--to make sure this only loads when the blog has been gotten from service-->
 <div *ngIf="blog">
     <!--BLOG DISPLAY-->
     <div class="row blogListPadding">
@@ -14,22 +14,22 @@
         </div>
     </div>
     
-    <!-- COMMENTING -->
-    <div class="row blogListPadding">
+    <!-- COMMENT REPLY VIEW-->
+    <div class="row blogListPadding" (collapsed)="collapsed($event)"
+        (expanded)="expanded($event)" [collapse]="isCollapsed">
         <div class="col-md-12">
-            <commentreply [blog]="blog" [formid]="'blogReply'" [respondsTo]="" [originalComment]=""></commentreply>
+            <commentreply [(blog)]="blog" [formid]="'blogReply'" [respondsTo]="" [(originalComment)]="originalComment" [(isCollapsed)]="isCollapsed"></commentreply>
         </div>
     </div>
+
     <div class="row blogListPadding">
         <div class="col-md-8">
             <br/><br/>
-            <!--<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#blogReply">Comment</button>-->
+            <!--COMMENT REPLY BUTTON-->
+            <button type="button" class="btn btn-info" (click)="isCollapsed = !isCollapsed">Comment</button>
             <br/>
-            <!-- COMMENT VIEW -->
-        
+            <!-- SHOW ALL COMMENTS -->
             <h2 *ngIf="blog.comments && blog.comments.length != 0"><b style="color: #696969;">Comments</b></h2>
-            <!-- Iterates through Comments -->
-            <!--TODO: commenting needs to order and sort here-->
             <div *ngFor="let comment of blog.comments">
                 <commentview [comment]="comment" [level]="1" [blog]="blog"></commentview>
             </div>

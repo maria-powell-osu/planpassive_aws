@@ -14,6 +14,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var forms_2 = require("@angular/forms");
 var angular2_recaptcha_1 = require("angular2-recaptcha");
+var ng2_bootstrap_1 = require("ng2-bootstrap");
 //Plan Passive Components
 var blog_list_component_1 = require("./blogs/blog-list/blog-list.component");
 var blog_view_component_1 = require("./blogs/blog-view/blog-view.component");
@@ -46,6 +47,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             forms_2.FormsModule,
             angular2_recaptcha_1.ReCaptchaModule,
+            ng2_bootstrap_1.CollapseModule.forRoot(),
             router_1.RouterModule.forRoot([
                 //Gets matched on first-match basis
                 { path: 'home', component: home_component_1.HomeComponent },

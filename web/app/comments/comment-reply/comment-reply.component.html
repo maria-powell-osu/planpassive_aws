@@ -41,6 +41,9 @@
                  <!-- Field Error Message-->
                 <div *ngIf="commentReplyForm.get('email').errors && userHitReply">
                   <span *ngIf="commentReplyForm.get('email').errors.required" class="text-danger">
+                  Enter a Email
+                  </span>
+                  <span *ngIf="commentReplyForm.get('email').errors.pattern" class="text-danger">
                   Enter a Valid Email
                   </span>
                </div>  
@@ -51,8 +54,8 @@
                     site_key="<6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH>"></re-captcha>
 
                  <!-- Field Error Message-->
-                <div *ngIf="commentReplyForm.get('captchaResponse').errors && userHitReply">
-                  <span *ngIf="commentReplyForm.get('captchaResponse').errors.required" class="text-danger">
+                <div *ngIf="commentReplyForm.get('captcha').errors && userHitReply">
+                  <span *ngIf="commentReplyForm.get('captcha').errors.required" class="text-danger">
                   Please confirm you are not a robot taking over the world
                   </span>
                </div>  

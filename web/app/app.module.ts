@@ -6,6 +6,7 @@ import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { FormsModule } from '@angular/forms';
 import { ReCaptchaModule } from 'angular2-recaptcha';
+import { CollapseModule } from 'ng2-bootstrap';
 
 //Plan Passive Components
 import { BlogListComponent} from "./blogs/blog-list/blog-list.component";
@@ -35,6 +36,7 @@ import { CommentReplyComponent } from './comments/comment-reply/comment-reply.co
     HttpModule,
     FormsModule,
     ReCaptchaModule,
+    CollapseModule.forRoot(),
     RouterModule.forRoot([
       //Gets matched on first-match basis
       {path: 'home', component: HomeComponent},

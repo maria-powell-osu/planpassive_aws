@@ -8,4 +8,5 @@ export interface IBlog {
     content: string;
     id: number;
     comments: any;
+    key: number;
 }

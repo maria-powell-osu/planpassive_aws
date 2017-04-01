@@ -24,7 +24,8 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'angular2-recaptcha': 'node_modules/angular2-recaptcha',
+      'angular2-recaptcha': 'npm:angular2-recaptcha',
+      'ng2-bootstrap': 'npm:ng2-bootstrap/bundles',
       'rxjs': 'npm:rxjs'    
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -39,7 +40,11 @@
        'angular2-recaptcha': {
          defaultExtension: 'js', 
          main:'index'
-      }
+      },
+       'ng2-bootstrap': {
+        main: './ng2-bootstrap.umd.min.js',
+        defaultExtension: 'js'
+       }
     }
   });
 })(this);

@@ -20,11 +20,12 @@ var CommentService = (function () {
         this._http = _http;
     }
     //TODO: this list needs to get ordered
-    // getComments() : Observable<IComment[]> {
-    //     return this._http.get("http://planpassive.com/comments")
-    //     .map(this.extractData)
-    //     .catch(this.handleError);
-    // }
+    CommentService.prototype.postComment = function (postData) {
+        //let options = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
+        return this._http.post("http://planpassive.com/comments", postData)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     CommentService.prototype.extractData = function (response) {
         var comments = response.json();
         return comments || [];

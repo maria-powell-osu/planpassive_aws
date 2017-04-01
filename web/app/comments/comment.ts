@@ -8,4 +8,5 @@ export interface IComment {
     website: string;
     respondsTo: number;
     id: number;
+    responses: [string];
 }

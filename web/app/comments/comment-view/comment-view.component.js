@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var CommentViewComponent = (function () {
     function CommentViewComponent() {
+        this.isCollapsed = true;
     }
+    CommentViewComponent.prototype.collapsed = function (event) { };
+    CommentViewComponent.prototype.expanded = function (event) { };
     return CommentViewComponent;
 }());
 __decorate([

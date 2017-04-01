@@ -7,12 +7,12 @@
          <b>{{comment.date}}</b></p> 
 	</div>
 	<!-- To prohibit from too much comments of comments-->
-	<!--<div class="col-md-1 col-md-offset-5" ng-if="level < 4">
-		<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{comment.key}}">
+	<div class="col-md-1 col-md-offset-5" ng-if="level < 4">
+		<button type="button" class="btn btn-info" (click)="isCollapsed = !isCollapsed">
 			<span class="glyphicon glyphicon-share-alt"></span>
 			Reply
 		</button>
-	</div>-->
+	</div>
 </div>
 <br/>
 <div class="row">
@@ -20,15 +20,14 @@
 	<p>{{comment.content}}</p>
 	</div>
 </div>
-<div class="row">
+<div class="row" (collapsed)="collapsed($event)"
+        (expanded)="expanded($event)" [collapse]="isCollapsed">
 	<!-- COMMENT USER FORM -->
-	<!--<mp-comment-reply-form blog="blog" formid="comment.key" responds-to="comment.key" original-comment="comment"></mp-comment-reply-form>-->
+	<commentreply [(blog)]="blog" [formid]="'blogReply'" [(respondsTo)]="comment.key" [(originalComment)]="comment" [(isCollapsed)]="isCollapsed"></commentreply>
 </div>
 
 <div class="row">
 	<div class="col-md-11 col-md-offset-1">
-		<!-- Iterates through comments of comments -->
-		<!--<div ng-repeat="comment in comment.responses | orderBy:'date' track by $index" style="margin-left: 100px;">-->
 		<div *ngFor="let comment of comment.responses">
             <commentview [comment]="comment" [level]="level + 1" [blog]="blog"></commentview>
 		</div>

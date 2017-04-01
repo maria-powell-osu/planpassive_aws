@@ -20,12 +20,14 @@ var BlogViewComponent = (function () {
     }
     BlogViewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.test = "test";
+        this.isCollapsed = true;
         this.sub = this._route.params.subscribe(function (params) {
             var name = _this._route.snapshot.params['name'];
             _this.getBlog(name);
         });
     };
+    BlogViewComponent.prototype.collapsed = function (event) { };
+    BlogViewComponent.prototype.expanded = function (event) { };
     BlogViewComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
     };
