@@ -1,83 +1,60 @@
-App.factory('FutureValueCalculator', function() {
-	var FutureValueCalculator = {};
-	return {
-		calculateResults: function (userInput){
-			return futureValueCalculations(userInput);
-		}
+import { Injectable } from "@angular/core";
+declare var google: any;
 
-	}
-});
+@Injectable()
+export class InvestmentCalculatorService {
 
-function futureValueCalculations(userInput){
-	var result = {};
-	result.dataForVisuals = {};
+    constructor (){    }
 
-	if (userInputValid(userInput)){
-		var p = userInput.investAmount.value,
-			r = (userInput.annualRateOfReturn.value / 100) / 12,
-			n = userInput.years.value * 12,
-			a = userInput.monthlyContributions.value,
-			w = n - (userInput.yearsBeforeContributing.value * 12);
+    calculateResults(form : any) : Object{
+        return this.rentalCalculations(form.controls);
+    }
 
-		//Calculate future value of investment	
-		result.futureValue = Math.round(calculateLumpSum(p,r,n) + calculateMonthlyPayments(a,r,n));
+    private rentalCalculations(userInput:any): any{
+        var result = {} as any;
+        result.dataForVisuals = {} as any;
 
-		//Calculate total Amount contributed
-		result.totalAmountContributed = Math.round(calculateTotalAmountContributed(p, a, n));
+        if (this.userInputValid(userInput)){
+            var p = userInput.investAmount.value;
+            var r = (userInput.annualRateOfReturn.value / 100) / 12;
+            var n = userInput.years.value * 12;
+            var a = userInput.monthlyContributions.value;
+            var w = n - (userInput.yearsBeforeContributing.value * 12);
 
-		//Calculate total investment return
-		result.totalInvestmentReturn = Math.round(calculateTotalInvestmentReturn(result.futureValue, result.totalAmountContributed));
+            //Calculate future value of investment	
+            result.futureValue = Math.round(this.calculateLumpSum(p,r,n) + this.calculateMonthlyPayments(a,r,n));
 
-		//Calculate future value of waited xx years
-		result.futureValueOfYears = Math.round(calculateFutureValueLumpSum(p, r, w) + calculateFutureValueAnnuity(a, r, w));
+            //Calculate total Amount contributed
+            result.totalAmountContributed = Math.round(this.calculateTotalAmountContributed(p, a, n));
 
-		result.resultPercent = Math.round(calculatePercent(result.totalInvestmentReturn, result.totalAmountContributed));
+            //Calculate total investment return
+            result.totalInvestmentReturn = Math.round(this.calculateTotalInvestmentReturn(result.futureValue, result.totalAmountContributed));
 
-		//Calculate cost of waiting
-		result.costOfWaiting = Math.round(calculateCostOfWaiting(result.futureValue, result.futureValueOfYears));
+            //Calculate future value of waited xx years
+            result.futureValueOfYears = Math.round(this.calculateFutureValueLumpSum(p, r, w) + this.calculateFutureValueAnnuity(a, r, w));
 
-		//Data for future value stacked column chart
-		result.dataForVisuals.futureValueChart = createFutureValueChartData(p, r, userInput.years.value, a);
+            result.resultPercent = Math.round(this.calculatePercent(result.totalInvestmentReturn, result.totalAmountContributed));
 
-		//data for future value pie chart
-		result.dataForVisuals.futureValuePieChart = createFutureValuePieChartData(result.totalInvestmentReturn, result.totalAmountContributed);
-	
+            //Calculate cost of waiting
+            result.costOfWaiting = Math.round(this.calculateCostOfWaiting(result.futureValue, result.futureValueOfYears));
 
-		//data for future value return gauge
-		//result.dataForVisuals.futureValueGauge = createFutureValueGauge(result.resultPercent);
-	} else {
-		result = 0;
-	}
+            //Data for future value stacked column chart
+            result.dataForVisuals.futureValueChart = this.createFutureValueChartData(p, r, userInput.years.value, a);
 
-	return result;
-}
+            //data for future value pie chart
+            result.dataForVisuals.futureValuePieChart = this.createFutureValuePieChartData(result.totalInvestmentReturn, result.totalAmountContributed);
+        
+        } else {
+            result = 0;
+        }
 
+        return result;
+    }
 
-function createFutureValueGauge(returnPercent){
-	var result = {};
-
-	result.data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['Return %', returnPercent]
-        ]);
-
-	var gaugeMax = returnPercent > 100 ? returnPercent : 100; 
-
-    result.options = {
-          width: 400, height: 120,
-          greenFrom: 50, greenTo: gaugeMax,
-          redFrom: 0, redTo: 20,
-          yellowFrom:20, yellowTo: 50,
-          minorTicks: 5
-        };
-
-	return result;
-}
-
-function createFutureValuePieChartData(totalInvestmentReturn, totalAmountContributed){
-	var result = {},
-		dataArray = [],
-		colorArray = [	
+private createFutureValuePieChartData(totalInvestmentReturn : any, totalAmountContributed : any){
+	var result = {} as any;
+	var dataArray = [];
+	var colorArray = [	
 			'#004080',
 			'#cccc00',
 			'#990000',
@@ -106,7 +83,7 @@ function createFutureValuePieChartData(totalInvestmentReturn, totalAmountContrib
     dataArrayWithoutHeader.shift();
 
     //Since we do not like the google charts legend label display, let's make our own 
-  	result.labels = createLabelArray(colorArray, dataArrayWithoutHeader);
+  	result.labels = this.createLabelArray(colorArray, dataArrayWithoutHeader);
 
   	//Set up display preferences
   	result.options = {
@@ -121,10 +98,10 @@ function createFutureValuePieChartData(totalInvestmentReturn, totalAmountContrib
   	return result;
 }
 
-function createFutureValueChartData(p, r, years, a){
-	var result = {},
-		chartData = [],
-		colorArray = [	
+private createFutureValueChartData(p:number, r:number, years:number, a:number){
+	var result = {} as any;
+	var chartData = [] as any;
+	var colorArray = [	
 			'#cccc00',
 			'#004080',
 			'#990000',
@@ -147,18 +124,18 @@ function createFutureValueChartData(p, r, years, a){
 	};
 
 	//Create the data in array format
-	var rawDataArray = [];
+	var rawDataArray = [] as any;
 	if(p == 0 && r == 0 && years == 0 && a == 0){
 		rawDataArray = [0, 1, 0];
 	}else{
-		rawDataArray = createFutureValueGraphData(p, r, years, a);
+		rawDataArray = this.createFutureValueGraphData(p, r, years, a);
 	}
 
 	//Add columns to the data 
 	chartData.push(["Year", "Amount Contributed", "Interest Earned"]);
 
 	//Add data rows to the data
-	rawDataArray.forEach(function(row) {
+	rawDataArray.forEach(function(row : any) {
 		chartData.push(row);
 	});
 
@@ -167,8 +144,8 @@ function createFutureValueChartData(p, r, years, a){
 	return result;
 }
 
-function createFutureValueGraphData(p, r, years, a){
-	var result = [];
+private createFutureValueGraphData(p : number, r: number, years: number, a: number){
+	var result = [] as any;
 
 	//because in finances we start counting at 1
 	for(var i = 1; i < years + 1; i++){
@@ -179,12 +156,12 @@ function createFutureValueGraphData(p, r, years, a){
 		dataRow.push(i);
 
 		//Amount Contributed Column
-		var totalAmountContributed = Math.round(calculateTotalAmountContributed(p, a, n));
+		var totalAmountContributed = Math.round(this.calculateTotalAmountContributed(p, a, n));
 		dataRow.push(totalAmountContributed);
 
 		//Interest Earned Column
-		var futureValue = Math.round(calculateLumpSum(p,r,n) + calculateMonthlyPayments(a,r,n));
-		var interestEarned = Math.round(calculateTotalInvestmentReturn(futureValue, totalAmountContributed));
+		var futureValue = Math.round(this.calculateLumpSum(p,r,n) + this.calculateMonthlyPayments(a,r,n));
+		var interestEarned = Math.round(this.calculateTotalInvestmentReturn(futureValue, totalAmountContributed));
 		dataRow.push(interestEarned);
 
 		result.push(dataRow);
@@ -193,7 +170,7 @@ function createFutureValueGraphData(p, r, years, a){
 	return result;
 }
 
-function calculatePercent (totalInvestmentReturn, totalAmountContributed){
+private calculatePercent (totalInvestmentReturn:any, totalAmountContributed: any){
 	var result;
 
 	if(totalInvestmentReturn !== null && totalAmountContributed !== null){
@@ -205,7 +182,7 @@ function calculatePercent (totalInvestmentReturn, totalAmountContributed){
 	return result;
 }
 
-function calculateCostOfWaiting(futureValue, futureValueOfYears) {
+private calculateCostOfWaiting(futureValue: any, futureValueOfYears: any) {
 	var result;
 
 	if(futureValue != null && futureValueOfYears != null){
@@ -217,7 +194,7 @@ function calculateCostOfWaiting(futureValue, futureValueOfYears) {
 	return result;
 }
 
-function calculateTotalInvestmentReturn(futureValue, totalAmountContributed) {
+private calculateTotalInvestmentReturn(futureValue: any, totalAmountContributed: any) {
 	var result;
 
 	if(futureValue != null && totalAmountContributed != null){
@@ -229,7 +206,7 @@ function calculateTotalInvestmentReturn(futureValue, totalAmountContributed) {
 	return result;
 }
 
-function calculateTotalAmountContributed(p, a, n){
+private calculateTotalAmountContributed(p: number, a: number, n: number){
 	var result;
 
 	if (a == null){
@@ -249,7 +226,7 @@ function calculateTotalAmountContributed(p, a, n){
 	return result;
 }
 
-function calculateFutureValueLumpSum(p, r, w){
+private calculateFutureValueLumpSum(p: number, r: number, w: number){
 	var result;
 
 	if(p != null && r != null && w != null){
@@ -259,7 +236,7 @@ function calculateFutureValueLumpSum(p, r, w){
 	return result;
 }
 
-function calculateFutureValueAnnuity(a, r, w){
+private calculateFutureValueAnnuity(a: number, r: number, w: number){
 	var result;
 
 	if(a != null && r != null && w != null){
@@ -270,7 +247,7 @@ function calculateFutureValueAnnuity(a, r, w){
 	return result;
 }
 
-function calculateLumpSum(p,r,n) {
+private calculateLumpSum(p: number,r: number,n: number) {
 	var result;	
 
 	if (p != null && r != null && n != null){
@@ -282,7 +259,7 @@ function calculateLumpSum(p,r,n) {
 	return result;
 }
 
-function calculateMonthlyPayments(a,r,n){
+private calculateMonthlyPayments(a: number,r: number,n: number){
 	var result;
 
 	if (a != null && r != null && n != null){
@@ -295,18 +272,18 @@ function calculateMonthlyPayments(a,r,n){
 	return result;
 }
 
-function userInputValid(userInput) {
+private userInputValid(userInput: any) {
 	var result = true;
 		
 	//if userInput is not defined then the input is not valid
 	if (userInput){
 
 		//if the values are not set, then default them to 0
-		var investAmount = userInput.investAmount ? userInput.investAmount : 0,
-			monthlyContributions = userInput.monthlyContributions ? userInput.monthlyContributions : 0,
-			annualRateOfReturn = userInput.annualRateOfReturn ? userInput.annualRateOfReturn : 0,
-			yearsBeforeContributing = userInput.yearsBeforeContributing ? userInput.yearsBeforeContributing : 0,
-			years = userInput.years ? userInput.years : 0;
+		var investAmount = userInput.investAmount ? userInput.investAmount.value : 0;
+		var monthlyContributions = userInput.monthlyContributions ? userInput.monthlyContributions.value : 0;
+		var annualRateOfReturn = userInput.annualRateOfReturn ? userInput.annualRateOfReturn.value : 0;
+		var yearsBeforeContributing = userInput.yearsBeforeContributing.value ? userInput.yearsBeforeContributing.value : 0;
+		var years = userInput.years ? userInput.years.value : 0;
 
 		//Check that the following values are all ints or floats
 		if(investAmount !== parseInt(investAmount, 10)){
@@ -333,12 +310,12 @@ function userInputValid(userInput) {
  * Params:      Colors: colors used in the pie chart so I can add color coding)
  *              Data: the sections added into the pie charts
  */
-function createLabelArray (colors, data){
-	var result = [],
-  		errormsg,
-  		descIndex = 0,
-  		valueIndex = 1,
-  		i = 0;
+private createLabelArray (colors: any, data: any){
+	var result = [] as any;
+  	var errormsg;
+  	var descIndex = 0;
+  	var valueIndex = 1;
+  	var i = 0;
 
 	//Create the label array with colors in it
 	for (i; i < data.length; i++){ 
@@ -364,4 +341,6 @@ function createLabelArray (colors, data){
 	  	}
 	}
 	return result;
+}
+
 }

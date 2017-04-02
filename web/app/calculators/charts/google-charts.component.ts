@@ -43,7 +43,8 @@ export class GoogleChartsComponent implements OnInit{
                         case 'pieChart':
                             self.drawPieChart(data);
                             break;
-                        case 'table':
+                        case 'columnChart':
+                            self.drawColumnChart(data);
                             break;
                         case 'gauge':
                             break;
@@ -59,6 +60,19 @@ export class GoogleChartsComponent implements OnInit{
         }
     }
     constructor(){}
+
+    private drawColumnChart(rawData: any){
+        var chartElement = jQuery("#" + this.chartId)[0];
+
+        //Initialize chart
+        var chart = new google.visualization.ColumnChart(chartElement);
+
+        //Create data table for chart   
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        //Draw Chart
+        chart.draw(data, rawData.options);
+    }
 
     private drawPieChart(rawData:any){
          var chartElement = jQuery("#" + this.chartId)[0];

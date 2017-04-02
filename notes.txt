@@ -68,5 +68,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 365 hrs
+	Coding: 380 hrs
  

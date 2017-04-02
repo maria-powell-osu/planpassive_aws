@@ -1,0 +1,189 @@
+<!--loader bar that kicks in while calculations are running-->
+<loader [loading]="futureValueStackColumnChartLoading && futureValuePieChartLoading"></loader>
+
+<div class="container page-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <br/>
+                <div class="col-md-4">
+                    <form id="investmentCalculatorInputForm" name="investmentCalculatorInputForm" [formGroup]="calcForm">
+                        <label>
+                            <span *ngIf="calcForm.get('investAmount').errors" class="text-danger">* </span> 
+                            What is your starting balance?
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="inpt form-control" placeholder="$" formControlName="investAmount">
+                            <span class="input-group-addon">$</span>
+                        </div>
+                        <!-- Field Error Message-->
+                        <div *ngIf="calcForm.get('investAmount').errors && userClickedCalculate">
+                            <span *ngIf="calcForm.get('investAmount').errors.required" class="text-danger">
+                            Enter Starting Balance
+                            </span>
+                        </div>  <br/>
+
+                        <label>
+                            <span *ngIf="calcForm.get('monthlyContributions').errors" class="text-danger">* </span> 
+                            How much do you want to contribute per month?
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="inpt form-control" placeholder="$" 
+                                formControlName="monthlyContributions">
+                            <span class="input-group-addon">$ / month</span>
+                        </div>
+                        <!-- Field Error Message-->
+                        <div *ngIf="calcForm.get('monthlyContributions').errors && userClickedCalculate">
+                            <span *ngIf="calcForm.get('monthlyContributions').errors.required" class="text-danger">
+                            Enter Contribution Amount
+                            </span>
+                        </div>  <br/>
+
+                        <label>
+                            <span *ngIf="calcForm.get('annualRateOfReturn').errors" class="text-danger">* </span> 
+                            What is the annual rate of return?
+                        </label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="inpt form-control" placeholder="$" 
+                                formControlName="annualRateOfReturn">
+                            <span class="input-group-addon">$ / year</span>
+                        </div>
+                        <!-- Field Error Message-->
+                        <div *ngIf="calcForm.get('annualRateOfReturn').errors && userClickedCalculate">
+                            <span *ngIf="calcForm.get('annualRateOfReturn').errors.required" class="text-danger">
+                            Enter Rate of Return
+                            </span>
+                        </div> <br/>
+
+                        <label>
+                            <span *ngIf="calcForm.get('years').errors" class="text-danger">* </span>
+                            How much will this investment be worth in ...?
+                        </label>
+                        <div class="input-group">
+                            <input type="number" step="0.001" class="inpt form-control" placeholder="years" 
+                                formControlName="years">
+                            <span class="input-group-addon">years</span>
+                        </div>
+                        <!-- Field Error Message-->
+                        <div *ngIf="calcForm.get('years').errors && userClickedCalculate">
+                            <span *ngIf="calcForm.get('years').errors.required" class="text-danger">
+                            Enter Rate of Return
+                            </span>
+                        </div> <br/>
+
+                        <label>In how many years will you start this investment?</label>
+                        <div class="input-group">
+                            <input type="number" step="0.001" class="inpt form-control" placeholder="years" 
+                                formControlName="yearsBeforeContributing">
+                            <span class="input-group-addon">years</span>
+                        </div>
+                        <span>This shows you the cost of waiting by not starting right now.</span><br/><br/>
+
+                        <!-- Calculate -->
+                        <button type="button" (click)="calculate()" class="btn btn-info pull-right">Calculate</button>
+                    </form>
+                </div>
+                <br/>
+                <div class="col-md-7 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-3" [hidden]="!result.resultPercent && !result.resultPercent === 0">
+                            <span>{{result.resultPercent}}% RETURN</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span [hidden]="!calcForm.get('years').value">{{calcForm.get('years').value}}-YEAR</span> VALUE<br/>
+                            <b class="dollarValueLarge">$ {{result.futureValue}}</b>
+                        </div>
+                        <div class="col-md-3">
+                            <div>CONTRIBUTIONS</div>
+                            <b class="dollarValueMedium">
+                                $ {{result.totalAmountContributed}}
+                            </b>
+                        </div>
+                        <div class="col-md-3 mpProfit">
+                            <div>PROFITS</div>
+                            <b class="dollarValueMedium">
+                                $ {{result.totalInvestmentReturn}}
+                            </b>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <!--CHART TABS-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <label class="btn btn-default" [ngClass]="{active: chartView === 'barGraph'}">
+                                        <input type="radio" [(ngModel)]="chartView" value="barGraph" class="mpButtonGroupRadio">
+                                        Bar Graph
+                                    </label>
+                                    <label class="btn btn-default" [ngClass]="{active: chartView === 'pieChart'}">
+                                        <input type="radio" [(ngModel)]="chartView" value="pieChart" class="mpButtonGroupRadio">
+                                        Pie Chart
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!--CHARTS-->
+                    <div class="row">
+                        <div class="col-md-12">
+                                <!--Stacked Column Chart-->
+                            <div class="row" [hidden]="chartView !== 'barGraph'">
+                                <div class="col-md-12">
+                                    <!--BAR GRAPH-->
+                                    <googlecharts [chartType]="'columnChart'" [(loading)]="futureValueStackColumnChartLoading"
+                                                [control]="calcForm.get('futureValueStackedBarChartData')" 
+                                                [chartId]="'futureValueStackedBarChartData'"></googlecharts>
+                                </div>
+                            </div>
+                            <div class="row" [hidden]="chartView !== 'pieChart'">
+                                <div class="col-md-6">
+                                    <h4>Monthly Income</h4>
+                                    <googlecharts [chartType]="'pieChart'" [(loading)]="futureValuePieChartLoading"
+                                                [control]="calcForm.get('futureValuePieChartData')"
+                                                [chartId]="'futureValuePieChartData'"></googlecharts>
+                                </div>
+                                <div class="col-md-6">		
+                                    <br/>
+                                    <br/>
+                                    <!-- Labels for Income Pie Chart-->
+                                    <div *ngFor="let labels of calcForm.get('futureValuePieChartData').value.labels">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="glyphicon glyphicon-stop" aria-hidden="true" 
+                                                    [style.color]="labels.color"></span>
+                                                <span>{{labels.description}}:</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span>{{labels.value}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="calcForm.get('yearsBeforeContributing') 
+                                            && calcForm.get('futureValueOfYears')">
+                        <div class="col-md-12" [hidden]="calcForm.get('yearsBeforeContributing').value 
+                                                        && calcForm.get('futureValueOfYears').value">
+                            <br/><span>If you wait <b>{{calcForm.get('yearsBeforeContributing').value}} years </b> 
+                                    to start this investment it is worth <b>${{calcForm.get('futureValueOfYears').value}}.</b>
+                                </span><br/>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="calcForm.get('years')">
+                        <div class="col-md-12" [hidden]="!calcForm.get('years').value || !result.costOfWaiting">
+                            <div>Cost of waiting {{calcForm.get('yearsBeforeContributing').value }} years 
+                                <b>$ {{result.costOfWaiting}}</b></div>
+                        </div>
+                    </div>
+                    <span class="pull-right">*Assumes monthly compounding</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>

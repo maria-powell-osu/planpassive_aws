@@ -40,7 +40,8 @@ var GoogleChartsComponent = (function () {
                     case 'pieChart':
                         self.drawPieChart(data);
                         break;
-                    case 'table':
+                    case 'columnChart':
+                        self.drawColumnChart(data);
                         break;
                     case 'gauge':
                         break;
@@ -52,6 +53,15 @@ var GoogleChartsComponent = (function () {
                 // }, 2000);
             });
         }
+    };
+    GoogleChartsComponent.prototype.drawColumnChart = function (rawData) {
+        var chartElement = jQuery("#" + this.chartId)[0];
+        //Initialize chart
+        var chart = new google.visualization.ColumnChart(chartElement);
+        //Create data table for chart   
+        var data = google.visualization.arrayToDataTable(rawData.data);
+        //Draw Chart
+        chart.draw(data, rawData.options);
     };
     GoogleChartsComponent.prototype.drawPieChart = function (rawData) {
         var chartElement = jQuery("#" + this.chartId)[0];
